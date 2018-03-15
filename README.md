@@ -1,2 +1,2 @@
-# IGADPiGameServer
-Game server created for educational purposes for IGAD (Breda University of Applied Sciences, the Netherlands)
+# Proto
+Personal C++ playground. Building and trying out things ranging from graphics, a.i. to low level stuff such as multi-threading solutions and memory management.

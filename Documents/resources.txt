@@ -1,0 +1,2 @@
+# passing commandline parameters in visual studio projects through CMake
+https://gist.github.com/UnaNancyOwen/665b3d7993785749b1033217d73540fa

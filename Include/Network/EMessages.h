@@ -1,0 +1,28 @@
+#pragma once
+
+#include "RakNetIncludes.h"
+
+enum EMessages
+{
+	EMessage_SendServerHelp = ID_USER_PACKET_ENUM + 1,
+	EMessage_SendGameHelp,	
+	EMessage_SendLogin,
+	EMessage_SendDisconnect,
+	EMessage_SendJoinGame,
+	EMessage_SendWhoseTurnIsIt,
+
+	EMessage_RecvServerHelp,
+	EMessage_RecvGameHelp,
+	EMessage_RecvLoginSuccess,
+	EMessage_RecvDisconnected,
+	EMessage_RecvWaitingForPlayers,
+	EMessage_RecvGameJoined,
+	EMessage_RecvWhoseTurnIsIt,
+	EMessage_RecvOpponentFinished,
+	EMessage_RecvAcknowledgement,
+	EMessage_RecvServerError,
+	EMessage_RecvGameNotActive,
+
+	EMessage_Count,
+	EMessage_BaseCount = EMessage_Count
+};

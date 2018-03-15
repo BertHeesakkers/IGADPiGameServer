@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.9.2)
+project (Base)
+
+add_subdirectory(Framework)
+add_subdirectory(Network)
+add_subdirectory(RakNet)
+add_subdirectory(ScotlandYard)
+add_subdirectory(ScotlandYardLobby)
+add_subdirectory(Server)
+add_subdirectory(Sokoban)
+add_subdirectory(SokobanLobby)
+add_subdirectory(Tron)
+add_subdirectory(TronLobby)

@@ -1,0 +1,302 @@
+cmake_minimum_required(VERSION 3.9.2)
+
+project(RakNet)
+
+include_directories(${ROOT_INCLUDE_FOLDER}RakNet/)
+
+#header files
+set(RakNet_CORE_HEADERS
+	../../Include/RakNet/CCRakNetUDT.h
+	../../Include/RakNet/CheckSum.h
+	../../Include/RakNet/CloudClient.h
+	../../Include/RakNet/CloudCommon.h
+	../../Include/RakNet/CloudServer.h
+	../../Include/RakNet/CommandParserInterface.h
+	../../Include/RakNet/ConnectionGraph2.h
+	../../Include/RakNet/ConsoleServer.h
+	../../Include/RakNet/DataCompressor.h
+	../../Include/RakNet/DirectoryDeltaTransfer.h
+	../../Include/RakNet/DR_SHA1.h
+	../../Include/RakNet/DS_BinarySearchTree.h
+	../../Include/RakNet/DS_BPlusTree.h
+	../../Include/RakNet/DS_BytePool.h
+	../../Include/RakNet/DS_ByteQueue.h
+	../../Include/RakNet/DS_Hash.h
+	../../Include/RakNet/DS_Heap.h
+	../../Include/RakNet/DS_HuffmanEncodingTree.h
+	../../Include/RakNet/DS_HuffmanEncodingTreeFactory.h
+	../../Include/RakNet/DS_HuffmanEncodingTreeNode.h
+	../../Include/RakNet/DS_LinkedList.h
+	../../Include/RakNet/DS_List.h
+	../../Include/RakNet/DS_Map.h
+	../../Include/RakNet/DS_MemoryPool.h
+	../../Include/RakNet/DS_Multilist.h
+	../../Include/RakNet/DS_OrderedChannelHeap.h
+	../../Include/RakNet/DS_OrderedList.h
+	../../Include/RakNet/DS_Queue.h
+	../../Include/RakNet/DS_QueueLinkedList.h
+	../../Include/RakNet/DS_RangeList.h
+	../../Include/RakNet/DS_Table.h
+	../../Include/RakNet/DS_ThreadsafeAllocatingQueue.h
+	../../Include/RakNet/DS_Tree.h
+	../../Include/RakNet/DS_WeightedGraph.h
+	../../Include/RakNet/DynDNS.h
+	../../Include/RakNet/EmailSender.h
+	../../Include/RakNet/EmptyHeader.h
+	../../Include/RakNet/EpochTimeToString.h
+	../../Include/RakNet/Export.h
+	../../Include/RakNet/FileList.h
+	../../Include/RakNet/FileListNodeContext.h
+	../../Include/RakNet/FileListTransfer.h
+	../../Include/RakNet/FileListTransferCBInterface.h
+	../../Include/RakNet/FileOperations.h
+	../../Include/RakNet/FormatString.h
+	../../Include/RakNet/FullyConnectedMesh2.h
+	../../Include/RakNet/Getche.h
+	../../Include/RakNet/Gets.h
+	../../Include/RakNet/GetTime.h
+	../../Include/RakNet/gettimeofday.h
+	../../Include/RakNet/GridSectorizer.h
+	../../Include/RakNet/HTTPConnection.h
+	../../Include/RakNet/HTTPConnection2.h
+	../../Include/RakNet/IncrementalReadInterface.h
+	../../Include/RakNet/InternalPacket.h
+	../../Include/RakNet/Itoa.h
+	../../Include/RakNet/Kbhit.h
+	../../Include/RakNet/LinuxStrings.h
+	../../Include/RakNet/LocklessTypes.h
+	../../Include/RakNet/LogCommandParser.h
+	../../Include/RakNet/MessageFilter.h
+	../../Include/RakNet/MessageIdentifiers.h
+	../../Include/RakNet/MTUSize.h
+	../../Include/RakNet/NativeFeatureIncludes.h
+	../../Include/RakNet/NativeFeatureIncludesOverrides.h
+	../../Include/RakNet/NativeTypes.h
+	../../Include/RakNet/NatPunchthroughClient.h
+	../../Include/RakNet/NatPunchthroughServer.h
+	../../Include/RakNet/NatTypeDetectionClient.h
+	../../Include/RakNet/NatTypeDetectionCommon.h
+	../../Include/RakNet/NatTypeDetectionServer.h
+	../../Include/RakNet/NetworkIDManager.h
+	../../Include/RakNet/NetworkIDObject.h
+	../../Include/RakNet/PacketConsoleLogger.h
+	../../Include/RakNet/PacketFileLogger.h
+	../../Include/RakNet/PacketizedTCP.h
+	../../Include/RakNet/PacketLogger.h
+	../../Include/RakNet/PacketOutputWindowLogger.h
+	../../Include/RakNet/PacketPool.h
+	../../Include/RakNet/PacketPriority.h
+	../../Include/RakNet/PluginInterface2.h
+	../../Include/RakNet/PS3Includes.h
+	../../Include/RakNet/PS4Includes.h
+	../../Include/RakNet/Rackspace.h
+	../../Include/RakNet/RakAlloca.h
+	../../Include/RakNet/RakAssert.h
+	../../Include/RakNet/RakMemoryOverride.h
+	../../Include/RakNet/RakNetCommandParser.h
+	../../Include/RakNet/RakNetDefines.h
+	../../Include/RakNet/RakNetDefinesOverrides.h
+	../../Include/RakNet/RakNetSmartPtr.h
+	../../Include/RakNet/RakNetSocket.h
+	../../Include/RakNet/RakNetSocket2.h
+	../../Include/RakNet/RakNetStatistics.h
+	../../Include/RakNet/RakNetTime.h
+	../../Include/RakNet/RakNetTransport2.h
+	../../Include/RakNet/RakNetTypes.h
+	../../Include/RakNet/RakNetVersion.h
+	../../Include/RakNet/RakPeer.h
+	../../Include/RakNet/RakPeerInterface.h
+	../../Include/RakNet/RakSleep.h
+	../../Include/RakNet/RakString.h
+	../../Include/RakNet/RakThread.h
+	../../Include/RakNet/RakWString.h
+	../../Include/RakNet/Rand.h
+	../../Include/RakNet/RandSync.h
+	../../Include/RakNet/ReadyEvent.h
+	../../Include/RakNet/RefCountedObj.h
+	../../Include/RakNet/RelayPlugin.h
+	../../Include/RakNet/ReliabilityLayer.h
+	../../Include/RakNet/ReplicaEnums.h
+	../../Include/RakNet/ReplicaManager3.h
+	../../Include/RakNet/Router2.h
+	../../Include/RakNet/RPC4Plugin.h
+	../../Include/RakNet/SecureHandshake.h
+	../../Include/RakNet/SendToThread.h
+	../../Include/RakNet/SignaledEvent.h
+	../../Include/RakNet/SimpleMutex.h
+	../../Include/RakNet/SimpleTCPServer.h
+	../../Include/RakNet/SingleProducerConsumer.h
+	../../Include/RakNet/SocketDefines.h
+	../../Include/RakNet/SocketIncludes.h
+	../../Include/RakNet/SocketLayer.h
+	../../Include/RakNet/StatisticsHistory.h
+	../../Include/RakNet/StringCompressor.h
+	../../Include/RakNet/StringTable.h
+	../../Include/RakNet/SuperFastHash.h
+	../../Include/RakNet/TableSerializer.h
+	../../Include/RakNet/TCPInterface.h
+	../../Include/RakNet/TeamBalancer.h
+	../../Include/RakNet/TeamManager.h
+	../../Include/RakNet/TelnetTransport.h
+	../../Include/RakNet/ThreadPool.h
+	../../Include/RakNet/ThreadsafePacketLogger.h
+	../../Include/RakNet/TransportInterface.h
+	../../Include/RakNet/TwoWayAuthentication.h
+	../../Include/RakNet/UDPForwarder.h
+	../../Include/RakNet/UDPProxyClient.h
+	../../Include/RakNet/UDPProxyCommon.h
+	../../Include/RakNet/UDPProxyCoordinator.h
+	../../Include/RakNet/UDPProxyServer.h
+	../../Include/RakNet/VariableDeltaSerializer.h
+	../../Include/RakNet/VariableListDeltaTracker.h
+	../../Include/RakNet/VariadicSQLParser.h
+	../../Include/RakNet/VitaIncludes.h
+	../../Include/RakNet/WindowsIncludes.h
+	../../Include/RakNet/WSAStartupSingleton.h
+	../../Include/RakNet/XBox360Includes.h
+	../../Include/RakNet/_FindFirst.h
+	../../Include/RakNet/AutopatcherPatchContext.h
+	../../Include/RakNet/AutopatcherRepositoryInterface.h
+	../../Include/RakNet/Base64Encoder.h
+	../../Include/RakNet/BitStream.h
+	../../Include/RakNet/CCRakNetSlidingWindow.h)
+
+source_group("Header Files" FILES ${RakNet_CORE_HEADERS})
+
+set(RakNet_AGGREGATE_HEADERS
+	${RakNet_CORE_HEADERS})
+
+# source files
+set(RakNet_CORE_SOURCES
+	../../Source/RakNet/_FindFirst.cpp
+	../../Source/RakNet/Base64Encoder.cpp
+	../../Source/RakNet/BitStream.cpp
+	../../Source/RakNet/CCRakNetSlidingWindow.cpp
+	../../Source/RakNet/CCRakNetUDT.cpp
+	../../Source/RakNet/CheckSum.cpp
+	../../Source/RakNet/CloudClient.cpp
+	../../Source/RakNet/CloudCommon.cpp
+	../../Source/RakNet/CloudServer.cpp
+	../../Source/RakNet/CommandParserInterface.cpp
+	../../Source/RakNet/ConnectionGraph2.cpp
+	../../Source/RakNet/ConsoleServer.cpp
+	../../Source/RakNet/DataCompressor.cpp
+	../../Source/RakNet/DirectoryDeltaTransfer.cpp
+	../../Source/RakNet/DR_SHA1.cpp
+	../../Source/RakNet/DS_BytePool.cpp
+	../../Source/RakNet/DS_ByteQueue.cpp
+	../../Source/RakNet/DS_HuffmanEncodingTree.cpp
+	../../Source/RakNet/DS_Table.cpp
+	../../Source/RakNet/DynDNS.cpp
+	../../Source/RakNet/EmailSender.cpp
+	../../Source/RakNet/EpochTimeToString.cpp
+	../../Source/RakNet/FileList.cpp
+	../../Source/RakNet/FileListTransfer.cpp
+	../../Source/RakNet/FileOperations.cpp
+	../../Source/RakNet/FormatString.cpp
+	../../Source/RakNet/FullyConnectedMesh2.cpp
+	../../Source/RakNet/Getche.cpp
+	../../Source/RakNet/Gets.cpp
+	../../Source/RakNet/GetTime.cpp
+	../../Source/RakNet/gettimeofday.cpp
+	../../Source/RakNet/GridSectorizer.cpp
+	../../Source/RakNet/HTTPConnection.cpp
+	../../Source/RakNet/HTTPConnection2.cpp
+	../../Source/RakNet/IncrementalReadInterface.cpp
+	../../Source/RakNet/Itoa.cpp
+	../../Source/RakNet/LinuxStrings.cpp
+	../../Source/RakNet/LocklessTypes.cpp
+	../../Source/RakNet/LogCommandParser.cpp
+	../../Source/RakNet/MessageFilter.cpp
+	../../Source/RakNet/NatPunchthroughClient.cpp
+	../../Source/RakNet/NatPunchthroughServer.cpp
+	../../Source/RakNet/NatTypeDetectionClient.cpp
+	../../Source/RakNet/NatTypeDetectionCommon.cpp
+	../../Source/RakNet/NatTypeDetectionServer.cpp
+	../../Source/RakNet/NetworkIDManager.cpp
+	../../Source/RakNet/NetworkIDObject.cpp
+	../../Source/RakNet/PacketConsoleLogger.cpp
+	../../Source/RakNet/PacketFileLogger.cpp
+	../../Source/RakNet/PacketizedTCP.cpp
+	../../Source/RakNet/PacketLogger.cpp
+	../../Source/RakNet/PacketOutputWindowLogger.cpp
+	../../Source/RakNet/PluginInterface2.cpp
+	../../Source/RakNet/PS4Includes.cpp
+	../../Source/RakNet/Rackspace.cpp
+	../../Source/RakNet/RakMemoryOverride.cpp
+	../../Source/RakNet/RakNetCommandParser.cpp
+	../../Source/RakNet/RakNetSocket.cpp
+	../../Source/RakNet/RakNetSocket2.cpp
+	../../Source/RakNet/RakNetSocket2_360_720.cpp
+	../../Source/RakNet/RakNetSocket2_Berkley.cpp
+	../../Source/RakNet/RakNetSocket2_Berkley_NativeClient.cpp
+	../../Source/RakNet/RakNetSocket2_NativeClient.cpp
+	../../Source/RakNet/RakNetSocket2_PS3_PS4.cpp
+	../../Source/RakNet/RakNetSocket2_PS4.cpp
+	../../Source/RakNet/RakNetSocket2_Vita.cpp
+	../../Source/RakNet/RakNetSocket2_Windows_Linux.cpp
+	../../Source/RakNet/RakNetSocket2_Windows_Linux_360.cpp
+	../../Source/RakNet/RakNetSocket2_WindowsStore8.cpp
+	../../Source/RakNet/RakNetStatistics.cpp
+	../../Source/RakNet/RakNetTransport2.cpp
+	../../Source/RakNet/RakNetTypes.cpp
+	../../Source/RakNet/RakPeer.cpp
+	../../Source/RakNet/RakSleep.cpp
+	../../Source/RakNet/RakString.cpp
+	../../Source/RakNet/RakThread.cpp
+	../../Source/RakNet/RakWString.cpp
+	../../Source/RakNet/Rand.cpp
+	../../Source/RakNet/RandSync.cpp
+	../../Source/RakNet/ReadyEvent.cpp
+	../../Source/RakNet/RelayPlugin.cpp
+	../../Source/RakNet/ReliabilityLayer.cpp
+	../../Source/RakNet/ReplicaManager3.cpp
+	../../Source/RakNet/Router2.cpp
+	../../Source/RakNet/RPC4Plugin.cpp
+	../../Source/RakNet/SecureHandshake.cpp
+	../../Source/RakNet/SendToThread.cpp
+	../../Source/RakNet/SignaledEvent.cpp
+	../../Source/RakNet/SimpleMutex.cpp
+	../../Source/RakNet/SocketLayer.cpp
+	../../Source/RakNet/StatisticsHistory.cpp
+	../../Source/RakNet/StringCompressor.cpp
+	../../Source/RakNet/StringTable.cpp
+	../../Source/RakNet/SuperFastHash.cpp
+	../../Source/RakNet/TableSerializer.cpp
+	../../Source/RakNet/TCPInterface.cpp
+	../../Source/RakNet/TeamBalancer.cpp
+	../../Source/RakNet/TeamManager.cpp
+	../../Source/RakNet/TelnetTransport.cpp
+	../../Source/RakNet/ThreadsafePacketLogger.cpp
+	../../Source/RakNet/TwoWayAuthentication.cpp
+	../../Source/RakNet/UDPForwarder.cpp
+	../../Source/RakNet/UDPProxyClient.cpp
+	../../Source/RakNet/UDPProxyCoordinator.cpp
+	../../Source/RakNet/UDPProxyServer.cpp
+	../../Source/RakNet/VariableDeltaSerializer.cpp
+	../../Source/RakNet/VariableListDeltaTracker.cpp
+	../../Source/RakNet/VariadicSQLParser.cpp
+	../../Source/RakNet/VitaIncludes.cpp
+	../../Source/RakNet/WSAStartupSingleton.cpp
+	../../Source/RakNet/RakNet.vcproj
+	../../Source/RakNet/RakNet_vc8.vcproj
+	../../Source/RakNet/RakNet_vc9.vcproj)
+
+source_group("Source Files" FILES ${RakNet_CORE_SOURCES})
+
+set(RakNet_AGGREGATE_SOURCES
+	${RakNet_CORE_SOURCES})
+
+# setup target
+add_library(RakNet STATIC ${RakNet_AGGREGATE_HEADERS} ${RakNet_AGGREGATE_SOURCES})
+
+set_target_properties(RakNet PROPERTIES FOLDER "Base")
+
+if (CMAKE_COMPILER_IS_GNUCC)
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w")
+endif()
+if (MSVC)
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /w")
+endif()
+
+install(TARGETS RakNet DESTINATION lib)
