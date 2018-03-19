@@ -1,0 +1,41 @@
+The server is built on RakNet (c) and uses the best practices described in their documentation. This means that, to ensure correct endianness for both client and server, data is sent through RakNet::BitStream structures and does not use custom message structures.
+
+Usage: 
+	Connecting to the server is explained in the online documentation of RakNet (c)
+
+	In the following text the structure of the message that can be sent are described as follows:
+		MSG: MESSAGE_ID
+			DATA_1: DataType(<DataName>)
+			DATA_2: DataType(<DataName>)
+			...
+
+	Where:
+		MESSAGE_ID				is the enumeration value that should be sent.
+		DATA_1, DATA_2, ...		are types (DataType) and indications of the kind of data (DataName) that should be added to the bitstream, in that order.
+
+	After the ID_CONNECTION_REQUEST_ACCEPTED message has been received the following messages can be sent:
+
+	MSG: EMessage_ServerHelp
+	MSG: EMessage_GameHelp
+		DATA_1: EGame(<GAME>)
+
+	MSG: EMessage_SendLogin
+		DATA_1: RakString(<LOGIN>)
+		DATA_2: RakString(<PASSWORD>)
+
+	MSG: EMessage_SendDisconnect
+	MSG: EMessage_SendJoinGame
+
+	Any of the previous messages can send a result to the client. The following are messages the client may receive:
+
+	EMessage_RecvServerHelp
+		DATA1: RakString(<HELPTEXT>)
+
+	EMessage_RecvGameHelp
+		DATA1: RakString(<HELPTEXT>)
+
+	EMessage_RecvLoginSuccess
+	EMessage_RecvDisconnected
+	EMessage_RecvWaitingForPlayers
+	EMessage_RecvJoinGame
+	EMessage_RecvServerError

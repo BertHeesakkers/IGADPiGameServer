@@ -1,0 +1,11 @@
+Chase is a game based on the original Tron light cycle game. For an impression of the classical version, please check: https://www.youtube.com/watch?v=-3ODe9mqoDE. This text will give you some insight in the messages that can be sent to a game of Chase and what kind of data you can expect to get back in return.
+
+	In the following text the structure of the message that can be sent are described as follows:
+		MSG: MESSAGE_ID, DATA_1: DataType(<DataName>) DATA_2: DataType(<DataName>), ...
+		Where:
+			MESSAGE_ID				is the enumeration value that should be sent.
+			DATA_1, DATA_2, ...		are the types (DataType) and indications of the kind of data (DataName) that should be added to the bitstream, in that order.
+
+	After the EMessage_RecvJoinGame message has been received the player has joined a game and the following messages can be sent:
+
+	MORE TO FOLLOW...

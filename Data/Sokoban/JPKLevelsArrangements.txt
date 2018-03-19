@@ -1,0 +1,663 @@
+Set: JPK Levels arrangements
+Copyright: (c) by the authors of each puzzle
+
+These levels are copyright (c) by the authors of each puzzle and may be 
+freely distributed for non-commercial use provided they remain unchanged,
+credited with the author's name, and provided the author is notified.
+
+This collection was downloaded from:
+"Sokoban. The beautiful world of remodels"
+http://sokoban-jd.blogspot.com/
+
+
+
+   ###########
+####   @     #
+#   $ ###$##$####
+# ## $$  $      #
+#  $ $   $$$  # #
+### .#### # ### #
+#.. *...#       #
+#.....###########
+#######
+Author: Jean-Pierre Kent + unknown
+Title: (untitled)
+Original level: JPK Levels #1
+Source: WinSoko #2948
+
+
+  ########
+  #  #   ####
+### $# $ #  #
+#   $ #   $.###
+# #$$  $ ##.  #
+# # # # ## .# #
+# #     ## .# #
+# ######## .  #
+# @      ##.###
+########   .#
+       ######
+Author: Jean-Pierre Kent + kazuo
+Title: JPK #18
+Original level: JPK Levels #9
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+        ############
+        #     #    #
+      ### ##.......#
+#######   #...#....#
+#   # $ ###.....#..#
+#  @ $ $  #####....#
+### $$ $  #     ...#
+ #   #  $$#$$$  #  #
+ # $#   $ $  $  ####
+ # $ $ #  $  $# #
+ #    #  $  $$  #
+ ####$$ $ ## $  #
+    #      $ $ ##
+    #  ###     #
+    #### #######
+Author: Jean-Pierre Kent + monry
+Title: JPK #19
+Original level: JPK Levels #10
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+########
+#  #   ####
+# $# #$   #
+#    $    #
+## ##### ###
+ #  ...#$# #
+ # #.*.  # #
+ #$#...# #@#
+## ##  #$# #
+# $ $      #
+#     #  ###
+##########
+Author: Jean-Pierre Kent + monry
+Title: JPK #20
+Original level: JPK Levels #11
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+###########
+#      #  #
+#   $#$#$ #
+## $$ $   #
+ #  # # $## #####
+ #  # ....###   #
+ # ## ....# $$  #
+ # #@ ....#   # #
+ # $ #.....$  # #
+ # $$###### #$$ #
+ # $ $          #
+ #   ############
+ #   #
+ #####
+Author: Jean-Pierre Kent + monry
+Title: JPK #35
+Original level: JPK Levels #26
+Date: 1998.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+#####     ########
+#   #######      #
+# $      $   $$$ #
+# $# $#$ $#$$ $  #
+#   $  $       ###
+## # # $  ######
+ #$ $  #$$##  #
+ #   ###  ....##
+## #######.... #
+# $   $  #.... #
+#   $$$$ #....##
+####$ $ @#....#
+ #     $##....#
+ #   #   #....#
+ ###   #   ####
+   #########
+Author: Jean-Pierre Kent + monry
+Title: JPK #40
+Original level: JPK Levels #31
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+       ####
+########  #####
+#    $   $##  #
+#  #   #  ....##
+## #######.##. #
+# $   $  #.... #
+#   $$$# #$#####
+##### $ @# #
+ #     $## #
+ #   #   # #
+ ###   #   #
+   #########
+Author: Jean-Pierre Kent + monry
+Title: JPK #40
+Original level: JPK Levels #31
+Date: 1999.1.2
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ #####      ####
+ #   ########  ##
+ #           $  #
+ #*.#.*.*.#.#$$ #
+ #.*#.*#*.#.#   ##
+ #*.#..#..#.##$  #
+ #..***#***.#@$$ #
+ #         .#    #
+#############$$ ##
+#        #    $ #
+# ## $ $ # $$   #
+#  $ $#$$$  $####
+##           #
+ #############
+Author: Jean-Pierre Kent + monry
+Title: JPK #42
+Original level: JPK Levels #33
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ #####      ####
+ #   ########  ##
+ #           $  #
+ #*.#.*.*.#.#$$ #
+ #.*#.*#*.#.#   ##
+ #*.#..#..#.##$  #
+ #..***#***.#@$$ #
+ #        ..#    #
+#############$$ ##
+#        #    $ #
+# $# $ $$# $$   #
+#  $ $#$ $  $####
+##           #
+ #############
+Author: Jean-Pierre Kent + York Shen
+Title: #42 a
+Original level: JPK Levels #33
+Source: posted in SuperSoko
+
+
+         ####
+ #########  #
+##     ###$ ##
+#   $  $     #
+#@$$ #### $  ###
+## ######## $ ##
+ # #..#...# $  #
+ # #......## # #
+ # #.... .#    #
+ # #### $ # $$ #
+## $  # # #    #
+#  #  $   # ## #
+#  #$ # #$#    #
+#  $  #   #    #
+####  ##########
+   ####
+Author: Jean-Pierre Kent + monry
+Title: JPK #43
+Original level: JPK Levels #34
+Date: 1999.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ #############
+ #.....#  #  #
+ #.....#  $$ #
+ #...##   #  #
+ #..*#  $ #  #
+##...# $$ ## #
+#  $ #  # ## ##
+#  $ # ## #   #
+#    # ##  $  #
+####$#$##$### #
+  # $ $     $$##
+  #    $ $ $   #
+  ##   ##  #  @#
+   #############
+Author: Jean-Pierre Kent + monry
+Title: JPK #48
+Original level: JPK Levels #39
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ #############
+ #.....#  #  #
+ #.....#  $$ #
+ #...##   #  #
+ #..*#  $ #  #
+##...# $$ ## #
+#  $.#  # ## ##
+# $$ # ## #   #
+#    # ##  $  #
+####$#$##$###@#
+  # $ $     $$##
+  #    $ $ $   #
+  ##   ##  #   #
+   #############
+Author: Jean-Pierre Kent + monry?
+Title: (untitled)
+Original level: JPK Levels #39
+
+
+ #############
+ #.....#  #  #
+ #.....#  $$ #
+##...##   #  #
+# ..*#  $ #  #
+# ...# $$ ## #
+#  $.#  # ## ###
+#  $ #  # # $  #
+#    # ##  $   #
+####$#$ #$###  #
+  # $ $     $$##
+  #    $ $ $   #
+  ##   ##  #  @#
+   #############
+Author: Jean-Pierre Kent + York Shen
+Title: #48 a
+Original level: JPK Levels #39
+Source: posted in SuperSoko
+
+
+###################
+##         #      #
+#         ...#### #
+#       ##... #   #
+#  #######...     #
+####    ... .### ##
+#  $$###.....# #  #
+#  $   #.....#  $ #
+# $ $  #######    #
+# $ #$$$   ####$#$##
+# $    # # # $     #
+# $ $$$$   # $$    #
+#      ##    $ #####
+############$  #
+           #@ ##
+           #####
+Author: Jean-Pierre Kent + monry
+Title: JPK #55
+Original level: JPK Levels #46
+Date: 1999.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+####################
+#    #   @  #   #  #
+#    $ $ $ $   $#$ #
+###$##########     #
+# $  # ......#  #  #
+#    # *.*...####$##
+#  #### ###..#  #  #
+## ##     #..#  $  #
+#  ##$ $ $#**#  #  #
+#    $ #  #..# #####
+#   #  $ $#..$    #
+#####  ## #  #  $ #
+    ####  ##### ###
+       #        #
+       #  ####  #
+       ####  ####
+Author: Jean-Pierre Kent + monry
+Title: JPK #56
+Original level: JPK Levels #47
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+          #######
+######### #     #
+#   ....# # $$  #
+#   ....###  # $###
+#  ###....   #  $ #
+#  #  ....# #   $ #
+#  # ########  $$ #
+#  # #  #    #$   #
+# ## ####$ #$  $  #
+#  $        $ $  ##
+############# #####
+            # $@#
+            #$# #
+            #   #
+            #####
+Author: Jean-Pierre Kent + monry
+Title: JPK #61
+Original level: JPK Levels #52
+Date: 1999.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ ##########
+ #    ##  #
+ # ##   $ #
+##  ##  $ #
+#....##$  ###
+#.**.#   $  #
+#.*..##$##@ #
+# # ## $  $ #
+# $$     #  #
+#    ########
+######
+Author: Jean-Pierre Kent + monry
+Title: JPK #63
+Original level: JPK Levels #54
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ ##########
+##       ##
+#  $### $ #
+#   $ $   #
+#   #@##$ #
+#######  ###
+#   ##     #
+#.  ##$$ # #
+#...##  #  #
+#.*.## $  ##
+#...  $ # #
+#  ########
+####
+Author: Jean-Pierre Kent + monry
+Title: JPK #64
+Original level: JPK Levels #55
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+  ##############
+  #      #     #
+  # ####$$  $$ #
+  # #  # ##$   #
+  # #  # ## $$ #
+  # #  # ##$   #
+  # #  #  #  $ #
+  # ####  ## ###
+### .###   #$#
+#.*...#    # #
+#..***#  @ # #
+#..*..## #   ##
+##*#.###  # $ #
+ #     $  #   #
+ #   ######   #
+ #####    #####
+Author: Jean-Pierre Kent + monry
+Title: JPK #70
+Original level: JPK Levels #61
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+  ############
+  #       #  ####
+  #$# $   $  $  #
+###   #$# #  #  #
+#..   #  $#  $$ #
+#...  # $ $ $$ @#
+#...#### #### ###
+#...  #   #     #
+#...#$  $ # $ $ #
+#....$ ## $  $###
+#  .#     #   #
+###############
+Author: Jean-Pierre Kent + monry
+Title: JPK #71
+Original level: JPK Levels #62
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+             ####
+         #####  #
+   ####### $    ###
+   #@$      ##    #
+   #$###### ###$# ##
+   #  $ ###   # #  #
+   #      #  ## ## #
+   # $  # # ###  # #
+   # #  $     $ $# #
+   # # $ $ $ $     #
+####$########## ####
+#     $....####   #
+#   $  .*..###### #
+########.......*..#
+       ############
+Author: Jean-Pierre Kent + monry
+Title: JPK #74
+Original level: JPK Levels #65
+Date: 1999.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+             ####
+           ###  #
+   ####    # $ $####
+   #  ###### #@    #
+   #      #  ##$## #
+   # $  # # ###  # #
+   # #  $     $ $# #
+   # # $ $ $ $     #
+####$########## ####
+#     $....#  #  #
+#   $  .*..##### #
+########.......* #
+       ###########
+Author: Jean-Pierre Kent + monry
+Title: JPK #74
+Original level: JPK Levels #65
+Date: 1999.12
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+#############
+#....#..$   #####
+#..#***.  $     #
+#.*.....# $$$ $ #
+#..#######$  $ ####
+#...   $@#    ##  #
+#..*$$$  # #####$ #
+#... #  ## #   #  #
+#### # $##$  $ #$ #
+ # $$#   # $ $    #
+ #   ###   ####$$ #
+ # $ # #####  # $ #
+ #   #        #   #
+ #####        #####
+Author: Jean-Pierre Kent + York Shen
+Title: #75
+Original level: JPK Levels #66
+Source: posted in SuperSoko
+
+
+################
+##    #       ##
+##$$#   $ $ $  #
+#    $# $ $ $  #
+# $ $ ####### ##
+#  $  ## $ $  ##
+# $$#       @ ##
+##  $ ##.#######
+## # $##.  ....#
+#  #$ ##.# ##..#
+# $  $.........#
+#    #####.  ..#
+################
+Author: Jean-Pierre Kent + kazuo
+Title: JPK #1
+Original level: JPK Levels #67
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+ #################
+ #@  #.....#.... #
+ #$.*#.*.**#**.* ##
+ # ..*.*#.*...#   #
+ #$*....#.....#$$ #
+## ############   #
+#   $ $ $     #$$ #
+#  $# # # #$$$ $  #
+# $       $   ## ##
+##$$$ $$# #     $ #
+#  $ $#   ### #   #
+# $ $ $ #$ $  # ###
+#          #      #
+###################
+Author: Jean-Pierre Kent + York Shen
+Title: #2 b
+Original level: JPK Levels #68
+Source: posted in SuperSoko
+
+
+#####
+#   #######
+#   $  #  #
+## $# $ $ #
+ # $      ####
+##$$# #$$$ $ #
+# $       ## #
+#  ########  #
+# $$....*.#$ #
+#  #*.*.*.   #
+# $*.**...####
+# @#..**..#
+###########
+Author: Jean-Pierre Kent + York Shen
+Title: #3 a
+Original level: JPK Levels #69
+Comment: added 1 box
+Date: 2004.8.21
+URL: blog.163.com/changkai_8428/blog/static/77451918201111133123343/
+
+
+####### #########
+#     # #   ### #
+# ### ###$$   $ #
+# # $ ##    $   #
+#   $$    $ ##$ #
+#@$  ###$#  ##  #
+## ##... ##### ##
+ # #  #.######$ #
+ # $$ #.     #  #
+ ##   #  #   $  #
+  ### #. # $$#  #
+    #.#. #   $$ #
+    #.#..# # #  #
+    #....########
+    #....#
+    ######
+Author: Jean-Pierre Kent + monry
+Title: JPK #7
+Original level: JPK Levels #73
+Source: "JPK arrange (scratch)", collected by Hir
+
+
+####### #####
+#     # #   #####
+# ### ###$$   $ #
+# #  $##    $   #
+#   $$    $ ##$ #
+#    ###$#  ##  #
+# $##... ##### ##
+##@# .#.######$##
+# $$$*#.     #  #
+#    .#.##   $  #
+#####.#.## $$#  #
+   # .#.##   $$ #
+   # .#.## # #  #
+   # ...#########
+   # ...#
+   ######
+Author: Jean-Pierre Kent + unknown
+Title: (untitled)
+Original level: JPK Levels #73
+
+
+####### #####
+#     # #   #####
+# ### ###$$   $ #
+# #  $##    $   #
+#   $$    $ ##$ #
+#    ###$#  ##  #
+# $##... ##### ##
+##@# .#.######$##
+# $$$*#..    #  #
+#   ..#.##   $  #
+#####.#.## $$#  #
+   # .#.##   $$ #
+   # .#.## # #  #
+   # **.#########
+   # ...#
+   ######
+Author: Jean-Pierre Kent + York Shen?
+Title: (untitled)
+Original level: JPK Levels #73
+
+
+####### #####
+#     # #   #####
+# ### ###$$   $ #
+# #  $##    $   #
+#   $$    $ ##$ #
+#    ###$#  ##  #
+# $##.#. ##### ##
+##@# .#.######$##
+# $$$*#...   #  #
+#   ..#.##   $  #
+#####.#.## $$#  #
+   # .#.##   $$ #
+   # .#.## # #  #
+   # **.#########
+   # ...#
+   ######
+Author: Jean-Pierre Kent + York Shen
+Title: #7 b
+Original level: JPK Levels #73
+Comment:
+can add 1 wall as attach, but solution is same as first change
+2007-01-12 add 2 boxes--YS
+2007-01-13 add 1 wall--YS
+Source: posted in SuperSoko
+
+
+####### #####
+#     # #   #####
+# ### ###$$   $ #
+# #  $##    $   #
+#   $$    $ ##$ #
+#    ###$#  ##  #
+# $##... ##### ##
+##@# .#.######$##
+# $$$*#.     #  #
+#   ..#.##   $  #
+#####.#.## $$#  #
+   # .#.##   #$ #
+   # .#.## # #  #
+   # **.#########
+   # ...#
+   ######
+Author: Jean-Pierre Kent + unknown
+Title: (untitled)
+Original level: JPK Levels #73
+
+
+####### #####
+#     # #   ######
+# ### ###$$   $ ##
+# #  $##    $    #
+#   $$    $ ###$ #
+#    ###$#  ###  #
+# $##... ######  #
+##@# .#.#######$##
+# $$ *#.     ##  #
+#  ...#.##   $   #
+#####*#.## $$##  #
+   # .#.##    $$ #
+   # *#.## # ##  #
+   # ...##########
+   # *..#
+   ######
+Author: Jean-Pierre Kent + stopheart
+Title: #7 b
+Original level: JPK Levels #73

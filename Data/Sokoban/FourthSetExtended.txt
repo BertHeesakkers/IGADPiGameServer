@@ -1,0 +1,848 @@
+Fourth Set extended
+
+Collection: Fourth Set extended
+Author: Howard Abed
+Date: 1999, 2001-2002
+Source: 
+Levels of "Fourth Set" #1-32 come from the first "Fourth Set" 
+(c. June-October 1999). Other 9 levels come from "Simple levels" 
+(April 2001), and the 5 remaining were added later.
+
+All levels are remodels of XSokoban. I have collected all remodels 
+in a single collection, under the name "Fourth Set extended".- J.D.
+
+Comments of Howard Abed
+- In "Fourth Set" (1999):
+This set contains edited versions of some of the standard levels.
+I delete unnecessary space and added more boxes.
+- In "Simple levels" (2001)
+This set contains edited versions of some of the standard levels.
+
+-----------------------------------------------------------------------
+
+These levels are copyright (c) by Howard Abed and may be freely 
+distributed for non-commercial use provided they remain unchanged, 
+credited with the author's name, and provided the author is notified. 
+
+This collection was downloaded from:
+"Sokoban. The beautiful world of remodels"
+http://sokoban-jd.blogspot.com/
+
+-----------------------------------------------------------------------
+
+
+    #####
+    #   #
+    #$  #
+  ###  $##
+  #  $ $ #
+### # ## #   ######
+#   # ## ##### ...#
+# $  $   @   $ ...#
+############## $..#
+             ######
+Author: Howard Abed
+Title: Fourth Set #1
+Original level: Original #1
+
+
+#### #######
+#..# #     ###
+#..### $  $  #
+#... #$####  #
+#... $ @ ##  #
+#..$ # #  $ ##
+###### ##$ $ #
+  # $  $ $ $ #
+  #    #     #
+  ############
+Author: Howard Abed
+Title: Fourth Set #2
+Original level: Original #2
+
+
+             ######
+           ###....#
+############ $....#
+#    #  $ $  .....#
+# $$$#$  $ # *....#
+#  $     $ ###....#
+# $$ #$ $ $# ######
+#  $ #     #
+## #########
+ #   #   #
+ #    $ @#
+ # $$#$$ #
+ #   #   #
+ #########
+Author: Howard Abed
+Title: Fourth Set #3
+Original level: Original #4
+
+
+             ######
+           ###....#
+############ $....#
+#    #  $    .....#
+# $$ #$ $$$# *....#
+#  $$$   $ ###....#
+#    # $ $ # ######
+# $$ #     #
+## #########
+ #   #   #
+ #   $ $@#
+ # $$# $ #
+ #   #   #
+ #########
+Author: Howard Abed
+Title: Remodel of original level 4
+Original level: Original #4
+
+
+####
+#..### #####
+#..$ ### @ #
+#...    $$ #
+#..* # # $ #
+#..### # $ #
+#### $ #$  #
+   #  $# $ #
+   # $  $  #
+   #  ##   #
+   #########
+Author: Howard Abed
+Title: Fourth Set #4
+Original level: Original #6
+
+
+  ####
+  #  ###########
+  #    $   $ $ #
+  # $# $ #  $  #
+  #  $ $  ##   #
+### $# #  #### #
+#@#$ $ $  ##   #
+# $  $ #$#   # #
+#   $    $ $ $ #
+#####*.#########
+  #......#
+  #......#
+  #......#
+  ########
+Author: Howard Abed
+Title: Fourth Set #5
+Original level: Original #8
+
+
+          ######
+         ## ...#
+     ##### $...#
+     #     ..#.#
+     #  ## *...#
+     ## ### ...#
+    ### ########
+    # $$$ ##
+#####  $ $ #####
+#   #$ $   #   #
+#@$  $    $  $ #
+##### $$ $ #####
+    #      #
+    ########
+Author: Howard Abed
+Title: Fourth Set #6
+Original level: Original #9
+
+
+ ###  #############
+##@####       #   #
+#  $   $ $$$$*....#
+# $ $$# $ $ $ #...#
+#  $  # $  $  #...#
+###$$ #     $ #...#
+#  $  # $ $   #...#
+#    ######$###...#
+##.#  #  $ $  #...#
+#..## # $$ $ $##..#
+# *.# #    $  $ #.#
+# ..  # $$$$  $ #.#
+##### #       # #.#
+    # ######### #.#
+    #           #.#
+    ###############
+Author: Howard Abed
+Title: Remodel of original level 10
+Original level: Original #10
+
+
+################
+#              #
+# # ###### $ $ #
+# #  $ $ $ $#..#
+# # $ $@$   ##.##
+# #  $ $ $###...#
+# #   $ $  ##...#
+# ###$$$ $ ##...#
+#     # ## ##...#
+#####   ## ##...#
+    #####     ###
+        #     #
+        #######
+Author: Howard Abed
+Title: Fourth Set #7
+Original level: Original #12
+
+
+   #####
+  ##   ##    ####
+###     #    #  ###
+#  $ #$ #    #... #
+# # $#@$######.#. #
+#  # #$  #    .#.##
+# $    $ # # #.#.##
+#   ##  ##$ $ . . #
+# $ #   #  #$#.#. #
+## $  $   $  $... #
+ #$ ######    ##  #
+ #  #    ##########
+ ####
+Author: Howard Abed
+Title: Fourth Set #8
+Original level: Original #13
+
+
+   #########
+  ##   ##  ######
+###     # $#   .###
+#  $ #$ #  # *....#
+# # $#@$## # #*# .#
+#  # #$  #    .** #
+# $    $ # #$#.#. #
+#   ##  ##$ $ ..* #
+# $ #   #  #$#*#..#
+## $  $   $  $..* #
+ #$ ######    #...#
+ #  #    ##########
+ ####
+Author: Howard Abed
+Title: Remodel of original level 13
+Original level: Original #13
+
+
+   ########
+   #   #  #
+   #  $   #
+ ###$#$ $ ####
+ #  $  ## .  #
+ #  #$ $ $#*$#
+ #  #  @. .$ ####
+ ## ####*##.    #
+ # $#..*..# #   #
+ #  *.***. *# ###
+##  #..*..#   #
+#  $###.#######
+# $$  #  #
+#  #   $ #
+######   #
+     #####
+Author: Howard Abed
+Title: Remodel of original level 15
+Original level: Original #15
+
+
+   ##########
+   #... #   #
+   #....$ $ #
+   #..  #  ####
+  ####### $#  ##
+  #            #
+  #  #  ##  #  #
+#### ##  #### ##
+#  $  ##### #  #
+# # $  $  # $  #
+# @$  $   #   ##
+#### ## #######
+   #    #
+   ######
+Author: Howard Abed
+Title: Fourth Set #9
+Original level: Original #17
+
+
+     ###########
+     #  .  #   #
+     # #.$   $@#
+ ##### ##..# ####
+##  #...###     ###
+# $ #.**.. $ #  $ #
+#    ...##  ## ## #
+####$##*# $ #   # #
+  ## # .  #$$ $ # #
+  #  $ # #  #$$## #
+  #  $            #
+  #  ###########  #
+  ####         ####
+Author: Howard Abed
+Title: Remodel of original level 18
+Original level: Original #18
+
+
+    ##########
+#####        ####
+#     # $ $  #@ #
+# #######$####$ ###
+# #    ## #  #  ..#
+# # $     #  #$$#.#
+# # $$ #     #  ..#
+# #  ### ##     #.#
+# ###  #  #  #$ ..#
+# #    #$ #### *#.#
+# #$   $  $  #*...#
+#    $ # $ $ #..#.#
+#### $###    #**..#
+   # $  $$ ###....#
+   #      ## ######
+   ########
+Author: Howard Abed
+Title: Fourth Set #10
+Original level: Original #20
+
+
+    ##########
+#####        ####
+#     # $ $  #@.#
+# #######$####$ ###
+# #    ## #  #  ..#
+# #    $  #  #$$#*#
+# # $$ #     #  ..#
+# #  ### ##$   *#.#
+# ###  #  #  # *..#
+# #    #$ #### *#.#
+# #$   $  $  #.*..#
+#    $ # $ $ #.*#.#
+#### $###    #.*..#
+   # $  $$ ###....#
+   #      ## ######
+   ########
+Author: Howard Abed
+Title: Remodel of original level 20
+Original level: Original #20
+
+
+ ########
+ #      ####
+ # #### #  #
+## #@##    #
+# $$$ $  $$#
+#  # ## $  #
+#  # ##  $ ####
+####  $$$ $#  #
+ #   ##   ....#
+ # #   # #.. .#
+ #   # # ##...#
+ ##### $  #...#
+     ##   #####
+      #####
+Author: Howard Abed
+Title: Fourth Set #11
+Original level: Original #21
+
+
+    #######
+    #  #  ####
+##### $#$ #  ##
+#.. #  #  # $ #
+#.. # $#$ #  $####
+#.  #     #$  #  #
+#..   $#$ #   $  #
+#..@#  #  #$ $#  #
+#.. # $#$$    #  #
+#.. #  # $#$  #  ##
+#.. # $#  # $ #$  #
+#...#  #  #   #   #
+##..####  #####   #
+ ####  ####   #####
+Author: Howard Abed
+Title: Remodel of original level 23
+Original level: Original #23
+
+
+        #######
+    #####  #  ####
+    #   #   $    #
+ #### #$$ ## ##  #
+##      # #  ## ###
+#  ###$$#$  $  $  #
+#.....  # ##  #   #
+#...#$   @ # ### ##
+#...#  ###  $  $  #
+######## ##   #   #
+          #########
+Author: Howard Abed
+Title: Fourth Set #12
+Original level: Original #43
+
+
+##### ####
+#...# #  ####
+#...###  $  #
+#....## $$ $###
+##....##   $  #
+###... ## $ $ #
+# ##.   #  $  #
+#  ## # ### ####
+# $ # #$  $    #
+#  $ @ $    $  #
+#   # $ $$ $ ###
+#  ######  ###
+# ##    ####
+###
+Author: Howard Abed
+Title: Remodel of original level 45
+Original level: Original #45
+
+
+      ############
+     ##..    #   #
+    ##..*.*    $ #
+   ##..*.# # #$ ##
+   #..*.# # # $  #
+####...#      $# #
+#  ##.#       $  #
+# @$ $ ###  # $ ##
+# $   $   # #   #
+###$$   # # # # #
+  #   $   # # #####
+  # $# #####      #
+  #$   #   #    # #
+  #  ###   ##     #
+  #  #      #    ##
+  ####      ######
+Author: Howard Abed
+Title: Fourth Set #13
+Original level: Original #50
+
+
+##################
+#                ##
+# $#$  $ ##$ $ $  #
+#  $ $###    # $$ #
+#.###     $ $ ##  #
+#...#  #  #    # ##
+#..##$$#### $$ # #
+#...#      $ ##  #
+#....  ###  ##  ##
+##... $####### ##
+ #..#        @ #
+ ###############
+Author: Howard Abed
+Title: Fourth Set #14
+Original level: XSokoban #53
+
+
+#################
+#   #    #   #  #
+# $   .. $   $  ####
+## ###..## ###    @#
+#   #....#$#  $### #
+# $ #....#  $  $ $ #
+#   #....# # # $ $ #
+#   ##..##   #$#   #
+##$## .. ##$ #  #$##
+#   $ $$ $ $ #  #  #
+#   #    #   #     #
+####################
+Author: Howard Abed
+Title: Fourth Set #15
+Original level: XSokoban #54
+
+
+      ############
+     ##      #   #
+    ##....     $ #
+   ##....# # #  ##
+   #....# #   $ ###
+####...#  #       #
+# @##$#   # $ $ $ #
+#  $ $ ###### # ###
+# $    $  # # $   #
+### $$ $# # ### $ #
+  #       #   #  ##
+  #########   ####
+Author: Howard Abed
+Title: Fourth Set #16
+Original level: XSokoban #55
+
+
+      ############
+     ##      #   #
+    ##...* $   $ #
+   ##..*.# #$#$$##
+   #..*.### $ $ ###
+####...## #       #
+# @##*##  #       #
+#  $ $ ## ### # ###
+# $     #   #     #
+### $$  #   ###   #
+  #    ##     #  ##
+  ######      ####
+Author: Howard Abed
+Title: Remodel of original level 55
+Original level: XSokoban #55
+
+
+         ###########
+       ###   #  #  #
+     ###  $  $     #
+######.@  # $ $#$# #
+#.#..#.$$ ##$ $    #
+#...... # $   #   ##
+#...... $ ###$##$###
+#.#..#.$$ $    #   #
+#######   #  #$  $ #
+      ##  $    $ $ #
+       #  #  #  #  #
+       #############
+Author: Howard Abed
+Title: Fourth Set #17
+Original level: XSokoban #57
+
+
+#################
+#...... ## #    #
+#......       $ ####
+#....#$# #$###$    #
+#...#    # $ $   # #
+##.#  #$ #     $## #
+#  #  # $ $ ###  $ #
+#  $  $  $ #  # ## #
+##$# ## #$$# $#  ###
+#  #   $ $ #      #
+#    #     #  #  @#
+###################
+Author: Howard Abed
+Title: Fourth Set #18
+Original level: XSokoban #58
+
+
+#################
+#.*.*.. ## #    #
+#...*....... $ $####
+#.*..#$# #$###$    #
+#.*.#    # $ $   # #
+##*#  #$ #     $## #
+# .#$ # $ $ ###  $ #
+#..$  $  $ #  # ## #
+##.#$## #$$# $#  ###
+#  #   $ $ #   $  #
+#    #     #  #  @#
+###################
+Author: Howard Abed
+Title: Remodel of original level 58
+Original level: XSokoban #58
+
+
+     ###############
+     #  # #  #  #  #
+     # ## $   $   ##
+######    #  # $   #
+# @ ## ## #$ ## ## #
+#      $   $   $   #
+#..###$$## $##$ ## #
+#..#.#  # $   $ #  #
+#....# $$   ##$ ####
+#....#  #####      #
+#...###        ##  #
+##### ##############
+Author: Howard Abed
+Title: Fourth Set #19
+Original level: XSokoban #62
+
+
+####################
+#....#       #  #  #
+#....# # $  $      #
+#.... ##  $# # $#$ #
+#...#   $   $#  $  #
+#..####  # $   $$  #
+#......#### #### ###
+# $ $    #   #     #
+# ## $ #   $ # $ $ #
+# ##$$$ $ ## $  $  #
+#     @#     #   # #
+####################
+Author: Howard Abed
+Title: Fourth Set #20
+Original level: XSokoban #63
+
+
+####################
+#....#       #  #  #
+#.*..# # $  $      #
+#..*..##  $# # $#$ #
+#.*.#   $   $#  $  #
+#.*####  # $   $$  #
+#......####$#### ###
+#**.*..  #   #     #
+# ## $.#   $ # $ $ #
+# ##$$$$$ ## $  $$ #
+#     @#     #   # #
+####################
+Author: Howard Abed
+Title: Remodel of original level 63
+Original level: XSokoban #63
+
+
+###### #############
+#....# #           #
+#....# ### #  #$# ##
+#....# #   #$  $   #
+#....# #    $  #$$##
+##..## # $#  #$ $  #
+ # $#  #  $  $  #  #
+ #@ ####$###$## $  #
+ # $      #  #  $  #
+ #   ###  #  $  ####
+ ##### #  #  #     #
+       #############
+Author: Howard Abed
+Title: Fourth Set #21
+Original level: XSokoban #64
+
+
+##################
+#     #     @#...##
+# $ $ #   $  ##...##
+# # # ##$## ## ....#
+#   $ #   $$$......#
+###$### $$  ###.##.#
+#     $  #    #.####
+#  $  #  ###  #.#  #
+## #$##    $  $$   #
+#   $ ## $ #  # #$ #
+#     #    #  #    #
+####################
+Author: Howard Abed
+Title: Fourth Set #22
+Original level: XSokoban #65
+
+
+##################
+#     #     @#...##
+# $ $ # $ $  ##...##
+# # # ##$## ## ....#
+#   $ #   $$$......#
+###$### $$  ###.##.#
+#     $  #    #.####
+#  $  # $###$ #.#  #
+## #$##    $ $$*.. #
+#   $ ## $ #  # #* #
+#     #    #  #    #
+####################
+Author: Howard Abed
+Title: Remodel of original level 65
+Original level: XSokoban #65
+
+
+####################
+#     #  #...#@    #
+# # $     ....#    #
+#  $  #   #....#   #
+# ##$#### ##....#  #
+# $   $  #  #...#  #
+# $$ #   #   #.*$  #
+###  $$$#  $$$..$$ #
+# $  #  #    # $#  #
+#   $#  #       $$ #
+#  #    #    #  #  #
+####################
+Author: Howard Abed
+Title: Fourth Set #23
+Original level: XSokoban #66
+
+
+####################
+#  #  # #    #  #  #
+#   $      $ $     #
+## #  #$###$## $## #
+#   $     $  #  $  #
+# ###$##$#   # $   #
+# #   $ $  ###### $#
+# $  $$ $  # #.#...#
+#@#     #  # #.....#
+############ #.....#
+             #.....#
+             #######
+Author: Howard Abed
+Title: Fourth Set #24
+Original level: XSokoban #70
+
+
+####################
+#  #  # #    #  #  #
+#   $      $ $     #
+## #  #$###$## $## #
+#   $     $  #  $  #
+# ###$##$#   # $ . #
+# #   $ $  ######.*#
+# $  $$ $ $# #.#...#
+#@#     #  # #....*#
+############ #.....#
+             #....*#
+             #######
+Author: Howard Abed
+Title: Remodel of original level 70
+Original level: XSokoban #70
+
+
+##############
+#        #   #
+# $$  #$$# # #######
+#  # $ $ #$$ #@    #
+## #  #  # # #  #  #
+#   ##       #  ...#
+#   # $ # $ #  $#..#
+# $ #$ #   #  $ #..#
+##$ #  ####  $ #...#
+#  $      $ $ #....#
+#   #  #     #.....#
+####################
+Author: Howard Abed
+Title: Fourth Set #25
+Original level: XSokoban #73
+
+
+       ###########
+       #         #
+       # $ $ $ $ #
+  #### #   ##### #
+  #  #####$$  ##$#
+  #.. $ $ $      #
+###..$     ## ## #
+#....##@##### ## #
+#....####   # ## ##
+######      # $   #
+            #     #
+            #######
+Author: Howard Abed
+Title: Fourth Set #26
+Original level: XSokoban #78
+
+
+#############
+#           #
+# ### $$  $ #
+#   # $  $  #
+#  $####$####
+# $ ##      ####
+#  $$ $  $ ....#
+### ## $$# ....#
+  # ##   ###...#
+  #  @   # #...#
+  ######## #####
+Author: Howard Abed
+Title: Fourth Set #27
+Original level: XSokoban #79
+
+
+         #####
+##########...#
+#  @ ##   ...#
+# $  ##   ...#
+# $$ ### ....#
+## $ ###$#####
+ # ###  $ #
+##   $  $ #
+#  $ #  $ #
+# $  ##   #
+# $$ ######
+#    #
+######
+Author: Howard Abed
+Title: Fourth Set #28
+Original level: XSokoban #80
+
+
+####################
+# @  ##.....       #
+#  $ ##..**.       #
+# $$ ##.....       #
+##$  ### ###########
+ # ### $$ #
+##   $    #
+#  $$#$ $ #
+#    #    #
+# $$ ######
+#    #
+######
+Author: Howard Abed
+Title: Remodel of original level 80
+Original level: XSokoban #80
+
+
+              #####
+     ##########   #
+     #        #   #
+     #  $ $    $$ #
+     # ##### ## $ #
+     #$$   #$## $ #
+     # ### # ##$  #
+###### ### $ $    #
+#....$   $   ##   #
+#......  @   ######
+#....* #######
+########
+Author: Howard Abed
+Title: Fourth Set #29
+Original level: XSokoban #81
+
+
+    ######
+ ####    #
+ #    ## #
+ # $     #
+### #### ########
+#  $   $ ## *...#
+#   $$ $$   ....#
+# @  $  $## $...#
+##### ## ####...#
+ ###  $  #  #####
+ #   $$  #
+ #    #  #
+ #########
+Author: Howard Abed
+Title: Fourth Set #30
+Original level: XSokoban #82
+
+
+#######      ####
+#     #  #####  #
+# ### #  #  $   #
+# # $ ####  $   #
+# $ $$      ##$ #
+#@   ####   ##  #
+############## ##
+    #..###  ##$ #
+    #... ####   #
+    #...    $$  #
+    #..$ #### $ #
+    #..###  #   #
+    ####    #####
+Author: Howard Abed
+Title: Fourth Set #31
+Original level: XSokoban #83
+
+
+###############
+#     #    #  ##
+# $ $ #   $ $  #
+#  $$ #  $ ##  #
+# $$  ##$ $    #
+## #$ ## #######
+## #  ## ....#
+#  #$    ....#
+#   $$  @....#
+#     ####...#
+#######  #####
+Author: Howard Abed
+Title: Fourth Set #32
+Original level: XSokoban #84
