@@ -9,17 +9,17 @@ enum EScotlandYardServerMessages
 	EMessage_SendGetSpyTravelLog,
 	EMessage_SendGetPlayerLocations,
 	EMessage_SendTravel,
-	EMessage_SendGetLocation,			// to do
-	EMessage_SendGetTravelLog,			// to do
-	EMessage_SendAmISpy,				// to do
-	EMessage_SendGetRemainingTokens,	// to do
+	EMessage_SendGetLocation,
+	EMessage_SendGetTravelLog,
+	EMessage_SendAmISpy,
+	EMessage_SendGetRemainingTokens,
 
 	EMessage_RecvGetMap,
 	EMessage_RecvTravelResult,
 	EMessage_RecvGetSpyTravelLog,
 	EMessage_RecvGetPlayerLocations,
-	EMessage_RecvGetLocation,			// to do
-	EMessage_RecvAmISpy,				// to do
-	EMessage_RecvGetTravelLog,			// to do
-	EMessage_RecvGetRemainingTokens		// to do
+	EMessage_RecvGetLocation,
+	EMessage_RecvAmISpy,
+	EMessage_RecvGetTravelLog,
+	EMessage_RecvGetRemainingTokens
 };

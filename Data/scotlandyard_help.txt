@@ -8,4 +8,40 @@ Scotland Yard is a game based on the original Scotlan Yard board game. For an im
 
 	After the EMessage_RecvJoinGame message has been received the player has joined a game and the following messages can be sent:
 
-	MORE TO FOLLOW...
+	EMessage_SendGetMap
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendGetSpyTravelLog
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendGetPlayerLocations
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendTravel
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+		DATA_3: uint32_t(<DESTINATION>)
+
+	EMessage_SendGetLocation
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendGetTravelLog
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendAmISpy
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+	EMessage_SendGetRemainingTokens
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+
+
+	The following message will occasionally be sent by the server:
+
+	EMessage_RecvGetMap
+	EMessage_RecvTravelResult
+	EMessage_RecvGetSpyTravelLog
+	EMessage_RecvGetPlayerLocations
+	EMessage_RecvGetLocation
+	EMessage_RecvAmISpy
+	EMessage_RecvGetTravelLog
+	EMessage_RecvGetRemainingTokens	
