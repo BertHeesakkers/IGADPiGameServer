@@ -25,6 +25,9 @@ Usage:
 
 	MSG: EMessage_SendDisconnect
 	MSG: EMessage_SendJoinGame
+		DATA_1: uint32_t(<CLIENT ID>)
+		DATA_2: EGame(<GAME>)
+
 
 	Any of the previous messages can send a result to the client. The following are messages the client may receive:
 
@@ -35,7 +38,10 @@ Usage:
 		DATA1: RakString(<HELPTEXT>)
 
 	EMessage_RecvLoginSuccess
+		DATA_1: uint32_t(<CLIENT ID>)
+		
 	EMessage_RecvDisconnected
 	EMessage_RecvWaitingForPlayers
 	EMessage_RecvJoinGame
 	EMessage_RecvServerError
+		DATA_1: EServerError(<ERROR>)
