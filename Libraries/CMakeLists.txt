@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.9.2)
+cmake_minimum_required(VERSION 3.7.2)
 project (Base)
 
+#add_subdirectory(BattleShips)
+#add_subdirectory(BattleShipsLobby)
 add_subdirectory(Framework)
 add_subdirectory(Network)
 add_subdirectory(RakNet)

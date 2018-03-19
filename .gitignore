@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Visual Studio directories
+.vs/
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +33,6 @@
 *.exe
 *.out
 *.app
+
+# CMake build directory
+build/

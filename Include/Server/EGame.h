@@ -2,6 +2,7 @@
 
 enum EGame
 {
+	EGame_BattleShips,
 	EGame_ScotlandYard,
 	EGame_Tron,
 	EGame_Sokoban,
