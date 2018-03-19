@@ -25,6 +25,7 @@ Usage:
 
 	MSG: EMessage_SendDisconnect
 	MSG: EMessage_SendJoinGame
+	MSG: EMessage_SendWhoseTurnIsIt
 
 	Any of the previous messages can send a result to the client. The following are messages the client may receive:
 
