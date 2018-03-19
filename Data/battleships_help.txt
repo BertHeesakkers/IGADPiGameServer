@@ -1,0 +1,54 @@
+Battleships++ is a game based on the classical BattleShips game. For the rules of the classical version, please check https://en.wikipedia.org/wiki/Battleship_(game). For this version of the game, some rules have been changed. This text will give you some insight in the messages that can be sent to a game of BattleShips++ and what kind of data you can expect to get back in return.
+
+	In the following text the structure of the message that can be sent are described as follows:
+		MSG: MESSAGE_ID, DATA_1: DataType(<DataName>) DATA_2: DataType(<DataName>), ...
+		Where:
+			MESSAGE_ID				is the enumeration value that should be sent.
+			DATA_1, DATA_2, ...		are the types (DataType) and indications of the kind of data (DataName) that should be added to the bitstream, in that order.
+
+	After the EMessage_RecvJoinGame message has been received the player has joined a game and the following messages can be sent:
+
+	MSG: EMessages_SendPlaceShip
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+		DATA_3: short(<SHIP TO PLACE>)
+		DATA_4: short(<X COORDINATE ON BOARD>)
+		DATA_5: short(<Y COORDINATE ON BOARD>)
+		DATA_6: short(<DIRECTION OF SHIP>)
+
+	MSG: EMessages_SendGetBoardData
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendPlaceShip
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendRemoveShip
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendFinishedShipPlacement
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendShoot
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendMoveShip
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	MSG: EMessages_SendRotateShip
+		DATA_1: ClientID(<YOUR CLIENT ID>)
+		DATA_2: GameID(<YOUR GAME ID>)
+
+	The following message will occasionally be sent by the server:
+
+	MSG: EMessages_RecvGameActivated
+	MSG: EMessages_RecvGetBoardData
+	MSG: EMessages_RecvOpponentMoveFinished
+	MSG: EMessages_RecvGameAlreadyStarted
+	MSG: EMessages_RecvShipPlacementAlreadyDone
+	MSG: EMessages_RecvShipPlacementInvalid
