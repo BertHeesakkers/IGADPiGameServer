@@ -3,7 +3,7 @@ The server is built on RakNet (c) and uses the best practices described in their
 
 Connecting to the server is explained in the [online documentation of RakNet (c)](http://www.jenkinssoftware.com/raknet/manual/index.html).
 
-## EMessages
+## Server Messages
 For the latest update and the actual class for it, see https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EMessages.h
 
 ### EMessage_SendServerHelp
@@ -61,10 +61,10 @@ Will indicate that a player has disconnected from the current game.
 TBA
 
 ### EMessage_RecvGameJoined
-Sent to all players in the current game to inform of a joined player.
+Will be sent to all players when a game has enough players to be played at it has therefore started. Will also return the id of the game.
 ```
 DATA_1: uint32_t(<CLIENT ID>)
-DATA_2: EGame(<GAME>)
+DATA_2: uint32_t(<GAME ID>)
 ```
 
 ### EMessage_RecvWhoseTurnIsIt
