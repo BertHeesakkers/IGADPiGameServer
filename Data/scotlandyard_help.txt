@@ -38,10 +38,30 @@ Scotland Yard is a game based on the original Scotlan Yard board game. For an im
 	The following message will occasionally be sent by the server:
 
 	EMessage_RecvGetMap
+		DATA_1: RakString(<MAPFILE>)
+		
 	EMessage_RecvTravelResult
+		DATA_1: TBA
+		
 	EMessage_RecvGetSpyTravelLog
+		DATA_1: TBA
+		
 	EMessage_RecvGetPlayerLocations
+		DATA_1: TBA
+		
 	EMessage_RecvGetLocation
+		DATA_1: uint32_t(<LOCATION>)
+		
 	EMessage_RecvAmISpy
+		DATA_1: bool(<VALUE>)
+		
 	EMessage_RecvGetTravelLog
+		DATA_1: TBA
+		
 	EMessage_RecvGetRemainingTokens	
+		DATA_1: ETravelOption
+		DATA_2: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_1>)
+		DATA_3: ETravelOption
+		DATA_4: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_3>)
+		DATA_5: ETravelOption
+		DATA_6: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_5>)

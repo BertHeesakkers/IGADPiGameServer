@@ -43,6 +43,11 @@ Usage:
 		
 	EMessage_RecvDisconnected
 	EMessage_RecvWaitingForPlayers
-	EMessage_RecvJoinGame
+	EMessage_RecvGameJoined
+	EMessage_RecvWhoseTurnIsIt
+	EMessage_RecvOpponentFinished
+	EMessage_RecvAcknowledgement
 	EMessage_RecvServerError
 		DATA_1: EServerError(<ERROR>)
+		
+	EMessage_RecvGameNotActive
