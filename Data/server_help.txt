@@ -45,6 +45,7 @@ Usage:
 	EMessage_RecvWaitingForPlayers
 	EMessage_RecvGameJoined
 	EMessage_RecvWhoseTurnIsIt
+		DATA_1: uint32_t(<CLIENT ID>)
 	EMessage_RecvOpponentFinished
 	EMessage_RecvAcknowledgement
 	EMessage_RecvServerError
