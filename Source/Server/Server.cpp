@@ -347,7 +347,7 @@ void Server::UpdateUserData()
 
 void Server::HandleLostConnection(RakNet::Packet &a_Packet)
 {
-	// to do: find user data based on system address and close connection
+	// TODO: find user data based on system address and close connection
 	// remove player from game/lobbies
 }
 
@@ -420,9 +420,10 @@ void Server::HandleLogout(const std::string &a_ID, bool a_SendMessages /* = true
 	UserData *userData = FindUserData(m_UserData, a_ID);
 	AssertMessage(nullptr != userData, "Unable to find user data for client.");
 
-	// find any game player is involved in
-	// cancel games and inform other players
-	// remove games
+	// TODO: Finish HandleLogout(...); implementation.
+	// Find all players involved in the same game as the one that disconnected.
+	// Cancel games and inform other players
+	// Remove games
 
 	if (a_SendMessages)
 	{
