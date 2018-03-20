@@ -10,15 +10,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # Output directory f
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # Output directory for shared lib
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # Output directory for executables
 
-set(PROTO_ASSET_DIR ${CMAKE_SOURCE_DIR}/Data)
-
 set(CMAKE_DEBUG_POSTFIX "_d")
 
 if (WIN32)
 	add_definitions(-DENVIRONMENT_WINDOWS)
 elseif (UNIX)
     add_definitions(-DENVIRONMENT_PI)
-endif (UNIX)
+endif()
 
 include_directories(${ROOT_INCLUDE_FOLDER})
 

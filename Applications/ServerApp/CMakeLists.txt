@@ -35,10 +35,6 @@ set(ServerApp_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerApp ${ServerApp_CORE_HEADERS} ${ServerApp_CORE_SOURCE})
 
-#custom user settings
-set(COMMAND_ARGUMENTS ${PROTO_ASSET_DIR})
-configure_file( ${PROJECT_USER_TEMPLATE_FILE} ${CMAKE_CURRENT_BINARY_DIR}/ServerApp.vcxproj.user @ONLY )
-
 target_link_libraries(ServerApp Framework Network RakNet ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby Ws2_32)
 
 set_target_properties(ServerApp PROPERTIES FOLDER "Applications")
