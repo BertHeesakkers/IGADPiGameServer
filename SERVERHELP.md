@@ -3,7 +3,7 @@ The server is built on RakNet (c) and uses the best practices described in their
 
 Connecting to the server is explained in the [online documentation of RakNet (c)](http://www.jenkinssoftware.com/raknet/manual/index.html).
 
-## EMessage
+## EMessages
 For the latest update and the actual class for it, see https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EMessages.h
 
 ### EMessage_SendServerHelp
