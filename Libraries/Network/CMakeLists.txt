@@ -61,6 +61,12 @@ set(Network_AGGREGATE_SOURCES
 # setup target
 add_library(Network STATIC ${Network_AGGREGATE_HEADERS} ${Network_AGGREGATE_SOURCES})
 
+IF(WIN32)
+	target_compile_definitions(Framework PUBLIC ENVIRONMENT_WINDOWS)
+ELSE(WIN32)
+	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
+ENDIF(WIN32)
+
 set_target_properties(Network PROPERTIES FOLDER "Base")
 
 install(TARGETS Network DESTINATION lib)

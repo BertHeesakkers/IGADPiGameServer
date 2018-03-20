@@ -1,5 +1,8 @@
 The server is built on RakNet (c) and uses the best practices described in their documentation. This means that, to ensure correct endianness for both client and server, data is sent through RakNet::BitStream structures and does not use custom message structures.
 
+For EGame see:
+https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/EGame.h
+
 Usage: 
 	Connecting to the server is explained in the online documentation of RakNet (c)
 
@@ -16,32 +19,57 @@ Usage:
 	After the ID_CONNECTION_REQUEST_ACCEPTED message has been received the following messages can be sent:
 
 	MSG: EMessage_ServerHelp
+		NO_DATA
+		
 	MSG: EMessage_GameHelp
 		DATA_1: EGame(<GAME>)
 
 	MSG: EMessage_SendLogin
 		DATA_1: RakString(<LOGIN>)
 		DATA_2: RakString(<PASSWORD>)
+		
+	MSG: EMessage_SendJoinGame
+		DATA_1: EGame(<GAME>)
 
 	MSG: EMessage_SendDisconnect
-	MSG: EMessage_SendJoinGame
-		DATA_1: uint32_t(<CLIENT ID>)
-		DATA_2: EGame(<GAME>)
+		NO_DATA
+
+	MSG: EMessage_SendWhoseTurnIsIt
+		NO_DATA
 
 
 	Any of the previous messages can send a result to the client. The following are messages the client may receive:
 
 	EMessage_RecvServerHelp
-		DATA1: RakString(<HELPTEXT>)
+		DATA_1: RakString(<HELPTEXT>)
 
 	EMessage_RecvGameHelp
-		DATA1: RakString(<HELPTEXT>)
+		DATA_1: RakString(<HELPTEXT>)
 
 	EMessage_RecvLoginSuccess
 		DATA_1: uint32_t(<CLIENT ID>)
 		
 	EMessage_RecvDisconnected
+		NO_DATA
+		
 	EMessage_RecvWaitingForPlayers
-	EMessage_RecvJoinGame
+		NO_DATA
+		
+	EMessage_RecvGameJoined
+		DATA_1: uint32_t(<CLIENT ID>)
+		DATA_2: uint32_t(<GAME ID>)
+		
+	EMessage_RecvWhoseTurnIsIt
+		DATA_1: uint32_t(<CLIENT ID>)
+		
+	EMessage_RecvOpponentFinished
+		TBA
+		
+	EMessage_RecvAcknowledgement
+		TBA
+		
 	EMessage_RecvServerError
 		DATA_1: EServerError(<ERROR>)
+		
+	EMessage_RecvGameNotActive
+		TBA
