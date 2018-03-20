@@ -12,12 +12,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # Output directory f
 
 set(CMAKE_DEBUG_POSTFIX "_d")
 
-if (WIN32)
-	add_definitions(-DENVIRONMENT_WINDOWS)
-elseif (UNIX)
-    add_definitions(-DENVIRONMENT_PI)
-endif()
-
 include_directories(${ROOT_INCLUDE_FOLDER})
 
 add_subdirectory(Libraries)

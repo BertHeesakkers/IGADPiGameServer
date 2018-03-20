@@ -126,6 +126,12 @@ set(Framework_AGGREGATE_SOURCES
 # setup target
 add_library(Framework STATIC ${Framework_AGGREGATE_HEADERS} ${Framework_AGGREGATE_SOURCES})
 
+IF(WIN32)
+	target_compile_definitions(Framework PUBLIC ENVIRONMENT_WINDOWS UNICODE)
+ELSE(WIN32)
+	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
+ENDIF(WIN32)
+
 set_target_properties(Framework PROPERTIES FOLDER "Base")
 
 install(TARGETS Framework DESTINATION lib)
