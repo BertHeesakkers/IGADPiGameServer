@@ -1,4 +1,4 @@
-# RakNet Messages
+# Server Help
 The server is built on RakNet (c) and uses the best practices described in their documentation. This means that, to ensure correct endianness for both client and server, data is sent through `RakNet::BitStream` structures and does not use custom message structures.
 
 Connecting to the server is explained in the [online documentation of RakNet (c)](http://www.jenkinssoftware.com/raknet/manual/index.html).
