@@ -79,9 +79,6 @@ TBA
 ### `EMessage_RecvGameStopped`
 TBA
 
-### `EMessages_RecvOpponentMoveFinished`
-TBA
-
 ## Error Messages
 These messages are for BattleShips only. For server related error messages, please check out the [documentation file for the server](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Documentation/SERVERHELP.md).
 
