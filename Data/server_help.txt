@@ -56,9 +56,8 @@ Usage:
 		NO_DATA
 		
 	EMessage_RecvGameJoined
-		Sent to all players in game to inform of joined player
 		DATA_1: uint32_t(<CLIENT ID>)
-		DATA_2: EGame(<GAME>)
+		DATA_2: uint32_t(<GAME ID>)
 		
 	EMessage_RecvWhoseTurnIsIt
 		DATA_1: uint32_t(<CLIENT ID>)
