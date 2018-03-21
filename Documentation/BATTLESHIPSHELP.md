@@ -16,6 +16,12 @@ DATA_5: short([Y COORDINATE ON BOARD])
 DATA_6: short([DIRECTION OF SHIP])
 ```
 
+### `EMessage_SendStartGame`
+TBA
+
+### `EMessage_SendStopGame`
+TBA
+
 ### `EMessage_SendGetBoardData`
 ```
 DATA_1: ClientID([YOUR CLIENT ID])
@@ -61,22 +67,19 @@ DATA_2: GameID([YOUR GAME ID])
 ## Response Messages
 For more information, please check out [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/BattleShipsLobby/EMessages.h) for BattleShips.
 
+### `EMessage_RecvGetBoardData`
+TBA
+
 ### `EMessage_RecvGameStarted`
 TBA
 
-### `EMessages_RecvGetBoardData`
+### `EMessage_RecvGameOver`
+TBA
+
+### `EMessage_RecvGameStopped`
 TBA
 
 ### `EMessages_RecvOpponentMoveFinished`
-TBA
-
-### `EMessages_RecvGameAlreadyStarted`
-TBA
-
-### `EMessages_RecvShipPlacementAlreadyDone`
-TBA
-
-### `EMessages_RecvShipPlacementInvalid`
 TBA
 
 ## Error Messages
