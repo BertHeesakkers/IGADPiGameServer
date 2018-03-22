@@ -67,6 +67,10 @@ Will be sent after sending `EMessage_SendJoinGame` to the server to indicate the
 ```
 DATA_1: uint32_t(<CURRENT AMOUNT OF PLAYERS IN QUEUE>)
 DATA_2: uint32_t(<PLAYERS REQUIRED TO START GAME>)
+
+DATA_3: LobbyUserData(<USERDATA OF PLAYER 1>)
+DATA_4: LobbyUserData(<USERDATA OF PLAYER 2>)
+DATA_5: ... (Continuing until the amount in DATA_1)
 ```
 
 ### `EMessage_RecvGameJoined`
