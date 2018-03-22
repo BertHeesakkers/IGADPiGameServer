@@ -25,7 +25,7 @@
 #include "UserData.h"
 #include "Utility/ReadUserData.h"
 #include "Utility/WriteUserData.h"
-#include "LobbyUserData.h"
+#include "BaseLobby.h"
 
 namespace
 {
@@ -195,6 +195,11 @@ void Server::Run()
 			case EMessage_SendWhoseTurnIsIt:
 				{
 					HandleDetermineCurrentPlayer(*packet);
+					break;
+				}
+			case EMessage_SendLobbyData:
+				{
+					HandleSendLobbyData(*packet);
 					break;
 				}
 			default:
@@ -474,26 +479,23 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 			{
 				std::vector<UserData*> players = lobby->GetWaitQueue();
 				uint32_t requiredAmount = lobby->GetNumPlayersPerGame();
-				std::vector<LobbyUserData> lobbyUserData;
+				uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
+
+				RakNet::BitStream payload;
+				payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
+				payload.Write(requiredAmount);
+				payload.Write(numberOfPlayers);
 
 				for (auto pos = players.begin(); pos != players.end(); ++pos)
 				{
 					const UserData &userData = **pos;
-					LobbyUserData lud;
-					lud.name = userData.m_Name.c_str();
-					lud.clientId = userData.m_ClientID;
-					lobbyUserData.push_back(lud);
+					payload.Write(RakNet::RakString(userData.m_Name.c_str()));
+					payload.Write(static_cast<uint32_t>(userData.m_ClientID));
 				}
 
 				for (auto pos = players.begin(); pos != players.end(); ++pos)
 				{
 					const UserData &userData = **pos;
-					RakNet::BitStream payload;
-					payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
-					payload.Write(static_cast<uint32_t>(players.size()));
-					payload.Write(requiredAmount);
-					for(LobbyUserData lud : lobbyUserData)
-						payload.Write(lud);
 					SendMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
 			}
@@ -596,6 +598,38 @@ void Server::HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet)
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWhoseTurnIsIt));
 		payload.Write(currentPlayer);
+		SendMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
+	}
+}
+
+void Server::HandleSendLobbyData(RakNet::Packet& a_Packet) {
+	EGame game;
+	RakNet::BitStream bitStream(a_Packet.data, a_Packet.length, false);
+	bitStream.IgnoreBytes(sizeof(RakNet::MessageID));
+	bitStream.Read(game);
+
+	ILobby* lobby = FindGameLobby(m_Lobbies, game);
+
+	if(lobby == nullptr)
+	{
+		SendMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_GameLobbyUnavailable);
+	}
+	else
+	{
+		RakNet::BitStream payload;
+		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvLobbyData));
+		payload.Write(game);
+		payload.Write(static_cast<uint32_t>(lobby->GetNumPlayersPerGame()));
+		payload.Write(static_cast<uint32_t>(lobby->GetWaitQueue().size()));
+
+		std::vector<UserData*> players = lobby->GetWaitQueue();
+		for (auto pos = players.begin(); pos != players.end(); ++pos)
+		{
+			const UserData &userData = **pos;
+			payload.Write(RakNet::RakString(userData.m_Name.c_str()));
+			payload.Write(static_cast<uint32_t>(userData.m_ClientID));
+		}
+		
 		SendMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
 	}
 }
