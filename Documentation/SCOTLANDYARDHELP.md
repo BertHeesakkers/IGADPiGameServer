@@ -1,5 +1,5 @@
 # Scotland Yard Help
-Scotland Yard is a game based on the original Scotland Yard board game. For an impression of the classical version, please check [Wikipedia](https://en.wikipedia.org/wiki/Scotland_Yard_(board_game). The following will give you some insight in the messages that can be sent to a game of Scotland Yard and what kind of data you can expect to get back in return.
+Scotland Yard is a game based on the original Scotland Yard board game. For an impression of the classical version, please check [Wikipedia](https://en.wikipedia.org/wiki/Scotland_Yard_(board_game)). The following will give you some insight in the messages that can be sent to a game of Scotland Yard and what kind of data you can expect to get back in return.
 
 For the latest update on the messages, please check out the [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYardLobby/EMessages.h) file for Scotland Yard.
 
