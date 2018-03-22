@@ -72,6 +72,7 @@ DATA_3: LobbyUserData(<USERDATA OF PLAYER 1>)
 DATA_4: LobbyUserData(<USERDATA OF PLAYER 2>)
 DATA_5: ... (Continuing until the amount in DATA_1)
 ```
+`DATA_3` and onwards will be all the `LobbyUserData` of all the players. See [LobbyUserData.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/LobbyUserData.h) for more info.
 
 ### `EMessage_RecvGameJoined`
 Will be sent to all players when a game has enough players to be played at it has therefore started. Will also return the id of the game.
