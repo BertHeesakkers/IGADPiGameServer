@@ -38,6 +38,13 @@ For more info on EGame, please check out [EGame.h](https://github.com/BertHeesak
 ### `EMessage_SendWhoseTurnIsIt`
 Will return a `EMessage_RecvWhoseTurnIsIt` message with the player whose turn it is.
 
+### `EMessage_SendLobbyData`
+Will request the lobby data for the specified game which will be received using `EMessage_RecvLobbyData`. If no lobby is available, an `EServerError_GameLobbyUnavailable` error will be sent back.
+```
+DATA_1: EGame(<GAME>)
+```
+For more info on EGame, please check out [EGame.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/EGame.h).
+
 ## Response Messages
 For more info, please check out [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EMessages.h).
 
@@ -63,7 +70,18 @@ DATA_1: uint32_t(<CLIENT ID>)
 Will indicate that a player has disconnected from the current game.
 
 ### `EMessage_RecvWaitingForPlayers`
-TBA
+Will be sent after sending `EMessage_SendJoinGame` to the server to indicate the client has been added to the queue for a game. The message will continue to be sent to all the clients to indicate new players joining and this will continue until `EMessage_RecvGameJoined` has been received.
+```
+DATA_1: uint32_t(<PLAYERS REQUIRED TO START GAME>)
+DATA_2: uint32_t(<CURRENT AMOUNT OF PLAYERS IN QUEUE>)
+
+DATA_3: RakString(<NAME OF PLAYER 1>)
+DATA_4: uint32_t(<CLIENT ID OF PLAYER 1>)
+DATA_5: RakString(<NAME OF PLAYER 2>)
+DATA_6: uint32_t(<CLIENT ID OF PLAYER 2>)
+DATA_7: ... (Continuing until the amount in DATA_2)
+```
+`DATA_3` and onwards will be all the names and client id's of all the players.
 
 ### `EMessage_RecvGameJoined`
 Will be sent to all players when a game has enough players to be played at it has therefore started. Will also return the id of the game.
@@ -92,6 +110,20 @@ DATA_1: EServerError(<ERROR>)
 
 ### `EMessage_RecvGameNotActive`
 TBA
+
+### `EMessage_RecvLobbyData`
+```
+DATA_1: EGame(<GAME>)
+DATA_2: uint32_t(<PLAYERS REQUIRED TO START GAME>)
+DATA_3: uint32_t(<CURRENT AMOUNT OF PLAYERS IN QUEUE>)
+
+DATA_4: RakString(<NAME OF PLAYER 1>)
+DATA_5: uint32_t(<CLIENT ID OF PLAYER 1>)
+DATA_6: RakString(<NAME OF PLAYER 2>)
+DATA_7: uint32_t(<CLIENT ID OF PLAYER 2>)
+DATA_8: ... (Continuing until the amount in DATA_2)
+```
+`DATA_4` and onwards will be all the names and client id's of all the players.
 
 ## Server Errors
 When receiving the `EMessage_RecvServerError` message, an `EServerError` is sent with. Below is a list of possible errors.

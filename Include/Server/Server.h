@@ -55,6 +55,7 @@ private:
 	void AddLobby(EGame a_Game);
 	IServerGame* FindGame(GameID a_GameID);
 	void HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet);
+	void HandleSendLobbyData(RakNet::Packet &a_Packet);
 
 	ILogger &m_Logger;
 
