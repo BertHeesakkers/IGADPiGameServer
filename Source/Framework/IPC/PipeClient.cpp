@@ -5,7 +5,7 @@
 #include "PipeCreateParameters.h"
 #include "../AssertMessage.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 
 PipeClient::PipeClient()
 {

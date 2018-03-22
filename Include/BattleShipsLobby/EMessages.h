@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Base/Network/EMessages.h"
+#include "Network/EMessages.h"
 
 enum EBattleShipsServerMessages
 {

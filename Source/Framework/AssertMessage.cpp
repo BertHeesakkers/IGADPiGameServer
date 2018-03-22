@@ -18,7 +18,7 @@ void AssertMessage(bool a_Condition, const std::string &a_Text)
 	if (!a_Condition)
 	{
 		const std::wstring text = StringToWideString(a_Text);
-#ifdef ENVIRONMENT_WINDOWS
+#ifdef WIN32
 		::MessageBox(0, text.c_str(), L"Error!", MB_ICONERROR | MB_OK);
 #elif ENVIRONMENT_PI
 		std::cout << "Error: " << a_Text << std::endl;

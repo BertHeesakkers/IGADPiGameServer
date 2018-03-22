@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.9.2)
 
 project(BattleShipsTrainer LANGUAGES CXX)
 
 include_directories(${ROOT_INCLUDE_FOLDER}BattleShipsTrainer)
-include_directories(${ROOT_INCLUDE_FOLDER}RakNet)
 
 #external dependencies
 include_directories(${THIRD_PARTY_FOLDER}boost_1_65_1)
+include_directories(${THIRD_PARTY_FOLDER}RakNet/include)
 
 #header files
 set(BattleShipsTrainer_CORE_HEADERS

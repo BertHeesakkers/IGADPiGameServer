@@ -9,7 +9,7 @@
 Stopwatch::Stopwatch()
 	: m_StartTime({ 0 })
 	, m_LastQueryTime({ 0 })
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	, m_Frequency({ 0 })
 #endif
 	, m_FirstQuery(true)
@@ -26,7 +26,7 @@ Stopwatch::~Stopwatch()
 void Stopwatch::Start()
 {
 	AssertMessage(!m_Running, "Attempt to start a stopwatch that is already running!");
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	::QueryPerformanceFrequency(&m_Frequency);
 	::QueryPerformanceCounter(&m_StartTime);
 #elif defined(ENVIRONMENT_PI)
@@ -43,7 +43,7 @@ uint64_t Stopwatch::GetElapsedTime()
 	uint64_t elapsedTime = 0;
 	if (m_FirstQuery)
 	{
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 		::QueryPerformanceCounter(&m_LastQueryTime);
 		elapsedTime = static_cast<uint64_t>((m_LastQueryTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
 #elif defined(ENVIRONMENT_PI)
@@ -54,7 +54,7 @@ uint64_t Stopwatch::GetElapsedTime()
 	}
 	else
 	{
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 		LARGE_INTEGER queryTime;
 		::QueryPerformanceCounter(&queryTime);
 		elapsedTime = static_cast<uint64_t>((queryTime.QuadPart - m_LastQueryTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
@@ -74,7 +74,7 @@ uint64_t Stopwatch::GetTimeSinceStart() const
 {
 	AssertMessage(m_Running, "Attempt to retrieve running time from a stopwatch that is not running!");
 	uint64_t elapsedTime = 0;
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	LARGE_INTEGER currentTime;
 	::QueryPerformanceCounter(&currentTime);
 	elapsedTime = static_cast<uint64_t>((currentTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
@@ -96,7 +96,7 @@ void Stopwatch::Stop()
 void Stopwatch::Reset()
 {
 	AssertMessage(m_Running, "Attempt to reset a stopwatch that is not running!");
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	::QueryPerformanceCounter(&m_StartTime);
 #elif defined(ENVIRONMENT_PI)
 	gettimeofday(&m_StartTime, NULL);
@@ -117,7 +117,7 @@ void Stopwatch::WaitForTimePassed(double a_MilliSeconds)
 	{
 		do
 		{
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 			::QueryPerformanceCounter(&m_LastQueryTime);
 			elapsedTime = static_cast<uint64_t>((m_LastQueryTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
 #elif defined(ENVIRONMENT_PI)
@@ -129,7 +129,7 @@ void Stopwatch::WaitForTimePassed(double a_MilliSeconds)
 	}
 	else
 	{
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 		LARGE_INTEGER queryTime;
 		do
 		{

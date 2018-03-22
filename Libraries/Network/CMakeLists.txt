@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.9.2)
 
 project(Network)
 
@@ -7,6 +7,7 @@ include_directories(${ROOT_INCLUDE_FOLDER}Network/Helpers)
 
 #external dependencies
 include_directories(${THIRD_PARTY_FOLDER}boost_1_65_1)
+include_directories(${THIRD_PARTY_FOLDER}RakNet/include)
 
 #header files
 set(Network_CORE_HEADERS
@@ -62,7 +63,7 @@ set(Network_AGGREGATE_SOURCES
 add_library(Network STATIC ${Network_AGGREGATE_HEADERS} ${Network_AGGREGATE_SOURCES})
 
 IF(WIN32)
-	target_compile_definitions(Framework PUBLIC ENVIRONMENT_WINDOWS)
+	target_compile_definitions(Framework PUBLIC WIN32)
 ELSE(WIN32)
 	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
 ENDIF(WIN32)

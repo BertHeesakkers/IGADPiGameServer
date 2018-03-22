@@ -3,7 +3,7 @@
 #include "../AssertMessage.h"
 #include "../StringFunctions.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 
 Pipe::Pipe(HANDLE a_Handle, const PipeCreateParameters &a_Parameters)
 	: m_Parameters(a_Parameters)

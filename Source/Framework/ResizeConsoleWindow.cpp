@@ -5,7 +5,7 @@
 
 void ResizeConsoleWindow(short xSize, short ySize)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	HANDLE stdOutputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
 	BOOL success = ::GetConsoleScreenBufferInfo(stdOutputHandle, &consoleScreenBufferInfo);

@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.9.2)
 
 project(Framework)
-
-add_definitions(-DENVIRONMENT_WINDOWS)
 
 include_directories(${ROOT_INCLUDE_FOLDER}Framework)
 include_directories(${ROOT_INCLUDE_FOLDER}Framework/IPC)
@@ -127,7 +125,7 @@ set(Framework_AGGREGATE_SOURCES
 add_library(Framework STATIC ${Framework_AGGREGATE_HEADERS} ${Framework_AGGREGATE_SOURCES})
 
 IF(WIN32)
-	target_compile_definitions(Framework PUBLIC ENVIRONMENT_WINDOWS UNICODE)
+	target_compile_definitions(Framework PUBLIC WIN32 UNICODE)
 ELSE(WIN32)
 	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
 ENDIF(WIN32)

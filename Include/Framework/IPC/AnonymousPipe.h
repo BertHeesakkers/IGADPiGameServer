@@ -2,7 +2,7 @@
 
 #include "Pipe.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 
 #include <windows.h>
 

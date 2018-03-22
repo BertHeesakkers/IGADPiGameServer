@@ -4,7 +4,7 @@
 
 namespace
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	ConsoleEventCallback gs_ConsoleCopyEvent = 0;
 	ConsoleEventCallback gs_ConsoleBreakEvent = 0;
 	ConsoleEventCallback gs_ConsoleCloseEvent = 0;
@@ -13,7 +13,7 @@ namespace
 #endif
 }
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 BOOL WINAPI ConsoleProcedure(DWORD a_Signal)
 {
 	switch (a_Signal)
@@ -71,7 +71,7 @@ BOOL WINAPI ConsoleProcedure(DWORD a_Signal)
 
 void EnableConsoleEventCallbacks()
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	const bool success = ::SetConsoleCtrlHandler(ConsoleProcedure, TRUE) == TRUE;
 	assert(success);
 #endif
@@ -79,35 +79,35 @@ void EnableConsoleEventCallbacks()
 
 void SetConsoleCopyEvent(ConsoleEventCallback a_ConsoleCopyEvent)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	gs_ConsoleCloseEvent = a_ConsoleCopyEvent;
 #endif
 }
 
 void SetConsoleBreakEvent(ConsoleEventCallback a_ConsoleBreakEvent)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	gs_ConsoleBreakEvent = a_ConsoleBreakEvent;
 #endif
 }
 
 void SetConsoleCloseEvent(ConsoleEventCallback a_ConsoleCloseEvent)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	gs_ConsoleCloseEvent = a_ConsoleCloseEvent;
 #endif
 }
 
 void SetConsoleLogOffEvent(ConsoleEventCallback a_ConsoleLogOffEvent)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	gs_ConsoleLogOffEvent = a_ConsoleLogOffEvent;
 #endif
 }
 
 void SetConsoleShutDownEvent(ConsoleEventCallback a_ConsoleShutDownEvent)
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	gs_ConsoleShutDownEvent = a_ConsoleShutDownEvent;
 #endif
 }

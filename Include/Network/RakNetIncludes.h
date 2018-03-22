@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 #pragma warning(push)  
 #pragma warning(disable : 4005)
 #pragma warning(disable : 4477)
@@ -13,6 +13,6 @@
 #include "RakNet/RakPeerInterface.h"
 #include "RakNet/PacketLogger.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 #pragma warning(pop)
 #endif

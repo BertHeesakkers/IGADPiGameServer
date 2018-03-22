@@ -1,6 +1,6 @@
 #include "AnonymousPipe.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 
 AnonymousPipe* ConstructAnonymousPipe(const PipeCreateParameters&)
 {

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.9.2)
 
 project(ScotlandYard)
 
@@ -31,10 +31,11 @@ set(ScotlandYard_HELPERS_HEADERS
 	../../Include/ScotlandYard/Helpers/TurnHelpers.h
 	../../Include/ScotlandYard/Helpers/ValidateTravelLog.h)
 
-source_group("Header Files" FILES ${ScotlandYard_HELPERS_HEADERS})
+source_group("Header Files\\Helpers" FILES ${ScotlandYard_HELPERS_HEADERS})
 
 set(ScotlandYard_AGGREGATE_HEADERS
-	${ScotlandYard_CORE_HEADERS})
+	${ScotlandYard_CORE_HEADERS}
+	${ScotlandYard_HELPERS_HEADERS})
 
 # source files
 set(ScotlandYard_CORE_SOURCES
@@ -47,14 +48,19 @@ set(ScotlandYard_CORE_SOURCES
 	../../Source/ScotlandYard/ScotlandYardAI.cpp
 	../../Source/ScotlandYard/ScotlandYardGame.cpp
 	../../Source/ScotlandYard/Spy.cpp
-	../../Source/ScotlandYard/TravelLog.cpp
-	../../Source/ScotlandYard/Helpers/TurnHelpers.cpp
-	../../Source/ScotlandYard/Helpers/ValidateTravelLog.cpp)
+	../../Source/ScotlandYard/TravelLog.cpp)
 
 source_group("Source Files" FILES ${ScotlandYard_CORE_SOURCES})
 
+set(ScotlandYard_HELPERS_SOURCES
+	../../Source/ScotlandYard/Helpers/TurnHelpers.cpp
+	../../Source/ScotlandYard/Helpers/ValidateTravelLog.cpp)
+
+source_group("Source Files" FILES ${ScotlandYard_HELPERS_SOURCES})
+
 set(ScotlandYard_AGGREGATE_SOURCES
-	${ScotlandYard_CORE_SOURCES})
+	${ScotlandYard_CORE_SOURCES}
+	${ScotlandYard_HELPERS_SOURCES})
 
 # setup target
 add_library(ScotlandYard STATIC ${ScotlandYard_AGGREGATE_HEADERS} ${ScotlandYard_AGGREGATE_SOURCES})

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 #include <windows.h>
 #elif defined(ENVIRONMENT_PI)
 #include <sys/time.h>
@@ -22,7 +22,7 @@ public:
     
     void WaitForTimePassed(double a_MilliSeconds);
 private:
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	LARGE_INTEGER m_StartTime;
     LARGE_INTEGER m_LastQueryTime;
     LARGE_INTEGER m_Frequency;

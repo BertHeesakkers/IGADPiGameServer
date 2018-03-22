@@ -1,12 +1,12 @@
 #include "ClearConsoleWindow.h"
 
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 #include <windows.h>
 #endif
 
 void ClearConsoleWindow()
 {
-#if defined(ENVIRONMENT_WINDOWS)
+#if defined(WIN32)
 	HANDLE                     hStdOut;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD                      count;

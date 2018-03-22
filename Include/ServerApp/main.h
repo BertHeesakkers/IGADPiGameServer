@@ -1,6 +1,6 @@
 #pragma once
 // 
-// #if defined(ENVIRONMENT_WINDOWS)
+// #if defined(WIN32)
 // 
 // #if defined(_DEBUG)
 // // 	#pragma comment(lib, "Framework_d")
