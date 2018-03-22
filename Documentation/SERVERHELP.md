@@ -63,7 +63,11 @@ DATA_1: uint32_t(<CLIENT ID>)
 Will indicate that a player has disconnected from the current game.
 
 ### `EMessage_RecvWaitingForPlayers`
-TBA
+Will be sent after sending `EMessage_SendJoinGame` to the server to indicate the client has been added to the queue for a game. The message will continue to be sent to all the clients to indicate new players joining and this will continue until `EMessage_RecvGameJoined` has been received.
+```
+DATA_1: uint32_t(<CURRENT AMOUNT OF PLAYERS IN QUEUE>)
+DATA_2: uint32_t(<PLAYERS REQUIRED TO START GAME>)
+```
 
 ### `EMessage_RecvGameJoined`
 Will be sent to all players when a game has enough players to be played at it has therefore started. Will also return the id of the game.
