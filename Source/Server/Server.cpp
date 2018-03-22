@@ -25,7 +25,6 @@
 #include "UserData.h"
 #include "Utility/ReadUserData.h"
 #include "Utility/WriteUserData.h"
-#include "BaseLobby.h"
 
 namespace
 {
