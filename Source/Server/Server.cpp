@@ -601,14 +601,14 @@ void Server::HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet)
 	}
 }
 
-void Server::HandleSendLobbyData(RakNet::Packet& a_Packet) {
+void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
+{
 	EGame game;
 	RakNet::BitStream bitStream(a_Packet.data, a_Packet.length, false);
 	bitStream.IgnoreBytes(sizeof(RakNet::MessageID));
 	bitStream.Read(game);
 
 	ILobby* lobby = FindGameLobby(m_Lobbies, game);
-
 	if(lobby == nullptr)
 	{
 		SendMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_GameLobbyUnavailable);
