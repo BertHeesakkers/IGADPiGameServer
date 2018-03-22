@@ -25,6 +25,7 @@
 #include "UserData.h"
 #include "Utility/ReadUserData.h"
 #include "Utility/WriteUserData.h"
+#include "LobbyUserData.h"
 
 namespace
 {
@@ -473,6 +474,17 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 			{
 				std::vector<UserData*> players = lobby->GetWaitQueue();
 				uint32_t requiredAmount = lobby->GetNumPlayersPerGame();
+				std::vector<LobbyUserData> lobbyUserData;
+
+				for (auto pos = players.begin(); pos != players.end(); ++pos)
+				{
+					const UserData &userData = **pos;
+					LobbyUserData lud;
+					lud.name = userData.m_Name.c_str();
+					lud.clientId = userData.m_ClientID;
+					lobbyUserData.push_back(lud);
+				}
+
 				for (auto pos = players.begin(); pos != players.end(); ++pos)
 				{
 					const UserData &userData = **pos;
@@ -480,6 +492,8 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
 					payload.Write(static_cast<uint32_t>(players.size()));
 					payload.Write(requiredAmount);
+					for(LobbyUserData lud : lobbyUserData)
+						payload.Write(lud);
 					SendMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
 			}
