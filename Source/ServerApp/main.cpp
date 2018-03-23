@@ -3,6 +3,7 @@
 #include "Framework/CommandLine.h"
 #include "Framework/CommandLineParser.h"
 #include "Framework/HashedString.h"
+#include "Framework/Logging/FileLogger.h"
 #include "Framework/Logging/ConsoleLogger.h"
 #include "ServerApp.h"
 
