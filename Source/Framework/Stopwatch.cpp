@@ -2,7 +2,7 @@
 
 #include "AssertMessage.h"
 
-#if defined(ENVIRONMENT_PI)
+#if defined(__linux__)
 #include <sys/time.h>
 #endif
 
@@ -29,7 +29,7 @@ void Stopwatch::Start()
 #if defined(WIN32)
 	::QueryPerformanceFrequency(&m_Frequency);
 	::QueryPerformanceCounter(&m_StartTime);
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 	gettimeofday(&m_StartTime, NULL);
 #endif
 
@@ -46,7 +46,7 @@ uint64_t Stopwatch::GetElapsedTime()
 #if defined(WIN32)
 		::QueryPerformanceCounter(&m_LastQueryTime);
 		elapsedTime = static_cast<uint64_t>((m_LastQueryTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 		gettimeofday(&m_LastQueryTime, NULL);
 		elapsedTime = static_cast<uint64_t>((m_LastQueryTime.tv_sec - m_StartTime.tv_sec) * 1000.0 + (m_LastQueryTime.tv_usec - m_StartTime.tv_usec) / 1000.0);
 #endif
@@ -59,7 +59,7 @@ uint64_t Stopwatch::GetElapsedTime()
 		::QueryPerformanceCounter(&queryTime);
 		elapsedTime = static_cast<uint64_t>((queryTime.QuadPart - m_LastQueryTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
 		m_LastQueryTime = queryTime;
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 		timeval queryTime;
 		gettimeofday(&queryTime, NULL);
 		elapsedTime = static_cast<uint64_t>((queryTime.tv_sec - m_LastQueryTime.tv_sec) * 1000.0 + (queryTime.tv_usec - m_LastQueryTime.tv_usec) / 1000.0);
@@ -78,7 +78,7 @@ uint64_t Stopwatch::GetTimeSinceStart() const
 	LARGE_INTEGER currentTime;
 	::QueryPerformanceCounter(&currentTime);
 	elapsedTime = static_cast<uint64_t>((currentTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 	timeval currentTime;
 	gettimeofday(&currentTime, NULL);
 	elapsedTime = static_cast<uint64_t>((currentTime.tv_sec - m_StartTime.tv_sec) * 1000.0 + (currentTime.tv_usec - m_StartTime.tv_usec) / 1000.0);
@@ -98,7 +98,7 @@ void Stopwatch::Reset()
 	AssertMessage(m_Running, "Attempt to reset a stopwatch that is not running!");
 #if defined(WIN32)
 	::QueryPerformanceCounter(&m_StartTime);
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 	gettimeofday(&m_StartTime, NULL);
 #endif
 	m_FirstQuery = true;
@@ -120,7 +120,7 @@ void Stopwatch::WaitForTimePassed(double a_MilliSeconds)
 #if defined(WIN32)
 			::QueryPerformanceCounter(&m_LastQueryTime);
 			elapsedTime = static_cast<uint64_t>((m_LastQueryTime.QuadPart - m_StartTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 			gettimeofday(&m_LastQueryTime, NULL);
 			elapsedTime = static_cast<uint64_t>((m_LastQueryTime.tv_sec - m_StartTime.tv_sec) * 1000.0 + (m_LastQueryTime.tv_usec - m_StartTime.tv_usec) / 1000.0);
 #endif
@@ -137,7 +137,7 @@ void Stopwatch::WaitForTimePassed(double a_MilliSeconds)
 			elapsedTime = static_cast<uint64_t>((queryTime.QuadPart - m_LastQueryTime.QuadPart) * 1000.0 / m_Frequency.QuadPart);
 		} while (elapsedTime < a_MilliSeconds);
 		m_LastQueryTime = queryTime;
-#elif defined(ENVIRONMENT_PI)
+#elif defined(__linux__)
 		timeval queryTime;
 		do
 		{

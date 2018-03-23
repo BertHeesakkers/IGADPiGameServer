@@ -3,7 +3,7 @@
 #include "StringFunctions.h"
 
 #include <assert.h>
-#if ENVIRONMENT_PI
+#if __linux__
 #include <iostream>
 #endif
 #include <string>
@@ -20,7 +20,7 @@ void AssertMessage(bool a_Condition, const std::string &a_Text)
 		const std::wstring text = StringToWideString(a_Text);
 #ifdef WIN32
 		::MessageBox(0, text.c_str(), L"Error!", MB_ICONERROR | MB_OK);
-#elif ENVIRONMENT_PI
+#elif __linux__
 		std::cout << "Error: " << a_Text << std::endl;
 #endif
 		assert(false);

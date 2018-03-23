@@ -127,7 +127,7 @@ add_library(Framework STATIC ${Framework_AGGREGATE_HEADERS} ${Framework_AGGREGAT
 IF(WIN32)
 	target_compile_definitions(Framework PUBLIC WIN32 UNICODE)
 ELSE(WIN32)
-	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
+	target_compile_definitions(Framework PUBLIC __linux__)
 ENDIF(WIN32)
 
 set_target_properties(Framework PROPERTIES FOLDER "Base")

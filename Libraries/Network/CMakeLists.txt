@@ -65,7 +65,7 @@ add_library(Network STATIC ${Network_AGGREGATE_HEADERS} ${Network_AGGREGATE_SOUR
 IF(WIN32)
 	target_compile_definitions(Framework PUBLIC WIN32)
 ELSE(WIN32)
-	target_compile_definitions(Framework PUBLIC ENVIRONMENT_PI)
+	target_compile_definitions(Framework PUBLIC __linux__)
 ENDIF(WIN32)
 
 set_target_properties(Network PROPERTIES FOLDER "Base")

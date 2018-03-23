@@ -59,7 +59,7 @@ MessageResult WaitForMessage(RakNet::RakPeerInterface &a_Peer, EMessages a_Messa
 	return WaitForMessage(a_Peer, static_cast<DefaultMessageIDTypes>(a_MessageID), a_TimeOut);
 }
 
-#if defined(ENVIRONMENT_PI)
+#if defined(__linux__)
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wenum-compare"
@@ -149,7 +149,7 @@ MessageResult WaitForMessages(RakNet::RakPeerInterface &a_Peer, std::initializer
 	return result;
 }
 
-#if defined(ENVIRONMENT_PI)
+#if defined(__linux__)
 
 #pragma GCC diagnostic pop
 
