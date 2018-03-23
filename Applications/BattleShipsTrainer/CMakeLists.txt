@@ -29,7 +29,10 @@ set(BattleShipsTrainer_AGGREGATE_SOURCES
 #setup target
 add_executable(BattleShipsTrainer ${BattleShipsTrainer_CORE_HEADERS} ${BattleShipsTrainer_CORE_SOURCE})
 
-target_link_libraries(BattleShipsTrainer Framework Network RakNet ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby Ws2_32)
+target_link_libraries(BattleShipsTrainer Framework Network ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby Ws2_32)
+
+target_link_libraries(BattleShipsTrainer debug ${RAKNET_STATIC_LIB_DEBUG})
+target_link_libraries(BattleShipsTrainer optimized ${RAKNET_STATIC_LIB_RELEASE})
 
 set_target_properties(BattleShipsTrainer PROPERTIES FOLDER "Applications")
 

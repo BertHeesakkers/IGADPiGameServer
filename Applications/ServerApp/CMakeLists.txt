@@ -35,43 +35,22 @@ set(ServerApp_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerApp ${ServerApp_CORE_HEADERS} ${ServerApp_CORE_SOURCE})
 
-message(STATUS "Locating third party libraries")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-        find_library(RAKNET_STATIC_LIB_DEBUG RakNetLibStatic.lib HINTS ${THIRD_PARTY_FOLDER}RakNet/lib/Debug)
-        if(NOT RAKNET_STATIC_LIB_DEBUG)
-          message(FATAL_ERROR "RakNet static debug library not found!")
-        endif()
-
-        find_library(RAKNET_STATIC_LIB_RELEASE RakNetLibStatic.lib HINTS ${THIRD_PARTY_FOLDER}RakNet/lib/Release)
-        if(NOT RAKNET_STATIC_LIB_RELEASE)
-          message(FATAL_ERROR "RakNet static release library not found!")
-        endif()
+    message(STATUS "Setting up linking to Windows specific libraries")
+	target_link_libraries(ServerApp BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby)
+    target_link_libraries(ServerApp Ws2_32)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-        find_library(RAKNET_STATIC_LIB_DEBUG RakNetLibStatic)
-        if(NOT RAKNET_STATIC_LIB_DEBUG)
-          message(FATAL_ERROR "RakNet static debug library not found!")
-        endif()
-
-        find_library(RAKNET_STATIC_LIB_RELEASE RakNetLibStatic)
-        if(NOT RAKNET_STATIC_LIB_RELEASE)
-          message(FATAL_ERROR "RakNet static release library not found!")
-        endif()
-
-        find_package(Threads)
+	message(STATUS "Setting up linking to Linux specific libraries")
+	target_link_libraries(ServerApp -Wl,--whole-archive 
+		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby -Wl,--no-who-whole-archive)
+	target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
 endif()
-
-target_link_libraries(ServerApp Framework Network BattleShips ScotlandYard Sokoban Tron ScotlandYardLobby Server BattleShipsLobby SokobanLobby TronLobby)
 target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
 target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-        message(STATUS "Setting up linking to Windows specific libraries")
-        target_link_libraries(ServerApp Ws2_32)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-        message(STATUS "Setting up linking to Linux specific libraries")
-        target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
-endif()
 
 set_target_properties(ServerApp PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 set_target_properties(ServerApp PROPERTIES FOLDER "Applications")
 
 install(TARGETS ServerApp DESTINATION bin)
+
+
