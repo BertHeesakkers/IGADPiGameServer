@@ -52,4 +52,4 @@ add_library(BattleShips STATIC ${BattleShips_AGGREGATE_HEADERS} ${BattleShips_AG
 
 set_target_properties(BattleShips PROPERTIES FOLDER "Games")
 
-install(TARGETS BattleShips DESTINATION lib)
+install(TARGETS BattleShips DESTINATION lib EXCLUDE_FROM_ALL)

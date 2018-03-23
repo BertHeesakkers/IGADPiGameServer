@@ -35,4 +35,4 @@ add_library(BattleShipsLobby STATIC ${BattleShipsLobby_AGGREGATE_HEADERS} ${Batt
 
 set_target_properties(BattleShipsLobby PROPERTIES FOLDER "ServerCode")
 
-install(TARGETS BattleShipsLobby DESTINATION lib)
+install(TARGETS BattleShipsLobby DESTINATION lib EXCLUDE_FROM_ALL)

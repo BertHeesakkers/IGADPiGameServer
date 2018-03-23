@@ -75,4 +75,4 @@ add_library(Server STATIC ${Server_AGGREGATE_HEADERS} ${Server_AGGREGATE_SOURCES
 
 set_target_properties(Server PROPERTIES FOLDER "ServerCode")
 
-install(TARGETS Server DESTINATION lib)
+install(TARGETS Server DESTINATION lib EXCLUDE_FROM_ALL)

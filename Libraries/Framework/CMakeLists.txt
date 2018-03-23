@@ -132,4 +132,4 @@ ENDIF(WIN32)
 
 set_target_properties(Framework PROPERTIES FOLDER "Base")
 
-install(TARGETS Framework DESTINATION lib)
+install(TARGETS Framework DESTINATION lib EXCLUDE_FROM_ALL)

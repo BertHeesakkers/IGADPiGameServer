@@ -36,4 +36,4 @@ add_library(SokobanLobby STATIC ${SokobanLobby_AGGREGATE_HEADERS} ${SokobanLobby
 
 set_target_properties(SokobanLobby PROPERTIES FOLDER "ServerCode")
 
-install(TARGETS SokobanLobby DESTINATION lib)
+install(TARGETS SokobanLobby DESTINATION lib EXCLUDE_FROM_ALL)

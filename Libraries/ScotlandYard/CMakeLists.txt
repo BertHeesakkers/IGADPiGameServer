@@ -67,4 +67,4 @@ add_library(ScotlandYard STATIC ${ScotlandYard_AGGREGATE_HEADERS} ${ScotlandYard
 
 set_target_properties(ScotlandYard PROPERTIES FOLDER "Games")
 
-install(TARGETS ScotlandYard DESTINATION lib)
+install(TARGETS ScotlandYard DESTINATION lib EXCLUDE_FROM_ALL)

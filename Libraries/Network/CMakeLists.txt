@@ -70,4 +70,4 @@ ENDIF(WIN32)
 
 set_target_properties(Network PROPERTIES FOLDER "Base")
 
-install(TARGETS Network DESTINATION lib)
+install(TARGETS Network DESTINATION lib EXCLUDE_FROM_ALL)
