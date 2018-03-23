@@ -17,15 +17,15 @@ namespace
 	const std::vector<std::string> GetPredefinedLevelSets()
 	{
 		std::vector<std::string> levelSets;
-		levelSets.push_back("Data\\FourthSetExtended.txt");
-		levelSets.push_back("Data\\JPKLevels.txt");
-		levelSets.push_back("Data\\JPKLevelsArrangements.txt");
-		levelSets.push_back("Data\\KobusTheronCollection.txt");
-		levelSets.push_back("Data\\MacTommyInventions.txt");
-		levelSets.push_back("Data\\OriginalRemixed.txt");
-		levelSets.push_back("Data\\SimpleSokoban.txt");
-		levelSets.push_back("Data\\ThinkingRabbitSet.txt");
-		levelSets.push_back("Data\\XSokoban.txt");
+		levelSets.push_back("data\\FourthSetExtended.txt");
+		levelSets.push_back("data\\JPKLevels.txt");
+		levelSets.push_back("data\\JPKLevelsArrangements.txt");
+		levelSets.push_back("data\\KobusTheronCollection.txt");
+		levelSets.push_back("data\\MacTommyInventions.txt");
+		levelSets.push_back("data\\OriginalRemixed.txt");
+		levelSets.push_back("data\\SimpleSokoban.txt");
+		levelSets.push_back("data\\ThinkingRabbitSet.txt");
+		levelSets.push_back("data\\XSokoban.txt");
 		return levelSets;
 	}
 }
