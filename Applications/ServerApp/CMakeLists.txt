@@ -35,7 +35,7 @@ set(ServerApp_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerApp ${ServerApp_CORE_HEADERS} ${ServerApp_CORE_SOURCE})
 
-message(STATUS "Locating RakNetLibsStatic library")
+message(STATUS "Locating third party libraries")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         find_library(RAKNET_STATIC_LIB_DEBUG RakNetLibStatic.lib HINTS ${THIRD_PARTY_FOLDER}RakNet/lib/Debug)
         if(NOT RAKNET_STATIC_LIB_DEBUG)
@@ -56,13 +56,19 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         if(NOT RAKNET_STATIC_LIB_RELEASE)
           message(FATAL_ERROR "RakNet static release library not found!")
         endif()
+
+        find_package(Threads)
 endif()
 
 target_link_libraries(ServerApp Framework Network BattleShips ScotlandYard Sokoban Tron ScotlandYardLobby Server BattleShipsLobby SokobanLobby TronLobby)
 target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
 target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+        message(STATUS "Setting up linking to Windows specific libraries")
         target_link_libraries(ServerApp Ws2_32)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        message(STATUS "Setting up linking to Linux specific libraries")
+        target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
 set_target_properties(ServerApp PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
