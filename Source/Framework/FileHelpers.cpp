@@ -1,12 +1,16 @@
 #include "FileHelpers.h"
 
+#include "AssertMessage.h"
+#include "StringFunctions.h"
+#include "DateTimeHelpers.h"
+
 #include <assert.h>
 #include <fstream>
 
 std::string ReadFileToString(const std::string &a_Filename)
 {
 	std::ifstream fileStream(a_Filename.c_str());
-	assert(fileStream.is_open());
+	AssertMessage(fileStream.is_open(), StringFormatter::Format("Unable to open [%s] for read!", a_Filename.c_str()));
 	std::string fileContents;
 
 	fileStream.seekg(0, std::ios::end);
