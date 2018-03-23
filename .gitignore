@@ -1,10 +1,6 @@
 # Prerequisites
 *.d
 
-# Project specific directories
-BattleShips/
-BattleShipsLobby/
-
 # Visual Studio directories
 .vs/
 

@@ -16,7 +16,7 @@
 
 namespace
 {
-	const std::string g_ScotlandYardMapFile = "Data/ScotlandYard/map_nodes.txt";
+	const std::string g_ScotlandYardMapFile = "data/ScotlandYard/map_nodes.txt";
 	static const std::vector<int> g_StartLocations = { 13, 26, 29, 34, 50, 53, 91, 94, 103, 112, 117, 132, 138, 141, 155, 174, 197, 198 };
 
 	AutoPointer<IRandomNumberGenerator> g_RandomNumberGenerator = CreateRandomNumberGenerator(15485863); // millionth prime
