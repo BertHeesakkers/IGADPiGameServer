@@ -121,7 +121,7 @@ DATA_4: RakString(<NAME OF PLAYER 1>)
 DATA_5: uint32_t(<CLIENT ID OF PLAYER 1>)
 DATA_6: RakString(<NAME OF PLAYER 2>)
 DATA_7: uint32_t(<CLIENT ID OF PLAYER 2>)
-DATA_8: ... (Continuing until the amount in DATA_2)
+DATA_8: ... (Continuing until the amount in DATA_3)
 ```
 `DATA_4` and onwards will be all the names and client id's of all the players.
 
