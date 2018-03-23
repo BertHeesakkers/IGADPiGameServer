@@ -42,7 +42,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	message(STATUS "Setting up linking to Linux specific libraries")
 	target_link_libraries(ServerApp -Wl,--whole-archive 
-		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby -Wl,--no-who-whole-archive)
+		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby -Wl,--no-whole-archive)
 	target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
 endif()
 target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
