@@ -51,6 +51,10 @@ target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
 set_target_properties(ServerApp PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 set_target_properties(ServerApp PROPERTIES FOLDER "Applications")
 
+set_target_properties(ServerApp PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/Bin
+                      RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/Bin
+)
 install(TARGETS ServerApp DESTINATION bin)
 
 
