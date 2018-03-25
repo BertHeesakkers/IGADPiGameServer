@@ -61,7 +61,7 @@ $ /server/path/bin/ServerApp
 
 ### Supported compiler
 
-- GCC 4.9 - 7.2 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers)) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
+- GCC 4.9 - 7.2 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
 - Clang 3.4 - 5.0 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
 - Intel C++ Compiler 17.0.2 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
 - Microsoft Visual C++ 2015 / Build Tools 14.0.25123.0 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
