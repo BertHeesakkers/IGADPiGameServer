@@ -1,3 +1,4 @@
+########### Scotland Yard Help ########### 
 Scotland Yard is a game based on the original Scotlan Yard board game. For an impression of the classical version, please check: https://en.wikipedia.org/wiki/Scotland_Yard_(board_game). This text will give you some insight in the messages that can be sent to a game of Scotland Yard and what kind of data you can expect to get back in return.
 
 	In the following text the structure of the message that can be sent are described as follows:
@@ -6,62 +7,86 @@ Scotland Yard is a game based on the original Scotlan Yard board game. For an im
 			MESSAGE_ID				is the enumeration value that should be sent.
 			DATA_1, DATA_2, ...		are the types (DataType) and indications of the kind of data (DataName) that should be added to the bitstream, in that order.
 
-	After the EMessage_RecvJoinGame message has been received the player has joined a game and the following messages can be sent:
+For the latest update on the messages, please check out the EMessages.h file for Scotland Yard.
+@see https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYardLobby/EMessages.h
+########### Requests Messages ########### 
+EMessage_SendGetMap
+This will return the map to you using EMessage_RecvGetMap.
 
-	EMessage_SendGetMap
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendGetSpyTravelLog
+This will return the spy's travel log using EMessage_RecvGetSpyTravelLog.
 
-	EMessage_SendGetSpyTravelLog
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendGetPlayerLocations
+This will return the locations of all players using EMessage_RecvGetPlayerLocations.
 
-	EMessage_SendGetPlayerLocations
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_1: ClientID(<YOUR CLIENT ID>)
 
-	EMessage_SendTravel
-		DATA_1: ClientID(<YOUR CLIENT ID>)
-		DATA_2: GameID(<YOUR GAME ID>)
-		DATA_3: uint32_t(<DESTINATION>)
+EMessage_SendTravel
+DATA_1: ClientID(<YOUR CLIENT ID>)
 
-	EMessage_SendGetLocation
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<YOUR GAME ID>)
+DATA_3: uint32_t(<DESTINATION>)
 
-	EMessage_SendGetTravelLog
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendGetLocation
+DATA_1: ClientID(<YOUR CLIENT ID>)
 
-	EMessage_SendAmISpy
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendGetTravelLog
+DATA_1: ClientID(<YOUR CLIENT ID>)
 
-	EMessage_SendGetRemainingTokens
-		DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendAmISpy
+Will return if the player is a spy or not via EMessage_RecvAmISpy.
 
+DATA_1: ClientID(<YOUR CLIENT ID>)
+EMessage_SendGetRemainingTokens
 
-	The following message will occasionally be sent by the server:
+DATA_1: ClientID(<YOUR CLIENT ID>)
 
-	EMessage_RecvGetMap
-		DATA_1: RakString(<MAPFILE>)
-		
-	EMessage_RecvTravelResult
-		DATA_1: TBA
-		
-	EMessage_RecvGetSpyTravelLog
-		DATA_1: TBA
-		
-	EMessage_RecvGetPlayerLocations
-		DATA_1: TBA
-		
-	EMessage_RecvGetLocation
-		DATA_1: uint32_t(<LOCATION>)
-		
-	EMessage_RecvAmISpy
-		DATA_1: bool(<VALUE>)
-		
-	EMessage_RecvGetTravelLog
-		DATA_1: TBA
-		
-	EMessage_RecvGetRemainingTokens	
-		DATA_1: ETravelOption
-		DATA_2: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_1>)
-		DATA_3: ETravelOption
-		DATA_4: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_3>)
-		DATA_5: ETravelOption
-		DATA_6: uint32_t(<VALUE FOR PREVIOUS TRAVEL OPTION DATA_5>)
+########### Response Messages ########### 
+
+EMessage_RecvGetMap
+DATA_1: RakString(<MAPFILE>)
+
+EMessage_RecvTravelResult
+TBA
+
+EMessage_RecvGetSpyTravelLog
+TBA
+
+EMessage_RecvGetPlayerLocations
+TBA
+
+EMessage_RecvGetLocation
+DATA_1: uint32_t(<LOCATION>)
+
+EMessage_RecvAmISpy
+Will return if the player is a spy or not.
+
+DATA_1: bool(<VALUE>)
+EMessage_RecvGetTravelLog
+TBA
+
+EMessage_RecvGetRemainingTokens
+TBA
+
+########### Travel Options ########### 
+There are multiple ways of transportation in this game. Below is a list of all the options.
+
+ETravelOption_Taxi
+ETravelOption_Bus
+ETravelOption_Underground
+ETravelOption_Ferry or ETravelOption_Black
+For more info, please check out ETravelOption.h.
+@see https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYard/ETravelOption.h
+
+########### Travel Results ########### 
+When receiving the EMessage_RecvTravelResult message, an ETravelResult sent with. Below is a list of possible results.
+
+ETravelResult_NoTokensLeft
+ETravelResult_NoValidTravelOption
+ETravelResult_DestinationNotFree
+ETravelResult_CaughtSpy
+ETravelResult_Success
+For more info, please check out ETravelResult.h.
+@see https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYard/ETravelResult.h
