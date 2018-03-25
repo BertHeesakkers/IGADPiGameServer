@@ -11,7 +11,7 @@ before_script:
   - make
   - make install
   - sudo mv Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
-  - sudo mv include/raknet ../RakNet/
+  - sudo mv include/raknet ../Include/RakNet/
   - cd ..
 script:
   - cmake .
