@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.9.2)
 project (IGADPiGameServer)
 
+if(UNIX)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
+endif()
+
 set(THIRD_PARTY_FOLDER ${CMAKE_SOURCE_DIR}/ThirdParty/)
 set(ROOT_INCLUDE_FOLDER ${CMAKE_SOURCE_DIR}/Include/)
 
