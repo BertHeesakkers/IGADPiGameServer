@@ -38,3 +38,6 @@
 
 # CMake build directory
 build/
+
+# game files
+server_error.log

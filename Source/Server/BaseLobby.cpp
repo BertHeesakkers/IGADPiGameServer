@@ -61,6 +61,7 @@ std::vector<UserData*>& BaseLobby::GetWaitQueue()
 
 void BaseLobby::AddNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface)
 {
+	m_Logger.WriteLine("AddNewGame(): 1");
 	IServerGame *game = CreateNewGame(a_GameID, a_PeerInterface);
 	AssertMessage(nullptr != game, "Failed to create new game for lobby!");
 
@@ -68,6 +69,7 @@ void BaseLobby::AddNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInte
 	uint32_t playerIndex = 0;
 	for (auto pos = m_WaitQueue.begin(); playerIndex < maxNumPlayers && pos != m_WaitQueue.end(); )
 	{
+		m_Logger.WriteLine("AddNewGame(): 2");
 		UserData &userData = **pos;
 		pos = m_WaitQueue.erase(pos);
 		userData.m_GameID = a_GameID;
@@ -76,6 +78,8 @@ void BaseLobby::AddNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInte
 		m_Logger.WriteLine("New game [%s / %d] starting for client [%s / %d].", Translate(m_Game), a_GameID, userData.m_Name, userData.m_ClientID);
 		++playerIndex;
 	}
+	m_Logger.WriteLine("AddNewGame(): 3");
 	game->OpenGameLog();
+	m_Logger.WriteLine("AddNewGame(): 4");
 	m_Games.push_back(game);
 }
