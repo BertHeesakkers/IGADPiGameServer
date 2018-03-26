@@ -254,6 +254,8 @@ void ScotlandYardGame::LoadMap(const std::string &a_Filename)
 	// Lines in file are structured:
 	// Node index; Taxi destinations; Bus destinations; Subway destinations; Ferry destinations; Coordinates; Name (if applicable)
 
+	Map m_Map;
+
 	std::string line;
 	std::vector<std::string> temp;
 	while (std::getline(fileStream, line))

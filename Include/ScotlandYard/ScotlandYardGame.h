@@ -3,6 +3,8 @@
 #include "Network/EPlayer.h"
 #include "ETravelResult.h"
 #include "Map.h"
+#include "Edge.h"
+#include "Node.h"
 
 #include <string>
 #include <vector>

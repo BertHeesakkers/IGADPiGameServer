@@ -10,7 +10,11 @@
 #include "ScotlandYard/Player.h"
 #include "ScotlandYard/ScotlandYardGame.h"
 
+//////////////////////////////////////////////////////////////////////////
 #include <fstream>
+#include "Framework/StringFunctions.h"
+#include "ScotlandYard/Map.h"
+//////////////////////////////////////////////////////////////////////////
 
 namespace
 {
@@ -42,6 +46,14 @@ namespace
 			a_Payload.Write(static_cast<short>(travelOption));
 		}
 	}
+
+	uint32_t StringToInt(const std::string &a_String)
+	{
+		std::stringstream convert(a_String);
+		uint32_t result;
+		convert >> result;
+		return result;
+	}
 }
 
 ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface, ILogger &a_Logger)
@@ -51,7 +63,36 @@ ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerI
 	GetServerLogger().WriteLine("ScotlandYardServerGame(): 1");
 	std::ifstream fileStream("data/ScotlandYard/map_nodes.txt");
 	AssertMessage(fileStream.is_open(), "Unable to open legacy map file!");
+
+	Map m_Map;
+
+	std::string line;
+	std::vector<std::string> temp;
+	while (std::getline(fileStream, line))
+	{
+		if (!line.empty())
+		{
+			std::vector<std::string> tokens = Tokenize(line, ";");
+			uint32_t nodeIndex = StringToInt(tokens[0]);
+			Node *node = m_Map.m_Nodes[nodeIndex - 1];
+			AssertMessage(nullptr != node, "Encounter uninitialized node!");
+
+			temp = Tokenize(tokens[1], ",");
+			//InsertEdges(m_Map, nodeIndex, temp, ETravelOption_Taxi);
+			temp = Tokenize(tokens[2], ",");
+			//InsertEdges(m_Map, nodeIndex, temp, ETravelOption_Bus);
+			temp = Tokenize(tokens[3], ",");
+			//InsertEdges(m_Map, nodeIndex, temp, ETravelOption_Underground);
+			temp = Tokenize(tokens[4], ",");
+			//InsertEdges(m_Map, nodeIndex, temp, ETravelOption_Ferry);
+			temp = Tokenize(tokens[5], ",");
+			node->m_X = StringToInt(temp[0]);
+			node->m_Y = StringToInt(temp[1]);
+		}
+	}
+
 	fileStream.close();
+	GetServerLogger().WriteLine("ScotlandYardServerGame(): 2");
 	// to delete
 
 	m_Game = new ScotlandYardGame();
