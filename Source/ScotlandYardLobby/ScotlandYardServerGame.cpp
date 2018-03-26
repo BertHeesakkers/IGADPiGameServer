@@ -44,7 +44,9 @@ namespace
 ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface, ILogger &a_Logger)
 	: BaseServerGame(a_GameID, a_PeerInterface, a_Logger)
 {
+	GetServerLogger().WriteLine("ScotlandYardServerGame(): 1");
 	m_Game = new ScotlandYardGame();
+	GetServerLogger().WriteLine("ScotlandYardServerGame(): 2");
 }
 
 ScotlandYardServerGame::~ScotlandYardServerGame()

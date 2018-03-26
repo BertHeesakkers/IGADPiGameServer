@@ -30,6 +30,7 @@ protected:
 
 	RakNet::RakPeerInterface& GetPeerInterface();
 	ILogger& GetGameLogger();
+	ILogger& GetServerLogger();
 
 	void BroadcastTurnFinished(const ClientID &a_ClientID) const;
 

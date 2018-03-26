@@ -69,6 +69,11 @@ ILogger& BaseServerGame::GetGameLogger()
 	return *m_GameLogger;
 }
 
+ILogger& BaseServerGame::GetServerLogger()
+{
+	return m_ServerLogger;
+}
+
 void BaseServerGame::BroadcastTurnFinished(const ClientID &a_ClientID) const
 {
 	for (auto pos = m_Players.begin(); pos != m_Players.end(); ++pos)
