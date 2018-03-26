@@ -2,12 +2,15 @@
 
 #include "EMessages.h"
 #include "EMessagesExt.h"
+#include "Framework/AssertMessage.h"
 #include "Framework/FileHelpers.h"
 #include "Framework/Logging/ILogger.h"
 #include "Network/EMessages.h"
 #include "Network/MessageHelpers.h"
 #include "ScotlandYard/Player.h"
 #include "ScotlandYard/ScotlandYardGame.h"
+
+#include <fstream>
 
 namespace
 {
@@ -44,7 +47,13 @@ namespace
 ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface, ILogger &a_Logger)
 	: BaseServerGame(a_GameID, a_PeerInterface, a_Logger)
 {
+	// to delete
 	GetServerLogger().WriteLine("ScotlandYardServerGame(): 1");
+	std::ifstream fileStream("data/ScotlandYard/map_nodes.txt");
+	AssertMessage(fileStream.is_open(), "Unable to open legacy map file!");
+	fileStream.close();
+	// to delete
+
 	m_Game = new ScotlandYardGame();
 	GetServerLogger().WriteLine("ScotlandYardServerGame(): 2");
 }
