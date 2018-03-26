@@ -15,7 +15,7 @@
 
 namespace
 {
-	const std::string g_GameName = "Games/BattleShips";
+	const std::string g_GameName = "BattleShips";
 
 	void WriteShipDataToBitStream(const BoardDataItem &a_ShipData, RakNet::BitStream &a_BitStream)
 	{

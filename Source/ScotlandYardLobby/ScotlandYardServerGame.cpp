@@ -10,12 +10,6 @@
 #include "ScotlandYard/Player.h"
 #include "ScotlandYard/ScotlandYardGame.h"
 
-//////////////////////////////////////////////////////////////////////////
-#include <fstream>
-#include "Framework/StringFunctions.h"
-#include "ScotlandYard/Map.h"
-//////////////////////////////////////////////////////////////////////////
-
 namespace
 {
 	const std::string g_GameName = "ScotlandYard";
@@ -45,14 +39,6 @@ namespace
 			a_Payload.Write(end);
 			a_Payload.Write(static_cast<short>(travelOption));
 		}
-	}
-
-	uint32_t StringToInt(const std::string &a_String)
-	{
-		std::stringstream convert(a_String);
-		uint32_t result;
-		convert >> result;
-		return result;
 	}
 }
 
