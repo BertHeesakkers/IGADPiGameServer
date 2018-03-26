@@ -19,8 +19,6 @@ uint32_t ScotlandYardLobby::GetNumPlayersPerGame() const
 
 IServerGame* ScotlandYardLobby::CreateNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface)
 {
-	m_Logger.WriteLine("ScotlandYardLobby::CreateNewGame(): 1");
 	ScotlandYardServerGame *game = new ScotlandYardServerGame(a_GameID, a_PeerInterface, m_Logger);
-	m_Logger.WriteLine("ScotlandYardLobby::CreateNewGame(): 2");
 	return game;
 }
