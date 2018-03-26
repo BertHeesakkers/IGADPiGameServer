@@ -43,5 +43,5 @@ TYPE MersenneTwister::Next()
 template<typename TYPE>
 TYPE MersenneTwister::Next(TYPE &a_Min, TYPE &a_Max)
 {
-	return static_cast<TYPE>(static_cast<TYPE>(NextDouble()) * (a_Max - a_Min) + a_Min);
+	return static_cast<TYPE>(NextDouble() * (a_Max - a_Min) + a_Min);
 }
