@@ -1,8 +1,10 @@
 # Prerequisites
 *.d
 
-# Visual Studio directories
+# Visual Studio directories and files
 .vs/
+*.ilk
+*.pdb
 
 # Compiled Object files
 *.slo

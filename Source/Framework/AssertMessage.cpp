@@ -21,7 +21,7 @@ void AssertMessage(bool a_Condition, const std::string &a_Text)
 #ifdef WIN32
 		::MessageBox(0, text.c_str(), L"Error!", MB_ICONERROR | MB_OK);
 #elif __linux__
-		std::cout << "Error: " << a_Text << std::endl;
+		std::cerr << "Error: " << a_Text << std::endl;
 #endif
 		assert(false);
 	}
