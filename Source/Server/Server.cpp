@@ -455,18 +455,14 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 		
 		if (lobby->CanStartNewGame())
 		{
-			m_Logger.WriteLine("lobby->CanStartNewGame(): 1");
 			const GameID newGameID = GenerateGameID();
 			lobby->AddNewGame(newGameID, *m_PeerInterface);			
-			m_Logger.WriteLine("lobby->CanStartNewGame(): 2");
 			if (a_SendMessages)
 			{
-				m_Logger.WriteLine("lobby->CanStartNewGame(): 3");
 				std::vector<UserData*> players;
 				FindUserData(m_UserData, newGameID, players);
 				for (auto pos = players.begin(); pos != players.end(); ++pos)
 				{
-					m_Logger.WriteLine("lobby->CanStartNewGame(): 4");
 					const UserData &userData = **pos;
 					RakNet::BitStream payload;
 					payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGameJoined));
@@ -474,7 +470,6 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(userData.m_GameID);
 					SendMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
-				m_Logger.WriteLine("lobby->CanStartNewGame(): 5");
 			}
 		}
 		else

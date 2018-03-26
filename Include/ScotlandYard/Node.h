@@ -19,5 +19,4 @@ private:
 
 	friend class Map;
 	friend class ScotlandYardGame;
-	friend class ScotlandYardServerGame;
 };

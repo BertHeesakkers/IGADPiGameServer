@@ -60,7 +60,6 @@ std::string WideStringToString(const std::wstring &a_String)
 
 std::vector<std::string> Tokenize(const std::string &a_String, const std::string &a_Delimiters)
 {
-#if defined(WIN32)
 	std::vector<std::string> tokens;
 	std::string::size_type lastPos = a_String.find_first_not_of(a_Delimiters, 0);
 	std::string::size_type pos = a_String.find_first_of(a_Delimiters, lastPos);
@@ -72,9 +71,6 @@ std::vector<std::string> Tokenize(const std::string &a_String, const std::string
 		pos = a_String.find_first_of(a_Delimiters, lastPos);
 	}
 	return tokens;
-#elif defined(__linux__)
-	return std::vector<std::string>();
-#endif
 }
 
 void LTrim(std::string &a_String)

@@ -24,5 +24,4 @@ private:
 	std::vector<Edge*> m_Edges;
 
 	friend class ScotlandYardGame;
-	friend class ScotlandYardServerGame;
 };
