@@ -36,7 +36,7 @@ namespace
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvAcknowledgement));
 		payload.Write(static_cast<short>(a_Collision));
 		payload.Write(a_ShipSunk);
-		SendMessage(a_PeerInterface, a_SystemAddress, payload);
+		SendNetworkMessage(a_PeerInterface, a_SystemAddress, payload);
 	}
 
 	void SendAcknowledgementMessage(RakNet::RakPeerInterface &a_PeerInterface, RakNet::SystemAddress a_SystemAddress, ECollision (&a_Collision)[2], bool (&a_ShipSunk)[2])
@@ -47,7 +47,7 @@ namespace
 		payload.Write(a_ShipSunk[0]);
 		payload.Write(static_cast<short>(a_Collision[1]));
 		payload.Write(a_ShipSunk[1]);
-		SendMessage(a_PeerInterface, a_SystemAddress, payload);
+		SendNetworkMessage(a_PeerInterface, a_SystemAddress, payload);
 	}
 
 	void SendAcknowledgementMessage(RakNet::RakPeerInterface &a_PeerInterface, RakNet::SystemAddress a_SystemAddress, ECollision a_Collision)
@@ -55,7 +55,7 @@ namespace
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvAcknowledgement));
 		payload.Write(static_cast<short>(a_Collision));
-		SendMessage(a_PeerInterface, a_SystemAddress, payload);
+		SendNetworkMessage(a_PeerInterface, a_SystemAddress, payload);
 	}
 
 	void SendAcknowledgementMessage(RakNet::RakPeerInterface &a_PeerInterface, RakNet::SystemAddress a_SystemAddress, ECollision (&a_Collision)[2])
@@ -64,7 +64,7 @@ namespace
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvAcknowledgement));
 		payload.Write(static_cast<short>(a_Collision[0]));
 		payload.Write(static_cast<short>(a_Collision[1]));
-		SendMessage(a_PeerInterface, a_SystemAddress, payload);
+		SendNetworkMessage(a_PeerInterface, a_SystemAddress, payload);
 	}
 
 	void SendAcknowledgementMessage(RakNet::RakPeerInterface &a_PeerInterface, RakNet::SystemAddress a_SystemAddress, char (&a_RadarInfo)[9])
@@ -80,7 +80,7 @@ namespace
 		payload.Write(static_cast<short>(a_RadarInfo[6]));
 		payload.Write(static_cast<short>(a_RadarInfo[7]));
 		payload.Write(static_cast<short>(a_RadarInfo[8]));
-		SendMessage(a_PeerInterface, a_SystemAddress, payload);
+		SendNetworkMessage(a_PeerInterface, a_SystemAddress, payload);
 	}
 }
 
@@ -229,11 +229,11 @@ void BattleShipsServerGame::HandleStartGame(RakNet::Packet &a_Packet, ClientID a
 {
 	if (m_Game->IsActive())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
 	}
 	else if (!m_Game->ShipPlacementDone())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementNotDone);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementNotDone);
 	}
 	else
 	{
@@ -250,12 +250,12 @@ void BattleShipsServerGame::HandleStopGame(RakNet::Packet &a_Packet, ClientID a_
 		for (auto pos = players.begin(); pos != players.end(); ++pos)
 		{
 			const UserData &userData = **pos;
-			SendMessage(GetPeerInterface(), userData.m_SystemAddress, EMessage_RecvGameStopped);
+			SendNetworkMessage(GetPeerInterface(), userData.m_SystemAddress, EMessage_RecvGameStopped);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -273,18 +273,18 @@ void BattleShipsServerGame::HandleGetBoard(RakNet::Packet &a_Packet, ClientID a_
 		const BoardDataItem &item = *pos;
 		WriteShipDataToBitStream(item, payload);
 	}
-	SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+	SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 }
 
 void BattleShipsServerGame::HandlePlaceShip(RakNet::Packet &a_Packet, ClientID a_ClientID)
 {
 	if (m_Game->IsActive())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
 	}
 	else if (m_Game->ShipPlacementDone())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
 	}
 	else
 	{
@@ -304,12 +304,12 @@ void BattleShipsServerGame::HandlePlaceShip(RakNet::Packet &a_Packet, ClientID a
 			}
 			else
 			{
-				SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementInvalid);
+				SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementInvalid);
 			}
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementInvalid);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementInvalid);
 		}
 	}
 }
@@ -318,11 +318,11 @@ void BattleShipsServerGame::HandleRemoveShip(RakNet::Packet &a_Packet, ClientID 
 {
 	if (m_Game->IsActive())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
 	}
 	else if (m_Game->ShipPlacementDone())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
 	}
 	else
 	{
@@ -335,7 +335,7 @@ void BattleShipsServerGame::HandleRemoveShip(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipRemovalInvalid);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipRemovalInvalid);
 		}
 	}
 }
@@ -346,11 +346,11 @@ void BattleShipsServerGame::HandleFinishedShipPlacement(RakNet::Packet &a_Packet
 	
 	if (m_Game->IsActive())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameAlreadyStarted);
 	}
 	else if (m_Game->ShipPlacementDone())
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvShipPlacementAlreadyDone);
 	}
 	else
 	{
@@ -380,12 +380,12 @@ void BattleShipsServerGame::HandleShoot(RakNet::Packet &a_Packet, ClientID a_Cli
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -407,12 +407,12 @@ void BattleShipsServerGame::HandleMoveShip(RakNet::Packet &a_Packet, ClientID a_
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -435,12 +435,12 @@ void BattleShipsServerGame::HandleRotateShip(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -464,12 +464,12 @@ void BattleShipsServerGame::HandleDoubleShot(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -492,12 +492,12 @@ void BattleShipsServerGame::HandleDoubleMove(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -518,12 +518,12 @@ void BattleShipsServerGame::HandleMine(RakNet::Packet &a_Packet, ClientID a_Clie
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -546,12 +546,12 @@ void BattleShipsServerGame::HandleRadar(RakNet::Packet &a_Packet, ClientID a_Cli
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -571,12 +571,12 @@ void BattleShipsServerGame::HandleShieldShip(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -599,12 +599,12 @@ void BattleShipsServerGame::HandleDoubleRotate(RakNet::Packet &a_Packet, ClientI
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -624,12 +624,12 @@ void BattleShipsServerGame::HandleRepairShip(RakNet::Packet &a_Packet, ClientID 
 		}
 		else
 		{
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvPlayedBeforeYourTurn);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -645,7 +645,7 @@ void BattleShipsServerGame::SendGameStartedMessage()
 	for (auto pos = players.begin(); pos != players.end(); ++pos)
 	{
 		const UserData &userData = **pos;
-		SendMessage(GetPeerInterface(), userData.m_SystemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), userData.m_SystemAddress, payload);
 	}
 }
 
@@ -673,7 +673,7 @@ void BattleShipsServerGame::HandleGameOver()
 		for (auto pos = players.begin(); pos != players.end(); ++pos)
 		{
 			const UserData &userData = **pos;
-			SendMessage(GetPeerInterface(), userData.m_SystemAddress, payload);
+			SendNetworkMessage(GetPeerInterface(), userData.m_SystemAddress, payload);
 		}
 	}
 }

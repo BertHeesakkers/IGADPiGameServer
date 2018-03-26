@@ -1,12 +1,14 @@
 #include "Translate.h"
 
+#include <algorithm>
 #include <string.h>
 
 namespace
 {
-	const std::string g_ScotlandYardName("ScotlandYard");
-	const std::string g_TronName("Tron");
-	const std::string g_SokobanName("Sokoban");
+	const std::string g_BattleShipsName("BATTLESHIPS");
+	const std::string g_ScotlandYardName("SCOTLANDYARD");
+	const std::string g_TronName("TRON");
+	const std::string g_SokobanName("SOKOBAN");
 }
 
 std::string Translate(EGame a_Game)
@@ -15,6 +17,11 @@ std::string Translate(EGame a_Game)
 
 	switch (a_Game)
 	{
+	case EGame_BattleShips:
+		{
+			translation = g_BattleShipsName;
+			break;
+		}
 	case EGame_ScotlandYard:
 		{
 			translation = g_ScotlandYardName;
@@ -44,15 +51,22 @@ std::string Translate(EGame a_Game)
 EGame Translate(const std::string &a_GameName)
 {
 	EGame game = EGame_Invalid;
-	if (0 == strcmp(g_ScotlandYardName.c_str(), a_GameName.c_str()))
+	std::string gameName(a_GameName);
+	std::transform(gameName.begin(), gameName.end(), gameName.begin(), ::toupper);
+
+	if (0 == strcmp(g_BattleShipsName.c_str(), gameName.c_str()))
+	{
+		game = EGame_BattleShips;
+	}
+	else if (0 == strcmp(g_ScotlandYardName.c_str(), gameName.c_str()))
 	{
 		game = EGame_ScotlandYard;
 	}
-	else if (0 == strcmp(g_TronName.c_str(), a_GameName.c_str()))
+	else if (0 == strcmp(g_TronName.c_str(), gameName.c_str()))
 	{
 		game = EGame_Tron;
 	}
-	else if (0 == strcmp(g_SokobanName.c_str(), a_GameName.c_str()))
+	else if (0 == strcmp(g_SokobanName.c_str(), gameName.c_str()))
 	{
 		game = EGame_Sokoban;
 	}

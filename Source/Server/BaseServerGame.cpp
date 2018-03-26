@@ -83,7 +83,7 @@ void BaseServerGame::BroadcastTurnFinished(const ClientID &a_ClientID) const
 		{
 			RakNet::BitStream payload;
 			payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvOpponentFinished));
-			SendMessage(m_PeerInterface, userData.m_SystemAddress, payload);
+			SendNetworkMessage(m_PeerInterface, userData.m_SystemAddress, payload);
 		}
 	}
 }

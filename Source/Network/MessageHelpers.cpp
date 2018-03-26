@@ -15,7 +15,7 @@ namespace
 	Stopwatch g_Stopwatch;
 }
 
-bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::MessageID a_MessageID)
+bool SendNetworkMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::MessageID a_MessageID)
 {
 	AssertMessage(a_SystemAddress != RakNet::UNASSIGNED_SYSTEM_ADDRESS, "SystemAddress is not defined! Unable to send message!");
 	RakNet::BitStream bsOut;
@@ -25,7 +25,7 @@ bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &
 	return result != 0;
 }
 
-bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::BitStream &a_Payload, bool a_BroadCast)
+bool SendNetworkMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::BitStream &a_Payload, bool a_BroadCast)
 {
 	AssertMessage(a_SystemAddress != RakNet::UNASSIGNED_SYSTEM_ADDRESS, "SystemAddress is not defined! Unable to send message!");
 	const uint32_t result = a_Peer.Send(&a_Payload, HIGH_PRIORITY, RELIABLE_ORDERED, 0, a_SystemAddress, a_BroadCast);	

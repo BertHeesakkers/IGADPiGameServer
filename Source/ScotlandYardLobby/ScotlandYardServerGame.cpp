@@ -150,13 +150,13 @@ void ScotlandYardServerGame::HandleGetMap(RakNet::Packet &a_Packet, ClientID a_C
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetMap));
 		payload.Write(RakNet::RakString(mapFile.c_str()));
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 4");
 	}
 	else
 	{
 		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 5");
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 6");
 	}
 	logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 7");
@@ -172,11 +172,11 @@ void ScotlandYardServerGame::HandleGetSpyTravelLog(RakNet::Packet &a_Packet, Cli
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetSpyTravelLog));
 		WriteTravelLog(travelLog, payload);
 
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -201,11 +201,11 @@ void ScotlandYardServerGame::HandleGetPlayerLocations(RakNet::Packet &a_Packet, 
 				payload.Write(player.GetPosition());
 			}
 		}
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -227,12 +227,12 @@ void ScotlandYardServerGame::HandleTravel(RakNet::Packet &a_Packet, ClientID a_C
 			RakNet::BitStream payload;
 			payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvTravelResult));
 			payload.Write(static_cast<short>(result));
-			SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 		}
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -247,11 +247,11 @@ void ScotlandYardServerGame::HandleGetLocation(RakNet::Packet &a_Packet, ClientI
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetLocation));
 		payload.Write(player.GetPosition());
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -267,11 +267,11 @@ void ScotlandYardServerGame::HandleGetTravelLog(RakNet::Packet &a_Packet, Client
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetTravelLog));
 		WriteTravelLog(travelLog, payload);
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -286,11 +286,11 @@ void ScotlandYardServerGame::HandleGetAmISpy(RakNet::Packet &a_Packet, ClientID 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvAmISpy));
 		payload.Write(player.IsSpy());
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 
@@ -315,11 +315,11 @@ void ScotlandYardServerGame::HandleGetRemainingTokens(RakNet::Packet &a_Packet, 
 			payload.Write(static_cast<short>(ETravelOption_Black));
 			payload.Write(player.GetTokens(ETravelOption_Black));
 		}
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
 	{
-		SendMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
 	}
 }
 

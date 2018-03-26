@@ -17,13 +17,13 @@ struct MessageResult
 	RakNet::Packet *m_Packet = nullptr;
 };
 
-bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::MessageID a_MessageID);
-bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::BitStream &a_Payload, bool a_BroadCast = false);
+bool SendNetworkMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::MessageID a_MessageID);
+bool SendNetworkMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, RakNet::BitStream &a_Payload, bool a_BroadCast = false);
 bool SendServerErrorMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, EServerError a_ServerError);
 bool SendAcknowledgementMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress);
 
 template<typename TYPE>
-bool SendMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, EMessages a_MessageID, const TYPE &a_Buffer)
+bool SendNetworkMessage(RakNet::RakPeerInterface &a_Peer, const RakNet::SystemAddress &a_SystemAddress, EMessages a_MessageID, const TYPE &a_Buffer)
 {
 	RakNet::BitStream bitStream;
 	bitStream.Write(static_cast<RakNet::MessageID>(a_MessageID));

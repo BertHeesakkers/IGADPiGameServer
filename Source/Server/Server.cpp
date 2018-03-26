@@ -60,7 +60,7 @@ namespace
 			RakNet::BitStream payload;
 			payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvLoginSuccess));
 			payload.Write(a_UserData.m_ClientID);
-			SendMessage(a_PeerInterface, a_UserData.m_SystemAddress, payload);
+			SendNetworkMessage(a_PeerInterface, a_UserData.m_SystemAddress, payload);
 		}
 	}
 }
@@ -188,7 +188,7 @@ void Server::Run()
 				}
 			case EMessage_SendDisconnect:
 				{
-					SendMessage(*m_PeerInterface, packet->systemAddress, EMessage_RecvDisconnected);
+					SendNetworkMessage(*m_PeerInterface, packet->systemAddress, EMessage_RecvDisconnected);
 					break;
 				}
 			case EMessage_SendWhoseTurnIsIt:
@@ -409,7 +409,7 @@ void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, cons
 			m_Logger.WriteLine("Unable to login client [%s]; no passhash provided.", a_ID);
 			if (a_SendMessages)
 			{
-				SendMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_NoPassword);
+				SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_NoPassword);
 			}
 		}
 	}
@@ -446,7 +446,7 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 		m_Logger.WriteLine("No game lobby available for game [%s].", Translate(a_Game));
 		if (a_SendMessages)
 		{
-			SendMessage(*m_PeerInterface, a_UserData.m_SystemAddress, EServerError_GameLobbyUnavailable);
+			SendNetworkMessage(*m_PeerInterface, a_UserData.m_SystemAddress, EServerError_GameLobbyUnavailable);
 		}
 	}
 	else
@@ -468,7 +468,7 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGameJoined));
 					payload.Write(userData.m_ClientID);
 					payload.Write(userData.m_GameID);
-					SendMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
+					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
 			}
 		}
@@ -495,7 +495,7 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 				for (auto pos = players.begin(); pos != players.end(); ++pos)
 				{
 					const UserData &userData = **pos;
-					SendMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
+					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
 			}
 		}
@@ -519,7 +519,7 @@ bool Server::HandleGameMessage(RakNet::Packet &a_Packet)
 		}
 		else
 		{
-			SendMessage(*m_PeerInterface, userData->m_SystemAddress, EServerError_NotLoggedIn);
+			SendNetworkMessage(*m_PeerInterface, userData->m_SystemAddress, EServerError_NotLoggedIn);
 		}
 	}
 	else
@@ -537,7 +537,7 @@ void Server::HandleServerHelp(RakNet::SystemAddress &a_SystemAddress)
 	RakNet::BitStream bitStream;
 	bitStream.Write(static_cast<RakNet::MessageID>(EMessage_RecvServerHelp));
 	bitStream.Write(RakNet::RakString(help.c_str()));
-	SendMessage(*m_PeerInterface, a_SystemAddress, bitStream);
+	SendNetworkMessage(*m_PeerInterface, a_SystemAddress, bitStream);
 }
 
 void Server::HandleGameHelp(RakNet::SystemAddress &a_SystemAddress, EGame a_Game)
@@ -547,7 +547,7 @@ void Server::HandleGameHelp(RakNet::SystemAddress &a_SystemAddress, EGame a_Game
 	const std::string help = GetGameHelp(a_Game);
 	bitStream.Write(RakNet::RakString(help.c_str()));
 
-	SendMessage(*m_PeerInterface, a_SystemAddress, bitStream);
+	SendNetworkMessage(*m_PeerInterface, a_SystemAddress, bitStream);
 }
 
 void Server::AddLobby(EGame a_Game)
@@ -597,7 +597,7 @@ void Server::HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet)
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWhoseTurnIsIt));
 		payload.Write(currentPlayer);
-		SendMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
+		SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
 	}
 }
 
@@ -611,7 +611,7 @@ void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
 	ILobby* lobby = FindGameLobby(m_Lobbies, game);
 	if(lobby == nullptr)
 	{
-		SendMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_GameLobbyUnavailable);
+		SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_GameLobbyUnavailable);
 	}
 	else
 	{
@@ -629,6 +629,6 @@ void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
 			payload.Write(static_cast<uint32_t>(userData.m_ClientID));
 		}
 		
-		SendMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
+		SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
 	}
 }
