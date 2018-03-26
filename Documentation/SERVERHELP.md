@@ -128,6 +128,7 @@ DATA_8: ... (Continuing until the amount in DATA_3)
 ## Server Errors
 When receiving the `EMessage_RecvServerError` message, an `EServerError` is sent with. Below is a list of possible errors.
 
+For more info, please check out [EServerErrors.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EServerErrors.h)
 ### `EServerError_NoError`
 ### `EServerError_GeneralError`
 ### `EServerError_InvalidPassword`
