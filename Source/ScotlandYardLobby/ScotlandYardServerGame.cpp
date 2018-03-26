@@ -62,6 +62,14 @@ ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerI
 	// to delete
 	GetServerLogger().WriteLine("ScotlandYardServerGame(): 1");
 	std::ifstream fileStream("data/ScotlandYard/map_nodes.txt");
+	if (fileStream.is_open())
+	{
+		GetServerLogger().WriteLine("fileStream.is_open(): success!");
+	}
+	else
+	{
+		GetServerLogger().WriteLine("fileStream.is_open(): failed!");
+	}
 	AssertMessage(fileStream.is_open(), "Unable to open legacy map file!");
 
 	Map m_Map;
