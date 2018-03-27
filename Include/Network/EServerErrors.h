@@ -8,6 +8,7 @@ enum EServerError
 	EServerError_InvalidPassword,
 	EServerError_NoPassword,
 	EServerError_NotLoggedIn,
+	EServerError_AlreadyLoggedIn,
 
 	EServerError_UserDataUnavailable,
 	EServerError_GameLobbyUnavailable,

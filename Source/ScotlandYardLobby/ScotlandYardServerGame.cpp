@@ -13,6 +13,7 @@
 namespace
 {
 	const std::string g_GameName = "ScotlandYard";
+	std::string g_Map = "";
 
 	void RetrievTravelData(RakNet::Packet &a_Packet, uint32_t &a_Destination, ETravelOption &a_TravelOption)
 	{
@@ -46,6 +47,7 @@ ScotlandYardServerGame::ScotlandYardServerGame(GameID a_GameID, RakNet::RakPeerI
 	: BaseServerGame(a_GameID, a_PeerInterface, a_Logger)
 {
 	m_Game = new ScotlandYardGame();
+	g_Map = ReadFileToString(ScotlandYardGame::GetMapFilename());
 }
 
 ScotlandYardServerGame::~ScotlandYardServerGame()
@@ -140,26 +142,17 @@ void ScotlandYardServerGame::AddPlayer()
 void ScotlandYardServerGame::HandleGetMap(RakNet::Packet &a_Packet, ClientID a_ClientID)
 {
 	ILogger &logger = GetServerLogger();
-	logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 1");
 	if (m_Game->IsActive())
 	{
-		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 2");
-		const std::string mapFile = ReadFileToString(ScotlandYardGame::GetMapFilename());
-		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 3");
-		logger.WriteLine(mapFile.c_str());
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetMap));
-		payload.Write(RakNet::RakString(mapFile.c_str()));
+		payload.Write(RakNet::RakString(g_Map.c_str()));
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
-		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 4");
 	}
 	else
 	{
-		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 5");
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
-		logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 6");
 	}
-	logger.WriteLine("ScotlandYardServerGame::HandleGetMap() 7");
 }
 
 void ScotlandYardServerGame::HandleGetSpyTravelLog(RakNet::Packet &a_Packet, ClientID a_ClientID)

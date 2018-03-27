@@ -61,12 +61,11 @@ private:
 
 	RakNet::RakPeerInterface *m_PeerInterface = nullptr;
 	RakNet::PacketLogger *m_PacketLogger = nullptr;
+	RakNet::RPC4 *m_RPCInterface = nullptr;
 
 	bool m_ServerRunning = false;
 	bool m_UsePacketLogger = false;
 	std::vector<UserData*> m_UserData;
 	std::vector<ILobby*> m_Lobbies;
 	bool m_UpdateUserData = false;
-
-	friend void TestServer();
 };

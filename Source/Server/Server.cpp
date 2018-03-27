@@ -99,6 +99,13 @@ void Server::Start(ServerParameters &a_ServerParameters)
 		AddLobby(game);
 	}
 
+	const bool setupRPCFunctions = false;
+	if (setupRPCFunctions)
+	{
+		m_RPCInterface = new RakNet::RPC4();
+		m_PeerInterface->AttachPlugin(m_RPCInterface);
+	}
+
 	ReadUserData(g_UserDataFilename, m_UserData);
 }
 
@@ -367,49 +374,57 @@ void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, cons
 	UserData *userData = FindUserData(m_UserData, a_ID);
 	if (nullptr != userData)
 	{
-		const bool emptyPasshash = IsEmptyPass(userData->m_Passhash);
-		if (!emptyPasshash)
+		if (userData->m_LoggedIn)
 		{
-			const bool success = ValidateLoginData(*userData, a_ID, a_Passhash);
-			if (success)
+			m_Logger.WriteLine("Client [%s] attempted to login twice.", a_ID);
+			SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_AlreadyLoggedIn);
+		}
+		else
+		{
+			const bool emptyPasshash = IsEmptyPass(userData->m_Passhash);
+			if (!emptyPasshash)
+			{
+				const bool success = ValidateLoginData(*userData, a_ID, a_Passhash);
+				if (success)
+				{
+#if defined(_DEBUG)
+					m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.AsCString());
+#else
+					m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
+#endif
+					HandleSuccessfulLogin(*m_PeerInterface, a_Packet, *userData, m_Logger, a_SendMessages);
+				}
+				else
+				{
+#if defined(_DEBUG)
+					m_Logger.WriteLine("Unable to verify login data form client [%s] with pass [%s].", a_ID, a_Passhash.AsCString());
+#else
+					m_Logger.WriteLine("Unable to verify login data form client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
+#endif
+					if (a_SendMessages)
+					{
+						SendServerErrorMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_InvalidPassword);
+					}
+				}
+			}
+			else if (emptyPasshash && !IsEmptyPass(a_Passhash))
 			{
 #if defined(_DEBUG)
 				m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.AsCString());
 #else
 				m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
 #endif
+				userData->m_Passhash = a_Passhash;
 				HandleSuccessfulLogin(*m_PeerInterface, a_Packet, *userData, m_Logger, a_SendMessages);
+				m_UpdateUserData = true;
 			}
 			else
 			{
-#if defined(_DEBUG)
-				m_Logger.WriteLine("Unable to verify login data form client [%s] with pass [%s].", a_ID, a_Passhash.AsCString());
-#else
-				m_Logger.WriteLine("Unable to verify login data form client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
-#endif
+				m_Logger.WriteLine("Unable to login client [%s]; no passhash provided.", a_ID);
 				if (a_SendMessages)
 				{
-					SendServerErrorMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_InvalidPassword);
+					SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_NoPassword);
 				}
-			}
-		}
-		else if (emptyPasshash && !IsEmptyPass(a_Passhash))
-		{
-#if defined(_DEBUG)
-			m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.AsCString());
-#else
-			m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
-#endif
-			userData->m_Passhash = a_Passhash;
-			HandleSuccessfulLogin(*m_PeerInterface, a_Packet, *userData, m_Logger, a_SendMessages);
-			m_UpdateUserData = true;
-		}
-		else
-		{
-			m_Logger.WriteLine("Unable to login client [%s]; no passhash provided.", a_ID);
-			if (a_SendMessages)
-			{
-				SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_NoPassword);
 			}
 		}
 	}

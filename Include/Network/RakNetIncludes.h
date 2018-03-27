@@ -12,6 +12,7 @@
 #include "RakNet/RakNetTypes.h"
 #include "RakNet/RakPeerInterface.h"
 #include "RakNet/PacketLogger.h"
+#include "RakNet/RPC4Plugin.h"
 
 #if defined(WIN32)
 #pragma warning(pop)

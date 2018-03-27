@@ -41,3 +41,4 @@ build/
 
 # game files
 server_error.log
+Bin/ClientApp.bat
