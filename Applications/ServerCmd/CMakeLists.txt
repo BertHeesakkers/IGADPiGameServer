@@ -28,21 +28,6 @@ set(ServerCmd_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerCmd ${ServerCmd_CORE_HEADERS} ${ServerCmd_CORE_SOURCE})
 
-
-
-#
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    message(STATUS "Setting up linking to Windows specific libraries")
-	target_link_libraries(ServerApp BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby)
-    target_link_libraries(ServerApp Ws2_32)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	message(STATUS "Setting up linking to Linux specific libraries")
-	target_link_libraries(ServerApp -Wl,--whole-archive 
-		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby -Wl,--no-whole-archive)
-	target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
-endif()
-#
-
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(STATUS "Setting up linking to Windows specific libraries")
 	target_link_libraries(ServerCmd Framework Network)
