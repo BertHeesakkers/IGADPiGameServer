@@ -6,7 +6,7 @@ Connecting to the server is explained in the [online documentation of RakNet (c)
 Any messages described below will only be sent after receiving the `ID_CONNECTION_REQUEST_ACCEPTED` message.
 
 ## Request Messages
-For more info, please check out [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EMessages.h).
+For more info, please check out [EMessages.h](/Include/Network/EMessages.h).
 
 ### `EMessage_SendServerHelp`
 Will return the server_help.txt file in a `EMessage_RecvServerHelp` message.
@@ -16,7 +16,7 @@ Will return the help file for the specified game in a `EMessage_RecvGameHelp` me
 ```
 DATA_1: EGame(<GAME>)
 ```
-For more info on EGame, please check out [EGame.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/EGame.h).
+For more info on EGame, please check out [EGame.h](/Include/Server/EGame.h).
 
 ### `EMessage_SendLogin`
 Will make you login as a user on the server.
@@ -33,7 +33,7 @@ Will make you join the specified game. Success will be indicated using a `EMessa
 ```
 DATA_1: EGame(<GAME>)
 ```
-For more info on EGame, please check out [EGame.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/EGame.h).
+For more info on EGame, please check out [EGame.h](/Include/Server/EGame.h).
 
 ### `EMessage_SendWhoseTurnIsIt`
 Will return a `EMessage_RecvWhoseTurnIsIt` message with the player whose turn it is.
@@ -43,10 +43,10 @@ Will request the lobby data for the specified game which will be received using 
 ```
 DATA_1: EGame(<GAME>)
 ```
-For more info on EGame, please check out [EGame.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Server/EGame.h).
+For more info on EGame, please check out [EGame.h](/Include/Server/EGame.h).
 
 ## Response Messages
-For more info, please check out [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EMessages.h).
+For more info, please check out [EMessages.h](/Include/Network/EMessages.h).
 
 ### `EMessage_RecvServerHelp`
 Will return the server help file.
@@ -128,7 +128,7 @@ DATA_8: ... (Continuing until the amount in DATA_3)
 ## Server Errors
 When receiving the `EMessage_RecvServerError` message, an `EServerError` is sent with. Below is a list of possible errors.
 
-For more info, please check out [EServerErrors.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/Network/EServerErrors.h)
+For more info, please check out [EServerErrors.h](/Include/Network/EServerErrors.h)
 ### `EServerError_NoError`
 ### `EServerError_GeneralError`
 ### `EServerError_InvalidPassword`
@@ -144,3 +144,10 @@ An invalid username (student id) has been supplied with the `EMessage_SendLogin`
 ### `EServerError_GameLobbyUnavailable`
 ### `EServerError_InvalidGameCommand`
 ### `EServerError_InvalidGameID`
+
+## Game Messages
+For game related messages, see their dedicated documentation files:
+- [Battleships](/Documentation/BATTLESHIPSHELP.md)
+- [Scotland Yard](/Documentation/SCOTLANDYARDHELP.md)
+- [Sokoban](/Documentation/SOKOBANHELP.md)
+- [Tron](/Documentation/TRONHELP.md)
