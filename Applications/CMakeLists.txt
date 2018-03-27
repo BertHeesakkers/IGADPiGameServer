@@ -27,6 +27,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 endif()
 
 add_subdirectory(ServerApp)
+add_subdirectory(ServerCmd)
 
 if(EXISTS "${CMAKE_SOURCE_DIR}/Applications/ClientApp/CMakeLists.txt")
 	add_subdirectory(ClientApp)

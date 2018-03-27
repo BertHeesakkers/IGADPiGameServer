@@ -31,6 +31,7 @@ namespace
 	const std::string g_ParameterFile = "data/server_parameters.json";
 	const std::string g_UserDataFilename = "data/students_2017.json";
 	const std::string g_ServerHelpFile = "data/server_help.txt";
+	Server *g_Server = nullptr;
 
 	bool IsEmptyPass(const HashedString &a_Passhash)
 	{
@@ -63,6 +64,51 @@ namespace
 			SendNetworkMessage(a_PeerInterface, a_UserData.m_SystemAddress, payload);
 		}
 	}
+
+	void RPCGetLobbyData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+
+		std::vector<std::string> lobbyData;
+		g_Server->GetLobbyData(lobbyData);
+
+		a_OutGoing->WriteCompressed("RetrieveActiveLobbies returnData");
+	}
+
+	void RPCGetGameData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCKillGame(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCKillAllGames(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCGetPlayerData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCKillPlayer(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCKillAllPlayers(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
+
+	void RPCKillServer(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+	}
 }
 
 Server::Server(ILogger &a_Logger, bool a_UsePacketLogger /* = false */)
@@ -75,10 +121,13 @@ Server::~Server()
 {
 	RakNet::RakPeerInterface::DestroyInstance(m_PeerInterface);
 	m_PeerInterface = nullptr;
+	g_Server = nullptr;
 }
 
 void Server::Start(ServerParameters &a_ServerParameters)
 {
+	g_Server = this;
+
 	m_PeerInterface = RakNet::RakPeerInterface::GetInstance();
 
 	RakNet::SocketDescriptor socketDescriptor(a_ServerParameters.m_ServerPort, 0);
@@ -104,6 +153,15 @@ void Server::Start(ServerParameters &a_ServerParameters)
 	{
 		m_RPCInterface = new RakNet::RPC4();
 		m_PeerInterface->AttachPlugin(m_RPCInterface);
+
+		m_RPCInterface->RegisterBlockingFunction("RPCGetLobbyData", RPCGetLobbyData);
+		m_RPCInterface->RegisterBlockingFunction("RPCGetGameData", RPCGetGameData);
+		m_RPCInterface->RegisterBlockingFunction("RPCKillGame", RPCKillGame);
+		m_RPCInterface->RegisterBlockingFunction("RPCKillAllGames", RPCKillAllGames);
+		m_RPCInterface->RegisterBlockingFunction("RPCGetPlayerData", RPCGetPlayerData);
+		m_RPCInterface->RegisterBlockingFunction("RPCKillPlayer", RPCKillPlayer);
+		m_RPCInterface->RegisterBlockingFunction("RPCKillAllPlayers", RPCKillAllPlayers);
+		m_RPCInterface->RegisterBlockingFunction("RPCKillServer", RPCKillServer);
 	}
 
 	ReadUserData(g_UserDataFilename, m_UserData);
