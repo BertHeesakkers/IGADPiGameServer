@@ -145,7 +145,7 @@ An invalid username (student id) has been supplied with the `EMessage_SendLogin`
 ### `EServerError_InvalidGameCommand`
 ### `EServerError_InvalidGameID`
 
-## Game related messages
+## Game Messages
 For game related messages, see their dedicated documentation files:
 - [Battleships](/Documentation/BATTLESHIPSHELP.md)
 - [Scotland Yard](/Documentation/SCOTLANDYARDHELP.md)
