@@ -1,0 +1,18 @@
+language: cpp
+sudo: required
+dist: trusty
+
+compiler:
+  - gcc
+before_script:
+  - git clone https://github.com/facebookarchive/RakNet.git
+  - cd RakNet
+  - cmake .
+  - make
+  - make install
+  - sudo mv Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
+  - sudo mv include/raknet ../Include/RakNet/
+  - cd ..
+script:
+  - cmake .
+  - make install
