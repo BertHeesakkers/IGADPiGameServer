@@ -4,7 +4,7 @@
 #include <windows.h>
 #endif
 
-#include <boost/format.hpp>
+#include "boost/format.hpp"
 #include <sstream>
 
 size_t ConvertString(const char *a_Input, wchar_t *a_Output);
