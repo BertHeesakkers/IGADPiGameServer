@@ -5,6 +5,7 @@ project(ServerCmd LANGUAGES CXX)
 include_directories(${ROOT_INCLUDE_FOLDER}ServerCmd)
 
 #external dependencies
+include_directories(${THIRD_PARTY_FOLDER}boost_1_65_1)
 include_directories(${THIRD_PARTY_FOLDER}RakNet/include)
 
 #header files

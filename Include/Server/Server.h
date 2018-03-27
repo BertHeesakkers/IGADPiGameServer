@@ -28,11 +28,11 @@ public:
 	void Stop(bool a_SendMessages = true);
 
 	// PiServerCmd functions
-	void GetLobbyData(std::vector<std::string> &a_Data) const;
-	void GetGameData(std::vector<std::string> &a_Data) const;
+	bool GetLobbyData(std::vector<std::string> &a_Data) const;
+	bool GetGameData(std::vector<std::string> &a_Data) const;
 	bool KillGame(const GameID &a_ID);
 	bool KillAllGames();
-	void GetPlayerData(std::vector<std::string> &a_Data) const;
+	bool GetPlayerData(std::vector<std::string> &a_Data) const;
 	bool KillPlayer(const ClientID &a_ID);
 	bool KillAllPlayers();
 	bool KillServer();

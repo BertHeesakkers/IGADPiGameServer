@@ -2,6 +2,9 @@
 	"ServerPort" : 60000,
 	"MaxClients" : 128,
     "Lobbies": [
-        "ScotlandYard"
+        "ScotlandYard",
+        "BattleShips",
+        "Sokoban",
+        "Tron"
     ]
 }

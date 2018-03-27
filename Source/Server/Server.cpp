@@ -68,46 +68,91 @@ namespace
 	void RPCGetLobbyData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
-
 		std::vector<std::string> lobbyData;
-		g_Server->GetLobbyData(lobbyData);
-
-		a_OutGoing->WriteCompressed("RetrieveActiveLobbies returnData");
+		std::string result = "No lobby data found.";
+		if (g_Server->GetLobbyData(lobbyData))
+		{
+			result = "";
+			for (auto const &data : lobbyData)
+			{
+				result += data;
+				result += ";";
+			}
+		}
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCGetGameData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		std::vector<std::string> gameData;
+		std::string result = "No game data found.";
+		if (g_Server->GetGameData(gameData))
+		{
+			result = "";
+			for (auto const &data : gameData)
+			{
+				result += data;
+				result += ";";
+			}
+		}
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCKillGame(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		uint32_t gameID = InvalidGameID();
+		a_Incoming->Read(gameID);
+		const std::string result = "RPCKillGame (" + std::to_string(gameID) + ") not implemented!";
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCKillAllGames(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		const std::string result = "RPCKillAllGames not implemented!";
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCGetPlayerData(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		std::vector<std::string> playerData;
+		std::string result = "No player data found.";
+		if (g_Server->GetPlayerData(playerData))
+		{
+			result = "";
+			for (auto const &data : playerData)
+			{
+				result += data;
+				result += ";";
+			}
+		}
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCKillPlayer(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		uint32_t clientID = InvalidClientID();
+		a_Incoming->Read(clientID);
+		const std::string result = "RPCKillPlayer (" + std::to_string(clientID) + ") not implemented!";
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCKillAllPlayers(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		const std::string result = "RPCKillAllPlayers not implemented!";
+		a_OutGoing->WriteCompressed(RakNet::RakString(result.c_str()));
 	}
 
 	void RPCKillServer(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
 	{
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		g_Server->KillServer();
+		a_OutGoing->WriteCompressed(RakNet::RakString("Server killed."));
 	}
 }
 
@@ -148,7 +193,7 @@ void Server::Start(ServerParameters &a_ServerParameters)
 		AddLobby(game);
 	}
 
-	const bool setupRPCFunctions = false;
+	const bool setupRPCFunctions = true;
 	if (setupRPCFunctions)
 	{
 		m_RPCInterface = new RakNet::RPC4();
@@ -321,14 +366,15 @@ void Server::Stop(bool a_SendMessages /* = true */)
 	}
 }
 
-void Server::GetLobbyData(std::vector<std::string> &a_Data) const
+bool Server::GetLobbyData(std::vector<std::string> &a_Data) const
 {
-	(void)a_Data;
+	a_Data.clear();
+	return !a_Data.empty();
 }
 
-void Server::GetGameData(std::vector<std::string> &a_Data) const
+bool Server::GetGameData(std::vector<std::string> &a_Data) const
 {
-	(void)a_Data;
+	return false;
 }
 
 bool Server::KillGame(const GameID &a_ID)
@@ -342,9 +388,33 @@ bool Server::KillAllGames()
 	return false;
 }
 
-void Server::GetPlayerData(std::vector<std::string> &a_Data) const
+bool Server::GetPlayerData(std::vector<std::string> &a_Data) const
 {
-	(void)a_Data;
+	a_Data.clear();
+	for (auto posLobby = m_Lobbies.begin(); posLobby != m_Lobbies.end(); ++posLobby)
+	{
+		const ILobby &lobby = **posLobby;
+		a_Data.push_back("LOBBY: " + Translate(lobby.GetGameType()));
+
+		const std::vector<IServerGame*> &games = lobby.GetGames();
+		a_Data.push_back("# OF GAMES: " + std::to_string(static_cast<int>(games.size())));
+
+		for (auto posGame = games.begin(); posGame != games.end(); ++posGame)
+		{
+			const IServerGame &game = **posGame;
+			a_Data.push_back("GAME ID: " + std::to_string(static_cast<unsigned int>(game.GetGameID())));
+
+			const UserDataVector &players = game.GetPlayers();
+			for (auto userPos = players.begin(); userPos != players.end(); ++userPos)
+			{
+				UserData &user = **userPos;
+				a_Data.push_back("PLAYER NAME: " + user.m_Name);
+				a_Data.push_back("PLAYER ID: " + user.m_ID);
+				a_Data.push_back("CLIENT ID: " + std::to_string(static_cast<unsigned int>(user.m_ClientID)));
+			}
+		}
+	}
+	return !a_Data.empty();
 }
 
 bool Server::KillPlayer(const ClientID &a_ID)
@@ -367,23 +437,7 @@ bool Server::KillServer()
 
 // const UserDataVector Server::GetUserData() const
 // {
-// 	UserDataVector userData;
-// 	for (auto posLobby = m_Lobbies.begin(); posLobby != m_Lobbies.end(); ++posLobby)
-// 	{
-// 		const ILobby &lobby = **posLobby;
-// 		const std::vector<IServerGame*> &games = lobby.GetGames();
-// 		for (auto posGame = games.begin(); posGame != games.end(); ++posGame)
-// 		{
-// 			const IServerGame &game = **posGame;
-// 			const UserDataVector &players = game.GetPlayers();
-// 			for (auto userPos = players.begin(); userPos != players.end(); ++userPos)
-// 			{
-// 				UserData &data = **userPos;
-// 				userData.push_back(&data);
-// 			}
-// 		}
-// 	}
-// 	return userData;
+
 // }
 // 
 // const GameDataVector Server::GetGameData() const

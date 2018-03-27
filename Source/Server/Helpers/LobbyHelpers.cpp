@@ -1,5 +1,6 @@
 #include "LobbyHelpers.h"
 
+#include "BattleShipsLobby/BattleShipsLobby.h"
 #include "Framework/AssertMessage.h"
 #include "ScotlandYardLobby/ScotlandYardLobby.h"
 #include "Server/ILobby.h"
@@ -24,6 +25,11 @@ ILobby* CreateGameLobby(EGame a_Game, ILogger &a_Logger)
 	ILobby *lobby = nullptr;
 	switch (a_Game)
 	{
+	case EGame_BattleShips:
+		{
+			lobby = new BattleShipsLobby(a_Logger);
+			break;
+		}
 	case EGame_ScotlandYard:
 		{
 			lobby = new ScotlandYardLobby(a_Logger);
