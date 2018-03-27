@@ -28,8 +28,11 @@ set(BattleShipsTrainer_AGGREGATE_SOURCES
 
 #setup target
 add_executable(BattleShipsTrainer ${BattleShipsTrainer_CORE_HEADERS} ${BattleShipsTrainer_CORE_SOURCE})
-
-target_link_libraries(BattleShipsTrainer Framework Network ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby Ws2_32)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+	target_link_libraries(BattleShipsTrainer Framework Network ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby Ws2_32)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+	target_link_libraries(BattleShipsTrainer Framework Network ScotlandYard Sokoban Tron ScotlandYardLobby Server SokobanLobby TronLobby)
+endif()
 
 target_link_libraries(BattleShipsTrainer debug ${RAKNET_STATIC_LIB_DEBUG})
 target_link_libraries(BattleShipsTrainer optimized ${RAKNET_STATIC_LIB_RELEASE})
