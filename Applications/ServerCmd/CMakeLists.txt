@@ -28,8 +28,11 @@ set(ServerCmd_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerCmd ${ServerCmd_CORE_HEADERS} ${ServerCmd_CORE_SOURCE})
 
+	target_link_libraries(ServerCmd Framework Network)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-	target_link_libraries(ServerCmd Framework Network Ws2_32)
+	target_link_libraries(ServerCmd Ws2_32)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+	target_link_libraries(ServerCmd ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
 target_link_libraries(ServerCmd debug ${RAKNET_STATIC_LIB_DEBUG})
