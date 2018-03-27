@@ -1,7 +1,9 @@
 #include "Server.h"
 
 #include "Framework/AssertMessage.h"
+#include "Framework/DateTimeHelpers.h"
 #include "Framework/FileHelpers.h"
+#include "Framework/Logging/FileLogger.h"
 #include "Framework/Logging/ILogger.h"
 #include "Framework/Sleep.h"
 #include "Framework/StringFunctions.h"
@@ -153,6 +155,14 @@ namespace
 		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
 		g_Server->KillServer();
 		a_OutGoing->WriteCompressed(RakNet::RakString("Server killed."));
+	}
+
+	void RPCPurgeLogFile(RakNet::BitStream *a_Incoming, RakNet::BitStream *a_OutGoing, RakNet::Packet *a_Packet)
+	{
+		AssertMessage(nullptr != g_Server, "Attempt to use an invalid server!");
+		std::string logFilename;
+		g_Server->PurgeLogFile(logFilename);
+		a_OutGoing->WriteCompressed(RakNet::RakString(logFilename.c_str()));
 	}
 }
 
@@ -435,33 +445,18 @@ bool Server::KillServer()
 	return true;
 }
 
-// const UserDataVector Server::GetUserData() const
-// {
-
-// }
-// 
-// const GameDataVector Server::GetGameData() const
-// {
-// 	GameDataVector gameData;
-// 	for (auto posLobby = m_Lobbies.begin(); posLobby != m_Lobbies.end(); ++posLobby)
-// 	{
-// 		const ILobby &lobby = **posLobby;
-// 		const std::vector<IServerGame*> &games = lobby.GetGames();
-// 		for (auto posGame = games.begin(); posGame != games.end(); ++posGame)
-// 		{
-// 			const IServerGame &game = **posGame;
-// 			GameData data;
-// 			data.m_GameID = game.GetGameID();
-// 		}
-// 	}
-// 	return gameData;
-// }
-// 
-// const LobbyDataVector Server::GetLobbyData() const
-// {
-// 	LobbyDataVector lobbyData;
-// 	return lobbyData;
-// }
+bool Server::PurgeLogFile(std::string &a_LogFilename)
+{
+	bool success = false;
+	FileLogger *fileLogger = dynamic_cast<FileLogger*>(&m_Logger);
+	if (nullptr != fileLogger)
+	{
+		const std::string dateTimeString = GetDateTimeFileString();
+		fileLogger->SaveLogFile(std::string("serverlog_") + dateTimeString, true);
+		success = true;
+	}
+	return success;
+}
 
 void Server::UpdateUserData()
 {

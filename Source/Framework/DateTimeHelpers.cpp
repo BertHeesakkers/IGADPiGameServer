@@ -17,6 +17,16 @@ std::string GetDateTimeString()
 	return std::string(buffer);
 }
 
+std::string GetDateTimeFileString()
+{
+	std::time_t rawTime;
+	std::time(&rawTime);
+
+	char buffer[80];
+	std::strftime(buffer, 80, "%Y%m%d_%H%M%S", std::localtime(&rawTime));
+	return std::string(buffer);
+}
+
 #if defined(WIN32)
 #pragma warning(pop)
 #endif

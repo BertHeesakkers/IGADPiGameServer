@@ -23,6 +23,7 @@ namespace
 	const std::string g_RPCKillPlayer("kill_player");
 	const std::string g_RPCKillAllPlayers("kill_all_players");
 	const std::string g_RPCKillServer("kill_server");
+	const std::string g_PurgeLogFile("purge_logfile");
 }
 
 int main(int a_ArgC, const char * a_ArgV[])
@@ -36,6 +37,7 @@ int main(int a_ArgC, const char * a_ArgV[])
 	commandLineParser.AddParameter(ECommandLineItemType_Optional, g_RPCKillPlayer);
 	commandLineParser.AddParameter(ECommandLineItemType_Choice, g_RPCKillAllPlayers);
 	commandLineParser.AddParameter(ECommandLineItemType_Choice, g_RPCKillServer);
+	commandLineParser.AddParameter(ECommandLineItemType_Choice, g_PurgeLogFile);
 	const CommandLine &commandLine = commandLineParser.Parse(a_ArgC, a_ArgV);
 
 	RakNet::RakPeerInterface *m_PeerInterface = RakNet::RakPeerInterface::GetInstance();
@@ -103,6 +105,10 @@ int main(int a_ArgC, const char * a_ArgV[])
 	else if (commandLine.HasParameter(g_RPCKillServer))
 	{
 		commandID = "RPCKillServer";
+	}
+	else if (commandLine.HasParameter(g_PurgeLogFile))
+	{
+		commandID = "RPCPurgeLogFile";
 	}
 	else
 	{
