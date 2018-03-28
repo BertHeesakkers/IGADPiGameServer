@@ -6,12 +6,7 @@
 
 #include <algorithm>
 
-/**
-* Added by Simon Renger
-* Date: 27-03-2018
-* Description:
-* finds user data based on the system address
-**/
+
 UserData* FindUserData(const std::vector<UserData*> &a_UserData, const RakNet::SystemAddress &a_SysAddr)
 {
 	UserData *userData = nullptr;

@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 
-namespace RakNet{
+namespace RakNet
+{
     struct SystemAddress;
 }
 

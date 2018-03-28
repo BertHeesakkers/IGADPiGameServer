@@ -56,18 +56,10 @@ private:
 	void HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet);
 	void HandleSendLobbyData(RakNet::Packet &a_Packet);
 	void HandleWaitingFromPlayer(ILobby* a_Lobby);
-	/**
-	* Moved by Simon Renger
-	* Date: 28-03-2018
-	* Description: utilitie methods:
-	**/
+
 	IServerGame* FindGame(GameID a_GameID);
 	void AddLobby(EGame a_Game);
-	/**
-	* Added by Simon Renger
-	* Date: 28-03-2018
-	* Description: see cpp file
-	**/
+
 	void RemovePlayer(UserData* a_UserData);
 	void RemovePlayerFromLobby(UserData* a_UserData);
 

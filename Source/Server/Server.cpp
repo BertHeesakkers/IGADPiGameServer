@@ -553,11 +553,6 @@ void Server::HandleLogout(const std::string &a_ID, bool a_SendMessages /* = true
 	{
 		m_PeerInterface->CloseConnection(userData->m_SystemAddress, true, 0, LOW_PRIORITY);
 	}
-	/**
-	* Added by Simon Renger
-	* Date: 28-03-2018
-	* Description: See RemovePlayer()
-	**/
 	RemovePlayer(userData);
 }
 
@@ -757,23 +752,14 @@ void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
 		SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
 	}
 }
-/**
-* Added by Simon Renger
-* Date: 28-03-2018
-* Description: 
-* - Removes the player from a Game
-* - Removes the player from a Lobby
-* - Updates other players
-* - Logouts the player
-**/
+
 void Server::RemovePlayer(UserData* a_UserData)
 {
-	if(a_UserData != nullptr){
 		if(a_UserData->m_GameID != InvalidGameID()){
 			auto game = FindGame(a_UserData->m_GameID);
 			if(game == nullptr){
 				RemovePlayerFromLobby(a_UserData);
-			}else{
+			}else{S
 				//clean up game
 				//send user messages:
 				const auto playersInGame = game->GetPlayers();
@@ -799,17 +785,10 @@ void Server::RemovePlayer(UserData* a_UserData)
 			RemovePlayerFromLobby(a_UserData);
 		}
 		//Logout:
-		a_UserData->m_LoggedIn = false;
-		a_UserData->m_SystemAddress = RakNet::UNASSIGNED_SYSTEM_ADDRESS;
-	}	
+		a_UserData.m_LoggedIn = false;
+		a_UserData.m_SystemAddress = RakNet::UNASSIGNED_SYSTEM_ADDRESS;
 }
-/**
-* Added by Simon Renger
-* Date: 28-03-2018
-* Description: 
-* - removes the player from a lobby
-* - sends the event: EMessage_RecvPlayerLeftLobby to all other players in the lobby which are waiting
-**/
+
 void Server::RemovePlayerFromLobby(UserData* a_UserData)
 {
 	ILobby* playersLobby = nullptr;

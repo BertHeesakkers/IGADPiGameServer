@@ -26,14 +26,10 @@ enum EMessages
 	EMessage_SendLobbyData,
 	EMessage_RecvLobbyData,
 	// End
-	/**
-	* Added by Simon Renger
-	* Date: 27-03-2018
-	* Description:  Have added them because EMessage_RecvDisconnected gets send if a player left the game
-	* They get send of a player left the lobby or dissconected.
-	**/
+	/// See server help files for more info:
 	EMessage_RecvPlayerLeftLobby,
 	EMessage_RecvPlayerLeftGame,
+	// End
 	EMessage_Count,
 	EMessage_BaseCount = EMessage_Count
 };
