@@ -13,7 +13,7 @@ before_script:
   - sudo mv Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
   - sudo mv include/raknet ../Include/RakNet/
   - cd ..
-  - sudo mv ThirdParty/boost_1_65_1/ Include/
+  - sudo mv ThirdParty/boost_1_65_1/boost Include/boost
 script:
   - cmake .
   - make install
