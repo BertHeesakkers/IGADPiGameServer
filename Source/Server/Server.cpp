@@ -466,9 +466,9 @@ void Server::UpdateUserData()
 void Server::HandleLostConnection(RakNet::Packet &a_Packet)
 {
 	auto* userData = FindUserData(m_UserData,a_Packet.systemAddress);
-	AssertMessage(nullptr != userData, "Unable to find user data for client.");
 	m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
-	RemovePlayer(*userData);
+	if(userData != nullptr)
+		RemovePlayer(*userData);
 }
 
 void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, const HashedString &a_Passhash, bool a_SendMessages /* = true */)
@@ -569,7 +569,10 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 	else
 	{
 		lobby->AddToQueue(a_UserData);
-		
+		if (a_SendMessages)
+		{
+				HandleWaitingFromPlayer(lobby);
+		}
 		if (lobby->CanStartNewGame())
 		{
 			const GameID newGameID = GenerateGameID();
@@ -587,13 +590,6 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(userData.m_GameID);
 					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
-			}
-		}
-		else
-		{
-			if (a_SendMessages)
-			{
-				HandleWaitingFromPlayer(lobby);
 			}
 		}
 	}
