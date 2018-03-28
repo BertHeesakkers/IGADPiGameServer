@@ -1,9 +1,27 @@
 #include "UserDataHelpers.h"
 
+#include "Network/RakNetIncludes.h"
 #include "Framework/HashedString.h"
 #include "Server/UserData.h"
 
 #include <algorithm>
+
+/**
+* Added by Simon Renger
+* Date: 27-03-2018
+* Description:
+* finds user data based on the system address
+**/
+UserData* FindUserData(const std::vector<UserData*> &a_UserData, const RakNet::SystemAddress &a_SysAddr)
+{
+	UserData *userData = nullptr;
+	auto pos = std::find_if(a_UserData.begin(), a_UserData.end(), [&a_SysAddr](const UserData *a_UserData) { return a_UserData->m_SystemAddress == a_SysAddr; });
+	if (pos != a_UserData.end())
+	{
+		userData = *pos;
+	}
+	return userData;
+}
 
 UserData* FindUserData(const std::vector<UserData*> &a_UserData, const std::string &a_ID)
 {

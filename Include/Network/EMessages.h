@@ -22,6 +22,14 @@ enum EMessages
 	EMessage_RecvAcknowledgement,
 	EMessage_RecvServerError,
 	EMessage_RecvGameNotActive,
+	/**
+	* Added by Simon Renger
+	* Date: 27-03-2018
+	* Description:  Have added them because EMessage_RecvDisconnected gets send if a player left the game
+	* They get send of a player left the lobby or dissconected.
+	**/
+	EMessage_RecvPlayerLeftLobby,
+	EMessage_RecvPlayerLeftGame,
 
 	// See https://github.com/BertHeesakkers/IGADPiGameServer/issues/13 for below
 	EMessage_SendLobbyData,

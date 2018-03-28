@@ -26,6 +26,8 @@
 #include "Utility/ReadUserData.h"
 #include "Utility/WriteUserData.h"
 
+#include <iostream>
+
 namespace
 {
 	const std::string g_ParameterFile = "data/server_parameters.json";
@@ -223,7 +225,6 @@ void Server::Run()
 		{
 			UpdateUserData();
 		}
-
 		for (packet = m_PeerInterface->Receive(); nullptr != packet; m_PeerInterface->DeallocatePacket(packet), packet = m_PeerInterface->Receive())
 		{
 			const DefaultMessageIDTypes messageID = static_cast<DefaultMessageIDTypes>(packet->data[0]);
@@ -231,6 +232,7 @@ void Server::Run()
 			{
 			case ID_CONNECTION_LOST:
 				{
+					m_Logger.WriteLine("Lost connection");
 					HandleLostConnection(*packet);
 					break;
 				}
@@ -468,11 +470,13 @@ void Server::UpdateUserData()
 	WriteUserData(g_UserDataFilename, m_UserData);
 	m_UpdateUserData = false;
 }
-
 void Server::HandleLostConnection(RakNet::Packet &a_Packet)
 {
-	// TODO: find user data based on system address and close connection
-	// remove player from game/lobbies
+	auto* userData = FindUserData(m_UserData,a_Packet.systemAddress);
+	if(userData != nullptr){
+		m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
+		RemovePlayer(userData);
+	}
 }
 
 void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, const HashedString &a_Passhash, bool a_SendMessages /* = true */)
@@ -504,6 +508,7 @@ void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, cons
 #else
 					m_Logger.WriteLine("Successful login for client [%s] with pass [%s].", a_ID, a_Passhash.GetHash());
 #endif
+
 					HandleSuccessfulLogin(*m_PeerInterface, a_Packet, *userData, m_Logger, a_SendMessages);
 				}
 				else
@@ -551,18 +556,16 @@ void Server::HandleLogout(const std::string &a_ID, bool a_SendMessages /* = true
 {
 	UserData *userData = FindUserData(m_UserData, a_ID);
 	AssertMessage(nullptr != userData, "Unable to find user data for client.");
-
-	// TODO: Finish HandleLogout(...); implementation.
-	// Find all players involved in the same game as the one that disconnected.
-	// Cancel games and inform other players
-	// Remove games
-
 	if (a_SendMessages)
 	{
 		m_PeerInterface->CloseConnection(userData->m_SystemAddress, true, 0, LOW_PRIORITY);
 	}
-	userData->m_LoggedIn = false;
-	userData->m_SystemAddress = RakNet::UNASSIGNED_SYSTEM_ADDRESS;
+	/**
+	* Added by Simon Renger
+	* Date: 28-03-2018
+	* Description: See RemovePlayer()
+	**/
+	RemovePlayer(userData);
 }
 
 void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessages /* = true */)
@@ -603,8 +606,15 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 		{
 			if (a_SendMessages)
 			{
-				std::vector<UserData*> players = lobby->GetWaitQueue();
-				uint32_t requiredAmount = lobby->GetNumPlayersPerGame();
+				HandleWaitingFromPlayer(lobby);
+			}
+		}
+	}
+}
+void Server::HandleWaitingFromPlayer(ILobby* a_Lobby)
+{
+				std::vector<UserData*> players = a_Lobby->GetWaitQueue();
+				uint32_t requiredAmount = a_Lobby->GetNumPlayersPerGame();
 				uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
 
 				RakNet::BitStream payload;
@@ -624,11 +634,7 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					const UserData &userData = **pos;
 					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
-			}
-		}
-	}
 }
-
 bool Server::HandleGameMessage(RakNet::Packet &a_Packet)
 {
 	bool success = false;
@@ -684,7 +690,6 @@ void Server::AddLobby(EGame a_Game)
 	lobby = CreateGameLobby(a_Game, m_Logger);
 	m_Lobbies.push_back(lobby);
 }
-
 IServerGame* Server::FindGame(GameID a_GameID)
 {
 	IServerGame *game = nullptr;
@@ -758,4 +763,77 @@ void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
 		
 		SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, payload);
 	}
+}
+/**
+* Added by Simon Renger
+* Date: 28-03-2018
+* Description: 
+* - Removes the player from a Game
+* - Removes the player from a Lobby
+* - Updates other players
+* - Logouts the player
+**/
+void Server::RemovePlayer(UserData* a_UserData)
+{
+	if(a_UserData != nullptr){
+		if(a_UserData->m_GameID != InvalidGameID()){
+			auto game = FindGame(a_UserData->m_GameID);
+			if(game == nullptr){
+				RemovePlayerFromLobby(a_UserData);
+			}else{
+				//clean up game
+				//send user messages:
+				const auto playersInGame = game->GetPlayers();
+				auto* lobby = FindGameLobby(m_Lobbies,a_UserData->m_GameID);
+				GameID gameID = a_UserData->m_GameID;
+				for(const auto& playerInGame : playersInGame){
+					//GameStopped
+					SendNetworkMessage(*m_PeerInterface, playerInGame->m_SystemAddress, EMessage_RecvPlayerLeftGame);
+					//move back to lobby:
+					playerInGame->m_GameID = InvalidGameID();
+					if(playerInGame->m_ClientID != a_UserData->m_ClientID)
+					{
+						lobby->AddToQueue(*playerInGame);
+						m_Logger.WriteLine("Moved player [%s] to game lobby.",playerInGame->m_ClientID);
+					}
+				}
+				lobby->RemoveGame(gameID);
+				//send waiting for players with the updated data
+				HandleWaitingFromPlayer(lobby);
+				m_Logger.WriteLine("Player was in the lobby for the game [%s] if any other players got a message.",a_UserData->m_GameID);
+			}
+		}else{
+			RemovePlayerFromLobby(a_UserData);
+		}
+		//Logout:
+		a_UserData->m_LoggedIn = false;
+		a_UserData->m_SystemAddress = RakNet::UNASSIGNED_SYSTEM_ADDRESS;
+	}	
+}
+/**
+* Added by Simon Renger
+* Date: 28-03-2018
+* Description: 
+* - removes the player from a lobby
+* - sends the event: EMessage_RecvPlayerLeftLobby to all other players in the lobby which are waiting
+**/
+void Server::RemovePlayerFromLobby(UserData* a_UserData)
+{
+	ILobby* playersLobby = nullptr;
+	for(auto* lobby : m_Lobbies){
+		if(lobby->HasWaitingUser(a_UserData)){
+			m_Logger.WriteLine("User was removed from lobby [%s].",lobby->GetGameType());
+			playersLobby = lobby;
+			lobby->RemoveFromQueue(a_UserData->m_ClientID);
+			break;
+			}
+		}
+		if(playersLobby != nullptr){
+		// inform other players
+		for(const auto& playerInLobby : playersLobby->GetWaitQueue()){
+			SendNetworkMessage(*m_PeerInterface,playerInLobby->m_SystemAddress,EMessage_RecvPlayerLeftLobby);
+		}
+		m_Logger.WriteLine("Player was in the lobby for game [%s] other player got a message.",a_UserData->m_GameID);
+		HandleWaitingFromPlayer(playersLobby);
+	}	
 }

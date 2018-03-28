@@ -13,6 +13,13 @@
 #include "RakNet/RakPeerInterface.h"
 #include "RakNet/PacketLogger.h"
 #include "RakNet/RPC4Plugin.h"
+/**
+* Added by Simon Renger
+* Date: 27-03-2018
+* Description:
+* Added it because it gives access to the RakPeer. This gives you access to f.g. RakNet::RakPeer::NumberOfConnections
+**/
+#include "RakNet/RakPeer.h"
 
 #if defined(WIN32)
 #pragma warning(pop)
