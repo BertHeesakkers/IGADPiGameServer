@@ -466,10 +466,9 @@ void Server::UpdateUserData()
 void Server::HandleLostConnection(RakNet::Packet &a_Packet)
 {
 	auto* userData = FindUserData(m_UserData,a_Packet.systemAddress);
-	if(userData != nullptr){
-		m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
-		RemovePlayer(userData);
-	}
+	AssertMessage(nullptr != userData, "Unable to find user data for client.");
+	m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
+	RemovePlayer(*userData);
 }
 
 void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, const HashedString &a_Passhash, bool a_SendMessages /* = true */)
@@ -553,7 +552,7 @@ void Server::HandleLogout(const std::string &a_ID, bool a_SendMessages /* = true
 	{
 		m_PeerInterface->CloseConnection(userData->m_SystemAddress, true, 0, LOW_PRIORITY);
 	}
-	RemovePlayer(userData);
+	RemovePlayer(*userData);
 }
 
 void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessages /* = true */)
@@ -753,24 +752,24 @@ void Server::HandleSendLobbyData(RakNet::Packet& a_Packet)
 	}
 }
 
-void Server::RemovePlayer(UserData* a_UserData)
+void Server::RemovePlayer(UserData& a_UserData)
 {
-		if(a_UserData->m_GameID != InvalidGameID()){
-			auto game = FindGame(a_UserData->m_GameID);
+		if(a_UserData.m_GameID != InvalidGameID()){
+			auto game = FindGame(a_UserData.m_GameID);
 			if(game == nullptr){
 				RemovePlayerFromLobby(a_UserData);
-			}else{S
+			}else{
 				//clean up game
 				//send user messages:
 				const auto playersInGame = game->GetPlayers();
-				auto* lobby = FindGameLobby(m_Lobbies,a_UserData->m_GameID);
-				GameID gameID = a_UserData->m_GameID;
+				auto* lobby = FindGameLobby(m_Lobbies,a_UserData.m_GameID);
+				GameID gameID = a_UserData.m_GameID;
 				for(const auto& playerInGame : playersInGame){
 					//GameStopped
 					SendNetworkMessage(*m_PeerInterface, playerInGame->m_SystemAddress, EMessage_RecvPlayerLeftGame);
 					//move back to lobby:
 					playerInGame->m_GameID = InvalidGameID();
-					if(playerInGame->m_ClientID != a_UserData->m_ClientID)
+					if(playerInGame->m_ClientID != a_UserData.m_ClientID)
 					{
 						lobby->AddToQueue(*playerInGame);
 						m_Logger.WriteLine("Moved player [%s] to game lobby.",playerInGame->m_ClientID);
@@ -779,7 +778,7 @@ void Server::RemovePlayer(UserData* a_UserData)
 				lobby->RemoveGame(gameID);
 				//send waiting for players with the updated data
 				HandleWaitingFromPlayer(lobby);
-				m_Logger.WriteLine("Player was in the lobby for the game [%s] if any other players got a message.",a_UserData->m_GameID);
+				m_Logger.WriteLine("Player was in the lobby for the game [%s] if any other players got a message.",a_UserData.m_GameID);
 			}
 		}else{
 			RemovePlayerFromLobby(a_UserData);
@@ -789,14 +788,14 @@ void Server::RemovePlayer(UserData* a_UserData)
 		a_UserData.m_SystemAddress = RakNet::UNASSIGNED_SYSTEM_ADDRESS;
 }
 
-void Server::RemovePlayerFromLobby(UserData* a_UserData)
+void Server::RemovePlayerFromLobby(UserData& a_UserData)
 {
 	ILobby* playersLobby = nullptr;
 	for(auto* lobby : m_Lobbies){
-		if(lobby->HasWaitingUser(a_UserData)){
+		if(lobby->HasWaitingUser(&a_UserData)){
 			m_Logger.WriteLine("User was removed from lobby [%s].",lobby->GetGameType());
 			playersLobby = lobby;
-			lobby->RemoveFromQueue(a_UserData->m_ClientID);
+			lobby->RemoveFromQueue(a_UserData.m_ClientID);
 			break;
 			}
 		}
@@ -805,7 +804,7 @@ void Server::RemovePlayerFromLobby(UserData* a_UserData)
 		for(const auto& playerInLobby : playersLobby->GetWaitQueue()){
 			SendNetworkMessage(*m_PeerInterface,playerInLobby->m_SystemAddress,EMessage_RecvPlayerLeftLobby);
 		}
-		m_Logger.WriteLine("Player was in the lobby for game [%s] other player got a message.",a_UserData->m_GameID);
+		m_Logger.WriteLine("Player was in the lobby for game [%s] other player got a message.",a_UserData.m_GameID);
 		HandleWaitingFromPlayer(playersLobby);
 	}	
 }

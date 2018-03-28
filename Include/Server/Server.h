@@ -60,8 +60,8 @@ private:
 	IServerGame* FindGame(GameID a_GameID);
 	void AddLobby(EGame a_Game);
 
-	void RemovePlayer(UserData* a_UserData);
-	void RemovePlayerFromLobby(UserData* a_UserData);
+	void RemovePlayer(UserData& a_UserData);
+	void RemovePlayerFromLobby(UserData& a_UserData);
 
 	ILogger &m_Logger;
 
