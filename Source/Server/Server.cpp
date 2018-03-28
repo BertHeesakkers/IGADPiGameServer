@@ -575,6 +575,31 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 	{
 		lobby->AddToQueue(a_UserData);
 		
+		if (a_SendMessages)
+		{
+			std::vector<UserData*> players = lobby->GetWaitQueue();
+			uint32_t requiredAmount = lobby->GetNumPlayersPerGame();
+			uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
+
+			RakNet::BitStream payload;
+			payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
+			payload.Write(requiredAmount);
+			payload.Write(numberOfPlayers);
+
+			for (auto pos = players.begin(); pos != players.end(); ++pos)
+			{
+				const UserData &userData = **pos;
+				payload.Write(RakNet::RakString(userData.m_Name.c_str()));
+				payload.Write(static_cast<uint32_t>(userData.m_ClientID));
+			}
+
+			for (auto pos = players.begin(); pos != players.end(); ++pos)
+			{
+				const UserData &userData = **pos;
+				SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
+			}
+		}
+
 		if (lobby->CanStartNewGame())
 		{
 			const GameID newGameID = GenerateGameID();
@@ -590,33 +615,6 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGameJoined));
 					payload.Write(userData.m_ClientID);
 					payload.Write(userData.m_GameID);
-					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
-				}
-			}
-		}
-		else
-		{
-			if (a_SendMessages)
-			{
-				std::vector<UserData*> players = lobby->GetWaitQueue();
-				uint32_t requiredAmount = lobby->GetNumPlayersPerGame();
-				uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
-
-				RakNet::BitStream payload;
-				payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
-				payload.Write(requiredAmount);
-				payload.Write(numberOfPlayers);
-
-				for (auto pos = players.begin(); pos != players.end(); ++pos)
-				{
-					const UserData &userData = **pos;
-					payload.Write(RakNet::RakString(userData.m_Name.c_str()));
-					payload.Write(static_cast<uint32_t>(userData.m_ClientID));
-				}
-
-				for (auto pos = players.begin(); pos != players.end(); ++pos)
-				{
-					const UserData &userData = **pos;
 					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
 				}
 			}
