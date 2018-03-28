@@ -5,6 +5,7 @@ dist: trusty
 compiler:
   - gcc-7.2
 before_script:
+  - gcc --version
   - git clone https://github.com/facebookarchive/RakNet.git
   - cd RakNet
   - cmake .
