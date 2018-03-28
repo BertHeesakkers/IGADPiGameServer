@@ -28,8 +28,6 @@
 #include "Utility/ReadUserData.h"
 #include "Utility/WriteUserData.h"
 
-#include <iostream>
-
 namespace
 {
 	const std::string g_ParameterFile = "data/server_parameters.json";
