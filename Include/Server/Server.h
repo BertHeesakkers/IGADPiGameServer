@@ -27,7 +27,7 @@ public:
 	bool IsRunning() const;
 	void Stop(bool a_SendMessages = true);
 
-	// PiServerCmd functions
+	// RPC functions
 	bool GetLobbyData(std::vector<std::string> &a_Data) const;
 	bool GetGameData(std::vector<std::string> &a_Data) const;
 	bool KillGame(const GameID &a_ID);
@@ -36,6 +36,7 @@ public:
 	bool KillPlayer(const ClientID &a_ID);
 	bool KillAllPlayers();
 	bool KillServer();
+	bool PurgeLogFile(std::string &a_LogFilename);
 
 private:
 	void UpdateUserData();

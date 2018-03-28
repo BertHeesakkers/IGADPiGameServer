@@ -1,7 +1,9 @@
-# Scotland Yard Help
-Scotland Yard is a game based on the original Scotland Yard board game. For an impression of the classical version, please check [Wikipedia](https://en.wikipedia.org/wiki/Scotland_Yard_(board_game). The following will give you some insight in the messages that can be sent to a game of Scotland Yard and what kind of data you can expect to get back in return.
+[Click here to go the the server help.](/Documentation/SERVERHELP.md)
 
-For the latest update on the messages, please check out the [EMessages.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYardLobby/EMessages.h) file for Scotland Yard.
+# Scotland Yard Help
+Scotland Yard is a game based on the original Scotland Yard board game. For an impression of the classical version, please check [Wikipedia](https://en.wikipedia.org/wiki/Scotland_Yard_(board_game)). The following will give you some insight in the messages that can be sent to a game of Scotland Yard and what kind of data you can expect to get back in return.
+
+For the latest update on the messages, please check out the [EMessages.h](/Include/ScotlandYardLobby/EMessages.h) file for Scotland Yard.
 
 ## Requests Messages
 
@@ -92,7 +94,7 @@ There are multiple ways of transportation in this game. Below is a list of all t
 * `ETravelOption_Underground`
 * `ETravelOption_Ferry` or `ETravelOption_Black`
 
-For more info, please check out [ETravelOption.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYard/ETravelOption.h).
+For more info, please check out [ETravelOption.h](/Include/ScotlandYard/ETravelOption.h).
 
 ## Travel Results
 When receiving the `EMessage_RecvTravelResult` message, an `ETravelResult` sent with. Below is a list of possible results.
@@ -103,4 +105,4 @@ When receiving the `EMessage_RecvTravelResult` message, an `ETravelResult` sent 
 * `ETravelResult_CaughtSpy`
 * `ETravelResult_Success`
 
-For more info, please check out [ETravelResult.h](https://github.com/BertHeesakkers/IGADPiGameServer/blob/master/Include/ScotlandYard/ETravelResult.h).
+For more info, please check out [ETravelResult.h](/Include/ScotlandYard/ETravelResult.h).

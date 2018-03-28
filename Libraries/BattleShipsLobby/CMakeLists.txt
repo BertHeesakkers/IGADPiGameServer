@@ -5,6 +5,7 @@ project(BattleShipsLobby)
 include_directories(${ROOT_INCLUDE_FOLDER}BattleShipsLobby)
 
 #external dependencies
+message(STATUS "Boost directory set at ${THIRD_PARTY_FOLDER}boost_1_65_1")
 include_directories(${THIRD_PARTY_FOLDER}boost_1_65_1)
 include_directories(${THIRD_PARTY_FOLDER}RakNet/include)
 

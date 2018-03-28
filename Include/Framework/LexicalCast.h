@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/lexical_cast.hpp>
+#include "boost/lexical_cast.hpp"
 
 template<typename T>
 inline T LexicalCast(const std::string &a_String)

@@ -3,6 +3,14 @@ Game server created for educational purposes for IGAD (Breda University of Appli
 
 <img src="https://insight.nhtv.nl/wp-content/uploads/2018/01/English-banner.jpg" />
 
+## Build status
+| Branch | Status                                                                                  |
+| ------ | --------------------------------------------------------------------------------------- |
+| master | <img src="https://api.travis-ci.org/BertHeesakkers/IGADPiGameServer.svg?branch=master"> |
+
+## Documentation
+For documentation references please check out the following folder [Documentation](/Documentation)
+
 ## How to use
 
 In order to learn how to use the server, check out the documentation. There you will find help files for how to communicate with the server.
