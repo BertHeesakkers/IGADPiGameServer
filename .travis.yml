@@ -12,7 +12,7 @@ addons:
 compiler:
   - gcc-7
 before_script:
-  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-7 /usr/bin/gcc
   - git clone https://github.com/facebookarchive/RakNet.git
   - cd RakNet
   - cmake .
