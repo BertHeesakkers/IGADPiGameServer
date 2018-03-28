@@ -4,9 +4,10 @@
 #include "Framework/AssertMessage.h"
 #include "ScotlandYardLobby/ScotlandYardLobby.h"
 #include "Server/ILobby.h"
+#include "Server/IServerGame.h"
 #include "SokobanLobby/SokobanLobby.h"
 #include "TronLobby/TronLobby.h"
-
+#include "Server/UserData.h"
 #include <algorithm>
 
 ILobby* FindGameLobby(const std::vector<ILobby*> &m_Lobbies, EGame a_Game)
@@ -19,7 +20,16 @@ ILobby* FindGameLobby(const std::vector<ILobby*> &m_Lobbies, EGame a_Game)
 	}
 	return lobby;
 }
-
+ILobby* FindGameLobby(const std::vector<ILobby*> &m_Lobbies, GameID a_GameID)
+{
+	for(auto* lobby:m_Lobbies){
+		for(auto* game : lobby->GetGames()){
+				if(game->GetGameID() == a_GameID)
+					return lobby;
+			}
+	}
+	return nullptr;
+}
 ILobby* CreateGameLobby(EGame a_Game, ILogger &a_Logger)
 {
 	ILobby *lobby = nullptr;

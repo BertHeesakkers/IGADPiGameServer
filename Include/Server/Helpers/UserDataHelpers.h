@@ -6,9 +6,15 @@
 #include <string>
 #include <vector>
 
+namespace RakNet{
+    struct SystemAddress;
+}
+
 class HashedString;
 struct UserData;
 
+
+UserData* FindUserData(const std::vector<UserData*> &a_UserData, const RakNet::SystemAddress &a_SysAddr);
 UserData* FindUserData(const std::vector<UserData*> &a_UserData, const std::string &a_ID);
 UserData* FindUserData(const std::vector<UserData*> &a_UserData, const ClientID &a_ClientID);
 void FindUserData(const std::vector<UserData*> &a_UserData, const GameID &a_GameID, std::vector<UserData*> &a_Selection);

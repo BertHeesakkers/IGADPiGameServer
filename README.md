@@ -46,6 +46,7 @@ rm -rf [RakNet path]/RakNet
 
 echo RakNet installed.
 ```
+**Important: Please be aware that `sudo apt-get install cmake -y` works only on debian based distributions**
 
 ## Build
 

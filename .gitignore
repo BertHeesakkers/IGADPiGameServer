@@ -36,10 +36,29 @@
 *.out
 *.app
 
+#Makefile
+Makefile
+
+#CmakeFiles
+*.cmake
+CMakeCache.txt
+
 # CMake build directory
 build/
+
+#CMake folder
+CMakeFiles/
+
 
 # game files
 server_error.log
 Bin/ClientApp.bat
 Bin/ServerCmd.bat
+
+#visualstudio code
+.vscode/
+
+# Server specific
+ServerApp
+ServerApp_d
+ServerCmd

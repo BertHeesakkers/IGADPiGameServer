@@ -50,7 +50,6 @@ const std::vector<UserData*>& BaseServerGame::GetPlayers() const
 {
 	return m_Players;
 }
-
 ClientID BaseServerGame::GetClient(EPlayer a_Player) const
 {
 	const uint32_t player = static_cast<uint32_t>(a_Player);
