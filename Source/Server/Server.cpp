@@ -589,6 +589,7 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 					payload.Write(userData.m_ClientID);
 					payload.Write(userData.m_GameID);
 					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
+					lobby->RemoveFromQueue(userData.m_ClientID);
 				}
 			}
 		}
