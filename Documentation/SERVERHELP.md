@@ -37,6 +37,10 @@ For more info on EGame, please check out [EGame.h](/Include/Server/EGame.h).
 
 ### `EMessage_SendWhoseTurnIsIt`
 Will return a `EMessage_RecvWhoseTurnIsIt` message with the player whose turn it is.
+```
+DATA_1: uint32_t(<CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
+```
 
 ### `EMessage_SendLobbyData`
 Will request the lobby data for the specified game which will be received using `EMessage_RecvLobbyData`. If no lobby is available, an `EServerError_GameLobbyUnavailable` error will be sent back.
