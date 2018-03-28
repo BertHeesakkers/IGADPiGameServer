@@ -22,6 +22,10 @@ enum EMessages
 	EMessage_RecvAcknowledgement,
 	EMessage_RecvServerError,
 	EMessage_RecvGameNotActive,
+	// See https://github.com/BertHeesakkers/IGADPiGameServer/issues/13 for below
+	EMessage_SendLobbyData,
+	EMessage_RecvLobbyData,
+	// End
 	/**
 	* Added by Simon Renger
 	* Date: 27-03-2018
@@ -30,12 +34,6 @@ enum EMessages
 	**/
 	EMessage_RecvPlayerLeftLobby,
 	EMessage_RecvPlayerLeftGame,
-
-	// See https://github.com/BertHeesakkers/IGADPiGameServer/issues/13 for below
-	EMessage_SendLobbyData,
-	EMessage_RecvLobbyData,
-	// End
-
 	EMessage_Count,
 	EMessage_BaseCount = EMessage_Count
 };
