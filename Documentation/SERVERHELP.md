@@ -84,6 +84,8 @@ DATA_7: ... (Continuing until the amount in DATA_2)
 `DATA_3` and onwards will be all the names and client id's of all the players.
 
 ### `EMessage_RecvGameJoined`
+A `EMessage_RecvWaitingForPlayers` messages will be received directly before receiving this message. The `EMessage_RecvWaitingForPlayers` will be to inform about other players in the game.
+
 Will be sent to all players when a game has enough players to be played at it has therefore started. Will also return the id of the game.
 ```
 DATA_1: uint32_t(<CLIENT ID>)
