@@ -43,9 +43,6 @@ private:
 
 	void HandleLostConnection(RakNet::Packet &a_Packet);
 	void HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, const HashedString &a_Passhash, bool a_SendMessages = true);
-#if defined(_DEBUG)
-	void HandleLogin(const std::string &a_ID, const std::string &a_Passhash, bool a_SendMessages = true);
-#endif
 	void HandleLogout(const std::string &a_ID, bool a_SendMessages = true);
 	void HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessages = true);
 	bool HandleGameMessage(RakNet::Packet &a_Packet);
@@ -55,7 +52,7 @@ private:
 
 	void HandleDetermineCurrentPlayer(RakNet::Packet &a_Packet);
 	void HandleSendLobbyData(RakNet::Packet &a_Packet);
-	void HandleWaitingFromPlayer(ILobby* a_Lobby);
+	void HandleWaitingFromPlayer(ILobby &a_Lobby);
 
 	IServerGame* FindGame(GameID a_GameID);
 	void AddLobby(EGame a_Game);
