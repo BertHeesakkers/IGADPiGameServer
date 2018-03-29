@@ -9,6 +9,7 @@
 #include "Network/MessageHelpers.h"
 #include "ScotlandYard/Player.h"
 #include "ScotlandYard/ScotlandYardGame.h"
+#include "ScotlandYard/Spy.h"
 
 namespace
 {
@@ -108,6 +109,12 @@ bool ScotlandYardServerGame::HandleGameMessage(RakNet::Packet &a_Packet, ClientI
 			break;
 		}
 	case EMessage_SendAmISpy:
+		{
+			HandleGetAmISpy(a_Packet, a_ClientID);
+			messageHandled = true;
+			break;
+		}
+	case EMessage_SendWhoIsSpy:
 		{
 			HandleGetAmISpy(a_Packet, a_ClientID);
 			messageHandled = true;
@@ -279,6 +286,26 @@ void ScotlandYardServerGame::HandleGetAmISpy(RakNet::Packet &a_Packet, ClientID 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvAmISpy));
 		payload.Write(player.IsSpy());
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+	}
+	else
+	{
+		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+	}
+}
+
+void ScotlandYardServerGame::HandleWhoIsSpy(RakNet::Packet& a_Packet)
+{
+	if (m_Game->IsActive())
+	{
+		const ScotlandYardGame &game = *const_cast<ScotlandYardGame*>(m_Game);
+		const Spy &spy = game.GetSpy();
+
+		const ClientID clientID = GetClient(spy.GetPlayer());
+
+		RakNet::BitStream payload;
+		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWhoIsSpy));
+		payload.Write(clientID);
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
 	else
