@@ -79,3 +79,25 @@ void BaseLobby::AddNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInte
 	game->OpenGameLog();
 	m_Games.push_back(game);
 }
+void BaseLobby::RemoveFromQueue(ClientID a_ID)
+{
+	auto pos = std::find_if(m_WaitQueue.begin(), m_WaitQueue.end(), [&a_ID](const UserData *a_UserData) { return a_UserData->m_ClientID == a_ID; });
+	if(pos != m_WaitQueue.end()){
+		m_WaitQueue.erase(pos);
+	}
+}
+bool BaseLobby::HasWaitingUser(UserData* a_UserData)
+{
+	for(auto* user : m_WaitQueue){
+		if(user->m_ClientID == a_UserData->m_ClientID)
+			return true;
+	}
+	return false;
+}
+
+void BaseLobby::RemoveGame(GameID a_GameID)
+{
+	auto pos = std::find_if(m_Games.begin(), m_Games.end(), [&a_GameID](const IServerGame *a_ServerGame) { return a_ServerGame->GetGameID() == a_GameID; });
+	if(pos != m_Games.end())
+		m_Games.erase(pos);
+}

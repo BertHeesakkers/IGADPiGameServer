@@ -23,8 +23,13 @@ public:
 	virtual const std::vector<IServerGame*>& GetGames() const override;
 	virtual std::vector<IServerGame*>& GetGames() override;
 	virtual void AddToQueue(UserData &a_UserData) override;
+
+	virtual void RemoveGame(GameID a_GameID) override;
+
+	virtual void RemoveFromQueue(ClientID a_ID) override;
 	virtual std::vector<UserData*>& GetWaitQueue() override;
 
+	virtual bool HasWaitingUser(UserData*) override;
 protected:
 	virtual IServerGame* CreateNewGame(GameID a_GameID, RakNet::RakPeerInterface &a_PeerInterface) = 0;
 	ILogger &m_Logger;
