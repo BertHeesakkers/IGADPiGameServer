@@ -569,10 +569,12 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 	else
 	{
 		lobby->AddToQueue(a_UserData);
+		
 		if (a_SendMessages)
 		{
-				HandleWaitingFromPlayer(lobby);
+				HandleWaitingFromPlayer(*lobby);
 		}
+
 		if (lobby->CanStartNewGame())
 		{
 			const GameID newGameID = GenerateGameID();
@@ -595,30 +597,32 @@ void Server::HandleJoinGame(EGame a_Game, UserData &a_UserData, bool a_SendMessa
 		}
 	}
 }
-void Server::HandleWaitingFromPlayer(ILobby* a_Lobby)
+
+void Server::HandleWaitingFromPlayer(ILobby &a_Lobby)
 {
-				std::vector<UserData*> players = a_Lobby->GetWaitQueue();
-				uint32_t requiredAmount = a_Lobby->GetNumPlayersPerGame();
-				uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
+	std::vector<UserData*> players = a_Lobby.GetWaitQueue();
+	const uint32_t requiredAmount = a_Lobby.GetNumPlayersPerGame();
+	const uint32_t numberOfPlayers = static_cast<uint32_t>(players.size());
 
-				RakNet::BitStream payload;
-				payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
-				payload.Write(requiredAmount);
-				payload.Write(numberOfPlayers);
+	RakNet::BitStream payload;
+	payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvWaitingForPlayers));
+	payload.Write(requiredAmount);
+	payload.Write(numberOfPlayers);
 
-				for (auto pos = players.begin(); pos != players.end(); ++pos)
-				{
-					const UserData &userData = **pos;
-					payload.Write(RakNet::RakString(userData.m_Name.c_str()));
-					payload.Write(static_cast<uint32_t>(userData.m_ClientID));
-				}
+	for (auto pos = players.begin(); pos != players.end(); ++pos)
+	{
+		const UserData &userData = **pos;
+		payload.Write(RakNet::RakString(userData.m_Name.c_str()));
+		payload.Write(static_cast<uint32_t>(userData.m_ClientID));
+	}
 
-				for (auto pos = players.begin(); pos != players.end(); ++pos)
-				{
-					const UserData &userData = **pos;
-					SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
-				}
+	for (auto pos = players.begin(); pos != players.end(); ++pos)
+	{
+		const UserData &userData = **pos;
+		SendNetworkMessage(*m_PeerInterface, userData.m_SystemAddress, payload);
+	}
 }
+
 bool Server::HandleGameMessage(RakNet::Packet &a_Packet)
 {
 	bool success = false;
