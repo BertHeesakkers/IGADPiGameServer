@@ -11,18 +11,21 @@ For the latest update on the messages, please check out the [EMessages.h](/Inclu
 This will return the map to you using `EMessage_RecvGetMap`.
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendGetSpyTravelLog`
 This will return the spy's travel log using `EMessage_RecvGetSpyTravelLog`.
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendGetPlayerLocations`
 This will return the locations of all players using  `EMessage_RecvGetPlayerLocations`.
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendTravel`
@@ -35,22 +38,33 @@ DATA_3: uint32_t(<DESTINATION>)
 ### `EMessage_SendGetLocation`
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendGetTravelLog`
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendAmISpy`
 Will return if the player is a spy or not via `EMessage_RecvAmISpy`.
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
+```
+
+### `EMessage_SendWhoIsSpy`
+Will return the client id of the spy via `EMessage_RecvWhoIsSpy`.
+```
+DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ### `EMessage_SendGetRemainingTokens`
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
+DATA_2: GameID(<GAME ID>)
 ```
 
 ## Response Messages
@@ -78,6 +92,12 @@ DATA_1: uint32_t(<LOCATION>)
 Will return if the player is a spy or not.
 ```
 DATA_1: bool(<VALUE>)
+```
+
+### `EMessage_RecvWhoIsSpy`
+Will return if the player is a spy or not.
+```
+DATA_1: unint32_t(<CLIENT ID OF SPY>)
 ```
 
 ### `EMessage_RecvGetTravelLog`
