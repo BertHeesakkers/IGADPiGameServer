@@ -5,8 +5,9 @@ Game server created for educational purposes for IGAD (Breda University of Appli
 
 ## Build status
 | Branch | Status                                                                                                                                                               |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| master | [<img src="https://api.travis-ci.org/BertHeesakkers/IGADPiGameServer.svg?branch=master">](https://travis-ci.org/BertHeesakkers/IGADPiGameServer) |
+| ------ |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| master | [<img src="https://api.travis-ci.org/BertHeesakkers/IGADPiGameServer.svg?branch=master">](https://travis-ci.org/BertHeesakkers/IGADPiGameServer) [<img alt="Coverity Scan Build Status" src="https://img.shields.io/coverity/scan/15346.svg"/>](https://scan.coverity.com/projects/bertheesakkers-igadpigameserver") |
+
 
 ## Documentation
 For documentation references please check out the following folder [Documentation](/Documentation)
