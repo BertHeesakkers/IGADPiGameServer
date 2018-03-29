@@ -2,9 +2,17 @@ language: cpp
 sudo: required
 dist: trusty
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-7
+
 compiler:
-  - gcc
+  - gcc-7
 before_script:
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-7 /usr/bin/gcc
   - git clone https://github.com/facebookarchive/RakNet.git
   - cd RakNet
   - cmake .
@@ -12,8 +20,8 @@ before_script:
   - make install
   - sudo mv Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
   - sudo mv include/raknet ../Include/RakNet/
-  - sudo mv ThirdParty/boost_1_65_1/ Include/
   - cd ..
+  - sudo mv Thirdparty/boost_1_65_1/boost Include/boost
 script:
   - cmake .
   - make install
