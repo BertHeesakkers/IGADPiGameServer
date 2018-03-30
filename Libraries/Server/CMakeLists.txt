@@ -7,6 +7,7 @@ include_directories(${ROOT_INCLUDE_FOLDER}Server/Helpers)
 include_directories(${ROOT_INCLUDE_FOLDER}Server/Utility)
 
 #external dependencies
+include_directories(${THIRD_PARTY_FOLDER})
 include_directories(${THIRD_PARTY_FOLDER}boost_1_65_1)
 include_directories(${THIRD_PARTY_FOLDER}RakNet/include)
 
@@ -71,6 +72,8 @@ set(Server_AGGREGATE_SOURCES
 	${Server_UTILITY_SOURCES})
 
 # setup target
+add_definitions(-DNOMINMAX)
+
 add_library(Server STATIC ${Server_AGGREGATE_HEADERS} ${Server_AGGREGATE_SOURCES})
 
 set_target_properties(Server PROPERTIES FOLDER "ServerCode")

@@ -1,62 +1,56 @@
 #include "ReadUserData.h"
 
+#include "Framework/AssertMessage.h"
 #include "Framework/FileHelpers.h"
 #include "Framework/LexicalCast.h"
 #include "Framework/StringFunctions.h"
-#include "Server/ThirdParty/json.hpp"
 #include "Server/UserData.h"
 
+#include <cereal/archives/json.hpp>
+
+#include <assert.h>
+#include <fstream>
 #include <string>
 
-using json = nlohmann::json; 
-
-void ParseUserData(const json &a_Json, UserData &a_UserData)
+namespace
 {
-	for (json::const_iterator it = a_Json.begin(); it != a_Json.end(); ++it)
+	struct UserLoginData
 	{
-		const std::string keyName = it.key();
-		const json keyValue = it.value();
+		std::string m_Name;
+		std::string m_ID;
+		unsigned long m_Passhash;
+	};
 
-		if (keyName == std::string("name"))
-		{
-			a_UserData.m_Name = keyValue.get<std::string>();
-		}
-		if (keyName == std::string("snr"))
-		{
-			a_UserData.m_ID = std::to_string(keyValue.get<int>());
-		}
-		if (keyName == std::string("passhash"))
-		{
-			if (keyValue.is_number())
-			{
-				a_UserData.m_Passhash = static_cast<unsigned long>(keyValue.get<unsigned long>());
-			}
-			else
-			{
-				a_UserData.m_Passhash = HashedString::Empty;
-			}
-		}
+	template<class Archive>
+	void serialize(Archive &a_Archive, UserLoginData &a_UserLoginData)
+	{
+		a_Archive(cereal::make_nvp("name", a_UserLoginData.m_Name),
+			cereal::make_nvp("snr", a_UserLoginData.m_ID),
+			cereal::make_nvp("passhash", a_UserLoginData.m_Passhash));
 	}
+
 }
 
 void ReadUserData(const std::string &a_Filename, std::vector<UserData*> &a_UserData)
 {
-	const std::string jsonString = ReadFileToString(a_Filename);
-	const json jsonObject = json::parse(jsonString);
-	
-	for (json::const_iterator it = jsonObject.begin(); it != jsonObject.end(); ++it)
+	std::ifstream fileStream(a_Filename);
+	AssertMessage(fileStream.is_open(), StringFormatter::Format("Unable to open [%s] for read!", a_Filename.c_str()));
 	{
-		const std::string keyName = it.key();
-		auto keyValue = it.value();
+		cereal::JSONInputArchive archive(fileStream);
+		size_t numEntries = 0;
+		archive(cereal::make_nvp("num_entries", numEntries));
 
-		if (keyName == std::string("logins"))
+		for (uint32_t entry = 0; entry < numEntries; ++entry)
 		{
-			for (json::const_iterator pos = keyValue.begin(); pos != keyValue.end(); ++pos)
-			{
-				UserData *user = new UserData();
-				ParseUserData(*pos, *user);
-				a_UserData.push_back(user);
-			}
+			UserLoginData userLoginData;
+			archive(userLoginData);
+
+			UserData *user = new UserData();
+			user->m_Name = userLoginData.m_Name;
+			user->m_ID = userLoginData.m_ID;
+			user->m_Passhash = userLoginData.m_Passhash;
+			a_UserData.push_back(user);
 		}
 	}
+	fileStream.close();
 }

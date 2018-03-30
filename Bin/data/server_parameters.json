@@ -1,10 +1,10 @@
 {
-	"ServerPort" : 60000,
-	"MaxClients" : 128,
-    "Lobbies": [
-        "ScotlandYard",
-        "BattleShips",
-        "Sokoban",
-        "Tron"
-    ]
+    "ServerPort": 60000,
+    "MaxClients": 128,
+    "Lobbies": {
+        "value0": "ScotlandYard",
+        "value1": "BattleShips",
+        "value2": "Sokoban",
+        "value3": "Tron"
+    }
 }

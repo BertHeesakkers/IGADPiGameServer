@@ -34,18 +34,6 @@ set(Framework_CORE_HEADERS
 
 source_group("Header Files" FILES ${Framework_CORE_HEADERS})
 
-set(Framework_IPC_HEADERS
-	../../Include/Framework/IPC/AnonymousPipe.h
-	../../Include/Framework/IPC/NamedPipe.h
-	../../Include/Framework/IPC/Pipe.h
-	../../Include/Framework/IPC/PipeClient.h
-	../../Include/Framework/IPC/PipeConstants.h
-	../../Include/Framework/IPC/PipeCreateParameters.h
-	../../Include/Framework/IPC/PipeServer.h
-	../../Include/Framework/IPC/WriteToNamedPipe.h)
-
-source_group("Header Files\\IPC" FILES ${Framework_IPC_HEADERS})
-
 set(Framework_LOGGING_HEADERS
 	../../Include/Framework/Logging/ConsoleLogger.h
 	../../Include/Framework/Logging/FileLogger.h
@@ -68,7 +56,6 @@ source_group("Header Files\\Math\\RNG" FILES ${Framework_MATH_RNG_HEADERS})
 
 set(Framework_AGGREGATE_HEADERS
 	${Framework_CORE_HEADERS}
-	${Framework_IPC_HEADERS}
 	${Framework_LOGGING_HEADERS}
 	${Framework_MATH_HEADERS}
 	${Framework_MATH_RNG_HEADERS})
@@ -91,16 +78,6 @@ set(Framework_CORE_SOURCES
 
 source_group("Source Files" FILES ${Framework_CORE_SOURCES})
 
-set(Framework_IPC_SOURCES
-	../../Source/Framework/IPC/AnonymousPipe.cpp
-	../../Source/Framework/IPC/NamedPipe.cpp
-	../../Source/Framework/IPC/Pipe.cpp
-	../../Source/Framework/IPC/PipeClient.cpp
-	../../Source/Framework/IPC/PipeServer.cpp
-	../../Source/Framework/IPC/WriteToNamedPipe.cpp)
-
-source_group("Source Files\\IPC" FILES ${Framework_IPC_SOURCES})
-
 set(Framework_LOGGING_SOURCES
 	../../Source/Framework/Logging/ConsoleLogger.cpp
 	../../Source/Framework/Logging/FileLogger.cpp)
@@ -116,7 +93,6 @@ source_group("Source Files\\Math\\RNG" FILES ${Framework_MATH_RNG_SOURCES})
 
 set(Framework_AGGREGATE_SOURCES
 	${Framework_CORE_SOURCES}
-	${Framework_IPC_SOURCES}
 	${Framework_LOGGING_SOURCES}
 	${Framework_MATH_SOURCES}
 	${Framework_MATH_RNG_SOURCES})

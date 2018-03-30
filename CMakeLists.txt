@@ -18,7 +18,9 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 
 include_directories(${ROOT_INCLUDE_FOLDER})
 
-add_definitions(-D_WINSOCKAPI_)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+	add_definitions(-D_WINSOCKAPI_)
+endif()
 
 add_subdirectory(Libraries)
 add_subdirectory(Applications)

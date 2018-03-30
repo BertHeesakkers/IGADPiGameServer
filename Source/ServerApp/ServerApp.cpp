@@ -16,7 +16,6 @@ ServerApp::~ServerApp()
 
 void ServerApp::Initialize(const std::string &a_ParameterFile)
 {
-	//ServerAppMenus::m_Application = this;
 	ParseServerParameters(a_ParameterFile, std::ref(m_Parameters));
 }
 
