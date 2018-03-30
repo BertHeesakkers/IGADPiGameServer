@@ -35,6 +35,8 @@ set(ServerApp_AGGREGATE_SOURCES
 #setup target
 add_executable(ServerApp ${ServerApp_CORE_HEADERS} ${ServerApp_CORE_SOURCE})
 
+find_package(Threads)
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(STATUS "Setting up linking to Windows specific libraries")
 	target_link_libraries(ServerApp BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby)
@@ -42,10 +44,9 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	message(STATUS "Setting up linking to Linux specific libraries")
 	target_link_libraries(ServerApp -Wl,--whole-archive 
-		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby -Wl,--no-whole-archive)
+		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} -Wl,--no-whole-archive)
 endif()
-find_package(Threads)
-target_link_libraries(ServerApp ${CMAKE_THREAD_LIBS_INIT})
+
 target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
 target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
 
