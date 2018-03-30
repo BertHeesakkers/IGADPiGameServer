@@ -49,7 +49,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	target_link_libraries(ServerApp debug -Wl,--whole-archive 
 		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_DEBUG} -Wl,--no-whole-archive)
 
-	target_link_libraries(ServerApp debug -Wl,--whole-archive 
+	target_link_libraries(ServerApp release -Wl,--whole-archive 
 		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_RELEASE} -Wl,--no-whole-archive)
 
 endif()
