@@ -41,14 +41,19 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(STATUS "Setting up linking to Windows specific libraries")
 	target_link_libraries(ServerApp BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby)
     target_link_libraries(ServerApp Ws2_32)
+	
+	target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
+	target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	message(STATUS "Setting up linking to Linux specific libraries")
-	target_link_libraries(ServerApp -Wl,--whole-archive 
-		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby pthread -Wl,--no-whole-archive)
+	target_link_libraries(ServerApp debug -Wl,--whole-archive 
+		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_DEBUG} -Wl,--no-whole-archive)
+
+	target_link_libraries(ServerApp debug -Wl,--whole-archive 
+		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_RELEASE} -Wl,--no-whole-archive)
+
 endif()
 
-target_link_libraries(ServerApp debug ${RAKNET_STATIC_LIB_DEBUG})
-target_link_libraries(ServerApp optimized ${RAKNET_STATIC_LIB_RELEASE})
 
 set_target_properties(ServerApp PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 set_target_properties(ServerApp PROPERTIES FOLDER "Applications")
