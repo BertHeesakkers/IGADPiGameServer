@@ -32,6 +32,7 @@ private:
 	void HandleGetLocation(RakNet::Packet &a_Packet, ClientID a_ClientID);
 	void HandleGetTravelLog(RakNet::Packet &a_Packet, ClientID a_ClientID);
 	void HandleGetAmISpy(RakNet::Packet &a_Packet, ClientID a_ClientID);
+	void HandleWhoIsSpy(RakNet::Packet &a_Packet);
 	void HandleGetRemainingTokens(RakNet::Packet &a_Packet, ClientID a_ClientID);
 
 	ScotlandYardGame *m_Game = nullptr;
