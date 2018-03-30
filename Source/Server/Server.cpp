@@ -466,9 +466,12 @@ void Server::UpdateUserData()
 void Server::HandleLostConnection(RakNet::Packet &a_Packet)
 {
 	auto* userData = FindUserData(m_UserData,a_Packet.systemAddress);
-	m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
 	if(userData != nullptr)
+	{
+		m_Logger.WriteLine("Lost connection with client [%s] with the ID [%i].",a_Packet.systemAddress.ToString(true),userData->m_ClientID);
 		RemovePlayer(*userData);
+	}
+		
 }
 
 void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, const HashedString &a_Passhash, bool a_SendMessages /* = true */)
@@ -678,6 +681,7 @@ void Server::AddLobby(EGame a_Game)
 	lobby = CreateGameLobby(a_Game, m_Logger);
 	m_Lobbies.push_back(lobby);
 }
+
 IServerGame* Server::FindGame(GameID a_GameID)
 {
 	IServerGame *game = nullptr;

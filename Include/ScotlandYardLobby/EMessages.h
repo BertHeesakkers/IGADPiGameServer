@@ -12,6 +12,11 @@ enum EScotlandYardServerMessages
 	EMessage_SendGetLocation,
 	EMessage_SendGetTravelLog,
 	EMessage_SendAmISpy,
+
+	// New:
+	EMessage_SendWhoIsSpy,
+	// End
+
 	EMessage_SendGetRemainingTokens,
 
 	EMessage_RecvGetMap,
@@ -19,7 +24,12 @@ enum EScotlandYardServerMessages
 	EMessage_RecvGetSpyTravelLog,
 	EMessage_RecvGetPlayerLocations,
 	EMessage_RecvGetLocation,
+	EMessage_RecvGetTravelLog, // Caution: Order of messages changed to keep consistency with Send messages.
 	EMessage_RecvAmISpy,
-	EMessage_RecvGetTravelLog,
+
+	// New:
+	EMessage_RecvWhoIsSpy,
+	// End
+
 	EMessage_RecvGetRemainingTokens
 };
