@@ -9,4 +9,4 @@ max_jobs: 1
 image: Visual Studio 2017
 
 install:
-  - cmd: Scripts/GenerateVisualStudioSolution.bat
+  - cmd: C:\projects\igadpigameserver\scripts\GenerateVisualStudioSolution.bat
