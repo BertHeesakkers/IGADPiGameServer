@@ -33,6 +33,7 @@ DATA_2: GameID(<GAME ID>)
 DATA_1: ClientID(<YOUR CLIENT ID>)
 DATA_2: GameID(<YOUR GAME ID>)
 DATA_3: uint32_t(<DESTINATION>)
+DATA_4: ETravelOption(<TRAVELOPTION>)
 ```
 
 ### `EMessage_SendGetLocation`
