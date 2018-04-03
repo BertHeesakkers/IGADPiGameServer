@@ -20,6 +20,7 @@ This will return the spy's travel log using `EMessage_RecvGetSpyTravelLog`.
 DATA_1: ClientID(<YOUR CLIENT ID>)
 DATA_2: GameID(<GAME ID>)
 ```
+**TODO: Check in source for any more required payloads.**
 
 ### `EMessage_SendGetPlayerLocations`
 This will return the locations of all players using  `EMessage_RecvGetPlayerLocations`.
@@ -27,12 +28,14 @@ This will return the locations of all players using  `EMessage_RecvGetPlayerLoca
 DATA_1: ClientID(<YOUR CLIENT ID>)
 DATA_2: GameID(<GAME ID>)
 ```
+**TODO: Check in source for any more required payloads.**
 
 ### `EMessage_SendTravel`
 ```
 DATA_1: ClientID(<YOUR CLIENT ID>)
 DATA_2: GameID(<YOUR GAME ID>)
 DATA_3: uint32_t(<DESTINATION>)
+DATA_4: ETravelOption(<TRAVELOPTION>)
 ```
 
 ### `EMessage_SendGetLocation`
@@ -40,6 +43,7 @@ DATA_3: uint32_t(<DESTINATION>)
 DATA_1: ClientID(<YOUR CLIENT ID>)
 DATA_2: GameID(<GAME ID>)
 ```
+**TODO: Check in source for any more required payloads.**
 
 ### `EMessage_SendGetTravelLog`
 ```
@@ -75,13 +79,29 @@ DATA_1: RakString(<MAPFILE>)
 ```
 
 ### `EMessage_RecvTravelResult`
-TBA
+```
+DATA_1: ETravelResult(<THE RESULT OF THE TRAVEL ACTION>)
+```
 
 ### `EMessage_RecvGetSpyTravelLog`
-TBA
+```
+DATA_1: uint32_t(<NUMBER OF TRAVEL LOG ITEMS>)
+
+DATA_2: uint32_t(<DESTINATION NODE ID OF TRAVEL LOG ITEM 1>)
+DATA_3: ETravelOption(<TRAVEL OPTION OF TRAVEL LOG ITEM 1>)
+
+DATA_...: Repeating DATA_2 and DATA_3 until the amount in DATA_1...
+```
+The destination node id's are 0 if the spy is hidden. In all the other turns where the spy reveals it's position, they are set just like in `EMessage_RecvGetTravelLog`.
 
 ### `EMessage_RecvGetPlayerLocations`
-TBA
+```
+DATA_1: EPlayer(<EPLAYER OF PLAYER 1>)
+DATA_2: ClientID(<CLIENT ID OF PLAYER 1>)
+DATA_3: uint32_t(<NODE NUMBER PLAYER 1 IS AT>)
+
+DATA_...: Repeating for all players.
+```
 
 ### `EMessage_RecvGetLocation`
 ```
@@ -101,10 +121,30 @@ DATA_1: unint32_t(<CLIENT ID OF SPY>)
 ```
 
 ### `EMessage_RecvGetTravelLog`
-TBA
+```
+DATA_1: uint32_t(<NUMBER OF TRAVEL LOG ITEMS>)
+
+DATA_2: uint32_t(<DESTINATION NODE ID OF TRAVEL LOG ITEM 1>)
+DATA_3: ETravelOption(<TRAVEL OPTION OF TRAVEL LOG ITEM 1>)
+
+DATA_...: Repeating DATA_2 and DATA_3 until the amount in DATA_1...
+```
 
 ### `EMessage_RecvGetRemainingTokens`
-TBA
+Will inform the client the amount of tokens the player has. Can be requested using `EMessage_SendGetRemainingTokens`.
+```
+DATA_1: ETravelOption(<TRAVEL OPTION>)
+DATA_2: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_1>)
+DATA_3: ETravelOption(<TRAVEL OPTION>)
+DATA_4: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_3>)
+DATA_5: ETravelOption(<TRAVEL OPTION>)
+DATA_6: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_5>)
+```
+If the player requested is a spy. The following will also be sent.
+```
+DATA_7: ETravelOption(<TRAVEL OPTION>)
+DATA_8: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_7>)
+```
 
 ## Travel Options
 There are multiple ways of transportation in this game. Below is a list of all the options.
