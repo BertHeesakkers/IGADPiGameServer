@@ -220,6 +220,7 @@ void Server::Start(ServerParameters &a_ServerParameters)
 	}
 
 	ReadUserData(g_UserDataFilename, m_UserData);
+	WriteUserData(g_UserDataFilename, m_UserData);
 }
 
 void Server::Run()

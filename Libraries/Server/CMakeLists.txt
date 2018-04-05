@@ -35,6 +35,7 @@ source_group("Header Files\\Helpers" FILES ${Server_HELPERS_HEADERS})
 
 set(Server_UTILITY_HEADERS
 	../../Include/Server/Utility/ReadUserData.h
+	../../Include/Server/Utility/UserLoginData.h
 	../../Include/Server/Utility/WriteUserData.h)
 
 source_group("Header Files\\Utility" FILES ${Server_UTILITY_HEADERS})
