@@ -29,10 +29,7 @@ endif()
 add_subdirectory(ServerApp)
 add_subdirectory(ServerCmd)
 
-if(EXISTS "${CMAKE_SOURCE_DIR}/Applications/ClientApp/CMakeLists.txt")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	add_subdirectory(ClientApp)
-endif()
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/Applications/BattleShipsTrainer/CMakeLists.txt")
 	add_subdirectory(BattleShipsTrainer)
 endif()
