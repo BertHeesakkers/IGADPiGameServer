@@ -29,17 +29,16 @@ set(ServerCmd_AGGREGATE_SOURCES
 add_executable(ServerCmd ${ServerCmd_CORE_HEADERS} ${ServerCmd_CORE_SOURCE})
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    message(STATUS "Setting up linking to Windows specific libraries")
+    message(STATUS "Setting up linking to Windows specific libraries for ServerCmd")
 	target_link_libraries(ServerCmd Framework Network)
 	target_link_libraries(ServerCmd Ws2_32)
+	target_link_libraries(ServerCmd debug ${RAKNET_STATIC_LIB_DEBUG})
+	target_link_libraries(ServerCmd optimized ${RAKNET_STATIC_LIB_RELEASE})
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	message(STATUS "Setting up linking to Linux specific libraries")
-	target_link_libraries(ServerCmd -Wl,--whole-archive Framework Network -Wl,--no-whole-archive)
-	target_link_libraries(ServerCmd ${CMAKE_THREAD_LIBS_INIT})
+	message(STATUS "Setting up linking to Linux specific libraries for ServerCmd")
+	target_link_libraries(ServerCmd debug -Wl,--whole-archive Framework Network ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_DEBUG} -Wl,--no-whole-archive)
+	target_link_libraries(ServerCmd optimized -Wl,--whole-archive Framework Network ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_RELEASE} -Wl,--no-whole-archive)
 endif()
-
-target_link_libraries(ServerCmd debug ${RAKNET_STATIC_LIB_DEBUG})
-target_link_libraries(ServerCmd optimized ${RAKNET_STATIC_LIB_RELEASE})
 
 set_target_properties(ServerCmd PROPERTIES FOLDER "Applications")
 
