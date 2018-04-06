@@ -51,19 +51,6 @@ find_package(Threads)
 #		BattleShips BattleShipsLobby Framework Network ScotlandYard ScotlandYardLobby Server Sokoban SokobanLobby Tron TronLobby ${CMAKE_THREAD_LIBS_INIT} ${RAKNET_STATIC_LIB_RELEASE} -Wl,--no-whole-archive)
 #endif()
 
-#set_target_properties(ServerApp PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
-#set_target_properties(ServerApp PROPERTIES FOLDER "Applications")
-
-#if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-#	set_target_properties(ServerApp PROPERTIES
-#		RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/Bin
-#		RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/Bin)
-#
-#	install(TARGETS ServerApp DESTINATION ${CMAKE_SOURCE_DIR}/Bin)
-#elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-#	install(TARGETS ServerApp DESTINATION ${CMAKE_SOURCE_DIR}/Bin)
-#endif()
-
 #setup target
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(STATUS "Setting up linking to Windows specific libraries")
