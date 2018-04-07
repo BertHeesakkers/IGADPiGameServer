@@ -55,7 +55,7 @@ $ cd /server/path/bin/
 $ mkdir -p log/Games
 $ chmod 666 -R log
 ```
-The you can run the application:
+Then you can run the application:
 ```
 $ /server/path/bin/ServerApp
 ```
