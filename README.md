@@ -42,7 +42,7 @@ sudo mv include/raknet /usr/local/include/
 ```
 
 ## Build
-```
+```bash
 $ cd /server_root
 $ cmake .
 $ make install
@@ -50,13 +50,13 @@ $ make install
 
 ## Run
 You have to make sure that there is a log folder and that the app has the premission to write in it:
-```
+```bash
 $ cd /server/path/bin/
 $ mkdir -p log/Games
 $ chmod 666 -R log
 ```
 Then you can run the application:
-```
+```bash
 $ /server/path/bin/ServerApp
 ```
 
