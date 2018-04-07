@@ -12,43 +12,36 @@ Game server created for educational purposes for IGAD (Breda University of Appli
 For documentation references please check out the following folder [Documentation](/Documentation)
 
 ## How to use
-
 In order to learn how to use the server, check out the documentation. There you will find help files for how to communicate with the server.
-### Dependencies
 
+### Dependencies
 - CMake 3.9.2 (latest version supported by Visual Studio 2017)
 - RakNet build as static lib
-### Building dependencies
 
+### Building dependencies
 This little bash script will help you build RakNet:
 ```bash
 #!/bin/bash
 
-# RakNet installation:
-# Commands below provided by Bert Heesakkers (NHTV) and modified by Zandor Smith.
+# Install cmake (if it isn't installed already)
 sudo apt-get install cmake -y
 
+# Download and compile RakNet
 git clone https://github.com/facebookarchive/RakNet.git
 cd RakNet
 cmake .
 make
 make install
 
-echo Removing old RakNet installation if it exists.
+# Remove old RakNet installation if it exists.
 sudo rm -rf /usr/local/include/raknet
 
-echo Moving RakNet to the correct directory.
-sudo mv [RakNet path]/RakNet/Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
-sudo mv [RakNet path]/RakNet/include/raknet /usr/local/include/
-
-echo Cleaning up...
-rm -rf [RakNet path]/RakNet
-
-echo RakNet installed.
+# Move RakNet to the correct directory.
+sudo mv Lib/LibStatic/libRakNetLibStatic.a /usr/local/lib
+sudo mv include/raknet /usr/local/include/
 ```
 
 ## Build
-
 ```
 $ cd /server_root
 $ cmake .
@@ -68,7 +61,6 @@ $ /server/path/bin/ServerApp
 ```
 
 ### Supported compiler
-
 - GCC 4.9 - 7.2 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
 - Clang 3.4 - 5.0 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
 - Intel C++ Compiler 17.0.2 (and possibly later) (because of the [json.hpp](https://github.com/nlohmann/json#supported-compilers))
