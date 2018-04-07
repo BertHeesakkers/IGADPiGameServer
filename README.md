@@ -18,8 +18,8 @@ In order to learn how to use the server, check out the documentation. There you 
 - CMake 3.9.2 (latest version supported by Visual Studio 2017)
 - RakNet build as static lib
 
-### Building dependencies
-This little bash script will help you build RakNet:
+### Install dependencies
+Run the following commands to install RakNet correctly.
 ```bash
 #!/bin/bash
 
