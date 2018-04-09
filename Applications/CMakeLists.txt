@@ -28,8 +28,3 @@ endif()
 
 add_subdirectory(ServerApp)
 add_subdirectory(ServerCmd)
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-	add_subdirectory(ClientApp)
-	add_subdirectory(BattleShipsTrainer)
-endif()
