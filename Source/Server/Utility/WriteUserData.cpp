@@ -29,6 +29,4 @@ void WriteUserData(const std::string &a_Filename, const std::vector<UserData*> &
 		userLoginData.push_back(loginData);
 	}
 	archive(userLoginData);
-
-	fileStream.close();
 }
