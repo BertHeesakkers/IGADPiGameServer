@@ -488,7 +488,7 @@ void Server::HandleLogin(RakNet::Packet &a_Packet, const std::string &a_ID, cons
 		if (userData->m_LoggedIn)
 		{
 			m_Logger.WriteLine("Client [%s] attempted to login twice.", a_ID);
-			SendNetworkMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_AlreadyLoggedIn);
+			SendServerErrorMessage(*m_PeerInterface, a_Packet.systemAddress, EServerError_AlreadyLoggedIn);
 		}
 		else
 		{

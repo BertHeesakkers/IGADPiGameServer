@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 namespace
 {
@@ -29,13 +30,11 @@ namespace
 		return result;
 	}
 
-	void InsertEdges(Map &a_Map, const uint32_t a_StartIndex, std::vector<std::string> &a_Destinations, ETravelOption a_TravelOption)
+	void InsertEdges(Map* a_Map, const uint32_t a_StartIndex, std::vector<std::string> a_Destinations, ETravelOption a_TravelOption)
 	{
-		for (auto pos = a_Destinations.begin(); pos != a_Destinations.end(); ++pos)
-		{
-			const uint32_t destination = StringToInt(*pos);
-			a_Map.AddEdge(a_StartIndex, destination, a_TravelOption);
-		}
+		std::cout << "DEBUG: InsertEdges " << a_StartIndex << " " << a_TravelOption << std::endl;
+		for (std::string destination : a_Destinations)
+			a_Map->AddEdge(a_StartIndex, StringToInt(destination), a_TravelOption);
 	}
 
 	bool IsPositionFree(uint32_t a_Position, const std::vector<Player*> &a_Players, bool a_IgnoreSpy = false)
@@ -154,9 +153,10 @@ ETravelResult ScotlandYardGame::Travel(EPlayer a_Player, uint32_t a_Destination,
 		if (hasTokens)
 		{
 			const uint32_t startIndex = player.GetPosition();
-			const bool canTravel = m_Map.CanTravel(startIndex, a_Destination, a_TravelOption);
+			const bool canTravel = m_Map->CanTravel(startIndex, a_Destination, a_TravelOption);
 			if (canTravel)
 			{
+				std::cout << "DEBUG: Player can travel to " << a_Destination << " using " << a_TravelOption << std::endl;
 				player.m_Position = a_Destination;
 				player.DropToken(a_TravelOption);
 				if (!player.IsSpy())
@@ -175,11 +175,13 @@ ETravelResult ScotlandYardGame::Travel(EPlayer a_Player, uint32_t a_Destination,
 			}
 			else
 			{
+				std::cout << "DEBUG: Player can't travel to " << a_Destination << " using " << a_TravelOption << std::endl;
 				travelResult = ETravelResult_NoValidTravelOption;
 			}
 		}
 		else
 		{
+			std::cout << "DEBUG: Player doesn't have enough tokens to travel to " << a_Destination << " using " << a_TravelOption << std::endl;
 			travelResult = ETravelResult_NoTokensLeft;
 		}
 	}
@@ -188,6 +190,31 @@ ETravelResult ScotlandYardGame::Travel(EPlayer a_Player, uint32_t a_Destination,
 		travelResult = ETravelResult_DestinationNotFree;
 	}
 	return travelResult;
+}
+
+bool ScotlandYardGame::CanPlayerTravel(EPlayer a_Player) const
+{
+	const Player &player = GetPlayer(a_Player);
+
+	const uint32_t currentNode = player.GetPosition();
+
+	std::vector<ETravelOption> travelOptions;
+	travelOptions.push_back(ETravelOption_Taxi);
+	travelOptions.push_back(ETravelOption_Bus);
+	travelOptions.push_back(ETravelOption_Underground);
+	if(player.IsSpy())
+		travelOptions.push_back(ETravelOption_Ferry);
+
+	for(Edge* edge : m_Map->m_Edges)
+	{
+		if (m_Map->m_Nodes[edge->m_Start - 1]->m_Index != currentNode)
+			continue;
+
+		for (ETravelOption travelOption : travelOptions)
+			if (edge->m_TravelOption == travelOption && player.GetTokens(travelOption) > 0)
+				return true;
+	}
+	return false;
 }
 
 bool ScotlandYardGame::IsActive() const
@@ -254,7 +281,7 @@ void ScotlandYardGame::LoadMap(const std::string &a_Filename)
 	// Lines in file are structured:
 	// Node index; Taxi destinations; Bus destinations; Subway destinations; Ferry destinations; Coordinates; Name (if applicable)
 
-	Map m_Map;
+	m_Map = new Map();
 
 	std::string line;
 	std::vector<std::string> temp;
@@ -264,7 +291,7 @@ void ScotlandYardGame::LoadMap(const std::string &a_Filename)
 		{
 			std::vector<std::string> tokens = Tokenize(line, ";");
 			uint32_t nodeIndex = StringToInt(tokens[0]);
-			Node *node = m_Map.m_Nodes[nodeIndex - 1];
+			Node *node = m_Map->m_Nodes[nodeIndex - 1];
 			AssertMessage(nullptr != node, "Encounter uninitialized node!");
 
 			temp = Tokenize(tokens[1], ",");

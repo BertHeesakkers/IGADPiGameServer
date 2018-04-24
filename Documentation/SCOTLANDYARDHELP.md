@@ -96,16 +96,19 @@ The destination node id's are 0 if the spy is hidden. In all the other turns whe
 
 ### `EMessage_RecvGetPlayerLocations`
 ```
-DATA_1: EPlayer(<EPLAYER OF PLAYER 1>)
-DATA_2: ClientID(<CLIENT ID OF PLAYER 1>)
-DATA_3: uint32_t(<NODE NUMBER PLAYER 1 IS AT>)
+DATA_1: uint32_t(<NUMBER OF PLAYERS>)
+
+DATA_2: EPlayer(<EPLAYER OF PLAYER 1>)
+DATA_3: ClientID(<CLIENT ID OF PLAYER 1>)
+DATA_4: uint32_t(<NODE NUMBER PLAYER 1 IS AT>)
 
 DATA_...: Repeating for all players.
 ```
 
 ### `EMessage_RecvGetLocation`
 ```
-DATA_1: uint32_t(<LOCATION>)
+DATA_1: ClientID(<CLIENT ID>)
+DATA_2: uint32_t(<NODE ID>)
 ```
 
 ### `EMessage_RecvAmISpy`
@@ -133,17 +136,31 @@ DATA_...: Repeating DATA_2 and DATA_3 until the amount in DATA_1...
 ### `EMessage_RecvGetRemainingTokens`
 Will inform the client the amount of tokens the player has. Can be requested using `EMessage_SendGetRemainingTokens`.
 ```
-DATA_1: ETravelOption(<TRAVEL OPTION>)
-DATA_2: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_1>)
+DATA_1: uint32_t(<CLIENT ID>)
+DATA_2: uint8_t(<AMOUNT OF TRAVELOPTIONS>)
 DATA_3: ETravelOption(<TRAVEL OPTION>)
-DATA_4: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_3>)
+DATA_4: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_1>)
 DATA_5: ETravelOption(<TRAVEL OPTION>)
-DATA_6: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_5>)
+DATA_6: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_3>)
+DATA_7: ETravelOption(<TRAVEL OPTION>)
+DATA_8: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_5>)
 ```
 If the player requested is a spy. The following will also be sent.
 ```
-DATA_7: ETravelOption(<TRAVEL OPTION>)
-DATA_8: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_7>)
+DATA_9: ETravelOption(<TRAVEL OPTION>)
+DATA_10: uint32_t(<TOKENS FOR TRAVEL OPTION IN DATA_7>)
+```
+
+### `EMessage_RecvPlayerIsStuck`
+Will inform all clients that a player is stuck and without enough tokens to continue. After this, the given player will never be given a turn again.
+```
+DATA_1: uint32_t(<CLIENT ID>)
+```
+
+### `EMessage_RecvGameEnded`
+Will inform all players that the game has been won by the spy or the detectives.
+```
+DATA_1: EWinnable(<WHO WON>)
 ```
 
 ## Travel Options
@@ -166,3 +183,11 @@ When receiving the `EMessage_RecvTravelResult` message, an `ETravelResult` sent 
 * `ETravelResult_Success`
 
 For more info, please check out [ETravelResult.h](/Include/ScotlandYard/ETravelResult.h).
+
+## Winnable
+When receiving  `EMessage_RecvGameEnded`, an `EWinnable` will be sent with. Below is a list of possible options:
+
+* `EWinnable_Spy`
+* `EWinnable_Detective`
+
+For more info, please check out [EWinnable.h](/Include/ScotlandYard/EWinnable.h).

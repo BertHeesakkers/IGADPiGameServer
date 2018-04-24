@@ -33,6 +33,7 @@ protected:
 	ILogger& GetServerLogger();
 
 	void BroadcastTurnFinished(const ClientID &a_ClientID) const;
+	void BroadcastTurnFinished(const ClientID &a_ClientID, const ClientID &a_ClientIDNewPlayer) const;
 
 private:
 	virtual void OpenGameLog();

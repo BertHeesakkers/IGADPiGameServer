@@ -16,11 +16,14 @@ public:
 	EPlayer GetNextPlayer() const;
 	void FinishedTurn(EPlayer a_Player);
 	uint32_t GetCurrentTurn() const;
+	void DisablePlayer(EPlayer a_Player);
+	uint32_t GetNumberOfDisabledPlayers();
 
 	void Reset();
 
 private:
 	uint32_t m_CurrentPlayer = 0;
 	std::vector<EPlayer> m_Players;
+	std::vector<EPlayer> m_DisabledPlayers;
 	mutable uint32_t m_Turn = 0;
 };

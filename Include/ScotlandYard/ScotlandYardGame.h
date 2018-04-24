@@ -23,7 +23,9 @@ public:
 	void AddPlayer(EPlayer a_Player);
 	const Player& GetPlayer(EPlayer a_Player) const;
 	bool IsSpy(EPlayer a_Player);
+
 	ETravelResult Travel(EPlayer a_Player, uint32_t a_Destination, ETravelOption a_TravelOption);
+	bool CanPlayerTravel(EPlayer a_Player) const;
 
 	bool IsActive() const;
 	EPlayer WhoseTurnIsIt() const;
@@ -46,7 +48,7 @@ private:
 
 	bool m_IsActive = false;
 	uint32_t m_NumPlayers;
-	Map m_Map;
+	Map* m_Map;
 	bool m_GameOver = false;
 	Ply *m_Ply;
 

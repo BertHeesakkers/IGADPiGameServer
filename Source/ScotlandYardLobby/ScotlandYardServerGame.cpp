@@ -10,6 +10,7 @@
 #include "ScotlandYard/Player.h"
 #include "ScotlandYard/ScotlandYardGame.h"
 #include "ScotlandYard/Spy.h"
+#include "ScotlandYard/Ply.h"
 
 namespace
 {
@@ -116,7 +117,7 @@ bool ScotlandYardServerGame::HandleGameMessage(RakNet::Packet &a_Packet, ClientI
 		}
 	case EMessage_SendWhoIsSpy:
 		{
-			HandleGetAmISpy(a_Packet, a_ClientID);
+			HandleWhoIsSpy(a_Packet);
 			messageHandled = true;
 			break;
 		}
@@ -170,6 +171,7 @@ void ScotlandYardServerGame::HandleGetSpyTravelLog(RakNet::Packet &a_Packet, Cli
 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetSpyTravelLog));
+		payload.Write(GetClient(m_Game->GetSpy().GetPlayer()));
 		WriteTravelLog(travelLog, payload);
 
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
@@ -189,17 +191,16 @@ void ScotlandYardServerGame::HandleGetPlayerLocations(RakNet::Packet &a_Packet, 
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetPlayerLocations));
 
 		const ScotlandYardGame &game = *const_cast<ScotlandYardGame*>(m_Game);
-		const uint32_t numPlayers = GetNumPlayersPerGame();
-		for (uint32_t playerIndex = 0; playerIndex < numPlayers; ++playerIndex)
+		const uint32_t numPlayers = game.m_Players.size();
+
+		payload.Write(numPlayers);
+
+		for (Player* player : game.m_Players)
 		{
-			EPlayer playerID = static_cast<EPlayer>(playerIndex);
-			const Player &player = game.GetPlayer(playerID);
-			if (!player.IsSpy())
-			{
-				payload.Write(playerID);
-				payload.Write(GetClient(playerID));
-				payload.Write(player.GetPosition());
-			}
+			EPlayer playerID = player->GetPlayer();
+			payload.Write(playerID);
+			payload.Write(GetClient(playerID));
+			payload.Write(player->GetPosition());
 		}
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
@@ -220,14 +221,23 @@ void ScotlandYardServerGame::HandleTravel(RakNet::Packet &a_Packet, ClientID a_C
 			ETravelOption travelOption;
 			RetrievTravelData(a_Packet, destination, travelOption);
 			ETravelResult result = m_Game->Travel(player, destination, travelOption);
-			if (ETravelResult_Success == result)
-			{
-				BroadcastTurnFinished(a_ClientID);
-			}
+
 			RakNet::BitStream payload;
 			payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvTravelResult));
 			payload.Write(static_cast<short>(result));
 			SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
+
+			if (result == ETravelResult_Success)
+			{
+				BroadcastTurnFinished(a_ClientID, GetClient(m_Game->WhoseTurnIsIt()));
+				HandlePlayerIsStuck(GetClient(m_Game->WhoseTurnIsIt()));
+				if (m_Game->m_Ply->GetNumberOfDisabledPlayers() >= m_Game->GetNumPlayersPerGame() - 1)
+					HandleWin(EWinnable_Spy);
+			} 
+			else if(result == ETravelResult_CaughtSpy)
+			{
+				HandleWin(EWinnable_Detectives);
+			}
 		}
 	}
 	else
@@ -246,6 +256,7 @@ void ScotlandYardServerGame::HandleGetLocation(RakNet::Packet &a_Packet, ClientI
 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetLocation));
+		payload.Write(a_ClientID);
 		payload.Write(player.GetPosition());
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
@@ -266,6 +277,7 @@ void ScotlandYardServerGame::HandleGetTravelLog(RakNet::Packet &a_Packet, Client
 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetTravelLog));
+		payload.Write(GetClient(currentPlayer));
 		WriteTravelLog(travelLog, payload);
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, payload);
 	}
@@ -324,6 +336,13 @@ void ScotlandYardServerGame::HandleGetRemainingTokens(RakNet::Packet &a_Packet, 
 
 		RakNet::BitStream payload;
 		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGetRemainingTokens));
+		payload.Write(a_ClientID);
+
+		if (player.IsSpy())
+			payload.Write(static_cast<uint8_t>(4));
+		else
+			payload.Write(static_cast<uint8_t>(3));
+
 		payload.Write(static_cast<short>(ETravelOption_Taxi));
 		payload.Write(player.GetTokens(ETravelOption_Taxi));
 		payload.Write(static_cast<short>(ETravelOption_Bus));
@@ -340,6 +359,41 @@ void ScotlandYardServerGame::HandleGetRemainingTokens(RakNet::Packet &a_Packet, 
 	else
 	{
 		SendNetworkMessage(GetPeerInterface(), a_Packet.systemAddress, EMessage_RecvGameNotActive);
+	}
+}
+
+void ScotlandYardServerGame::HandlePlayerIsStuck(ClientID a_ClientID)
+{
+	const ScotlandYardGame &game = *const_cast<ScotlandYardGame*>(m_Game);
+	const EPlayer currentPlayer = GetPlayer(a_ClientID);
+	if (m_Game->GetPlayer(currentPlayer).IsSpy())
+		return;
+
+	if (game.CanPlayerTravel(currentPlayer))
+		return;
+
+	game.m_Ply->DisablePlayer(currentPlayer);
+
+	for (UserData* userData : GetPlayers())
+	{
+		RakNet::BitStream payload;
+		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvPlayerIsStuck));
+		payload.Write(a_ClientID);
+		SendNetworkMessage(GetPeerInterface(), userData->m_SystemAddress, payload);
+	}
+
+	game.m_Ply->FinishedTurn(currentPlayer);
+	BroadcastTurnFinished(a_ClientID, GetClient(m_Game->WhoseTurnIsIt()));
+}
+
+void ScotlandYardServerGame::HandleWin(EWinnable a_Winnable)
+{
+	for (UserData* userData : GetPlayers())
+	{
+		RakNet::BitStream payload;
+		payload.Write(static_cast<RakNet::MessageID>(EMessage_RecvGameEnded));
+		payload.Write(a_Winnable);
+		SendNetworkMessage(GetPeerInterface(), userData->m_SystemAddress, payload);
 	}
 }
 
